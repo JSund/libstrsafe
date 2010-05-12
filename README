@@ -1,6 +1,16 @@
-libstrsafe is a cross platform implementation of the Safe String Library (StrSafe.h) provided by Microsoft. The library will allow multi platform software to use a single library for safe string operations. This will reduce the risk for buffer overflows and will increase code sharing between code for different platforms.
+Copyright (c) 2010, Jonas Sundberg <jsund@jsund.com>
 
-For more information on the project, see the Google Summer of Code project site [1] or the GitHub repository [2].
+This software has been released under the terms of the ISC license. For
+details, see the LICENSE file.
+
+libstrsafe is a cross platform implementation of the Safe String Library
+(StrSafe.h) provided by Microsoft. The library will allow multi platform
+software to use a single library for safe string operations. This will reduce
+the risk for buffer overflows and will increase code sharing between code for
+different platforms.
+
+For more information on the project, see the Google Summer of Code project
+site [1] or the GitHub repository [2].
 
 [1] http://socghop.appspot.com/gsoc/student_project/show/google/gsoc2010/openafs/t127230761041
 [2] http://github.com/JSund/libstrsafe

@@ -253,6 +253,73 @@ HRESULT StringCchCopyW(
 	__in	LPCWSTR pszSrc
 );
 
+/* TODO: Documentation of StringCchCopyEx. */
+#ifdef UNICODE
+	#define StringCchCopyEx StringCchCopyExW
+#else
+	#define StringCchCopyEx StringCchCopyExA
+#endif
+HRESULT StringCchCopyExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszSrc,
+	__out	LPSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCchCopyExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc,
+	__out	LPWSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+
+/* TODO: Documentation of StringCchCopyN. */
+#ifdef UNICODE
+	#define StringCchCopyN StringCchCopyNW
+#else
+	#define StringCchCopyN StringCchCopyNA
+#endif
+HRESULT StringCchCopyNA(
+	__inout	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cchSrc
+);
+HRESULT StringCchCopyNW(
+	__inout LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cchSrc
+);
+
+/* TODO: Documentation of StringCchCopyNEx. */
+#ifdef UNICODE
+	#define StringCchCopyEx StringCchCopyNExW
+#else
+	#define StringCchCopyEx StringCchCopyNExA
+#endif
+HRESULT StringCchCopyNExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cchSrc,
+	__out	LPSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCchCopyNExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cchSrc,
+	__out	LPWSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+
 /**
  * Calculates the length of psz by iterating over it until a null character
  * is reached. The null character is not counted as part of the string.

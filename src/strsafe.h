@@ -532,6 +532,73 @@ HRESULT StringCbCatW(
 	__in	LPCWSTR pszSrc
 );
 
+/* TODO: Documentation of StringCbCatEx. */
+#ifdef UNICODE
+	#define StringCbCatEx StringCbCatExW
+#else
+	#define StringCbCatEx StringCbCatExA
+#endif
+HRESULT StringCbCatExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszSrc,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCbCatExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+
+/* TODO: Documentation of StringCbCatN. */
+#ifdef UNICODE
+	#define StringCbCatN StringCbCatNW
+#else
+	#define StringCbCatN StringCbCatNA
+#endif
+HRESULT StringCbCatNA(
+	__inout	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cbMaxAppend
+);
+HRESULT StringCbCatNW(
+	__inout LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cbMaxAppend
+);
+
+/* TODO: Documentation of StringCbCatNEx. */
+#ifdef UNICODE
+	#define StringCbCatEx StringCbCatNExW
+#else
+	#define StringCbCatEx StringCbCatNExA
+#endif
+HRESULT StringCbCatNExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cbMaxAppend,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCbCatNExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cbMaxAppend,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+
 /**
  * Copies the content of pszSrc into pszDest until a null byte is found.
  * StringCbCopy assures that the string is null terminated. If the data in
@@ -572,6 +639,197 @@ HRESULT StringCbCopyW(
 	__out	LPWSTR pszDest,
 	__in	size_t cbDest,
 	__in	LPCWSTR pszSrc
+);
+
+/* TODO: Documentation of StringCbCopyEx. */
+#ifdef UNICODE
+	#define StringCbCopyEx StringCbCopyExW
+#else
+	#define StringCbCopyEx StringCbCopyExA
+#endif
+HRESULT StringCbCopyExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszSrc,
+	__out	LPSTR *ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCbCopyExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+
+/* TODO: Documentation of StringCbCopyN. */
+#ifdef UNICODE
+	#define StringCbCopyN StringCbCopyNW
+#else
+	#define StringCbCopyN StringCbCopyNA
+#endif
+HRESULT StringCbCopyNA(
+	__inout	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cbSrc
+);
+HRESULT StringCbCopyNW(
+	__inout LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cbSrc
+);
+
+/* TODO: Documentation of StringCbCopyNEx. */
+#ifdef UNICODE
+	#define StringCbCopyEx StringCbCopyNExW
+#else
+	#define StringCbCopyEx StringCbCopyNExA
+#endif
+HRESULT StringCbCopyNExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cbSrc,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCbCopyNExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cbSrc,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+
+/* TODO: Documentation of StringCbGets. */
+#ifdef UNICODE
+	#define StringCbGets StringCbGetsW
+#else
+	#define StringCbGets StringCbGetsA
+#endif
+HRESULT StringCbGetsA(
+	__out	LPSTR pszDest,
+	__in	size_t cbDest
+);
+HRESULT StringCbGetsW(
+	__out	LPWSTR pszDest,
+	__in	size_t cbDest
+);
+
+/* TODO: Documentation of StringCbGetsEx. */
+#ifdef UNICODE
+	#define StringCbGetsEx StringCbGetsExW
+#else
+	#define StringCbGetsEx StringCbGetsExA
+#endif
+HRESULT StringCbGetsExA(
+	__out	LPSTR pszDest,
+	__in	size_t cbDest,
+	__out 	LPSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCbGetsExW(
+	__out	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__out 	LPWSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags
+);
+
+/* TODO: Documentation of StringCbPrintf. */
+#ifdef UNICODE
+	#define StringCbPrintf StringCbPrintfW
+#else
+	#define StringCbPrintf StringCbPrintfA
+#endif
+HRESULT StringCbPrintfA(
+	__out	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszFormat,
+	__in	...
+);
+HRESULT StringCbPrintfW(
+	__out	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszFormat,
+	__in	...
+);
+
+/* TODO: Documentation of StringCbPrintfEx. */
+#ifdef UNICODE
+	#define StringCbPrintfEx StringCbPrintfExW
+#else
+	#define StringCbPrintfEx StringCbPrintfExA
+#endif
+HRESULT StringCbPrintfExA(
+	__out	LPSTR pszDest,
+	__in	size_t cbDest,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCSTR pszFormat,
+	__in	...
+);
+HRESULT StringCbPrintfExW(
+	__out	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCWSTR pszFormat,
+	__in	...
+);
+
+/* TODO: Documentation of StringCbVPrintf. */
+#ifdef UNICODE
+	#define StringCbVPrintf StringCbVPrintfW
+#else
+	#define StringCbVPrintf StringCbVPrintfA
+#endif
+HRESULT StringCbVPrintfA(
+	__out	LPSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCSTR pszFormat,
+	__in	va_list argList
+);
+HRESULT StringCbVPrintfW(
+	__out	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszFormat,
+	__in	va_list argList
+);
+
+/* TODO: Documentation of StringCbVPrintfEx. */
+#ifdef UNICODE
+	#define StringCbPrintExf StringCbVPrintfExW
+#else
+	#define StringCbPrintExf StringCbVPrintfExA
+#endif
+HRESULT StringCbVPrintfExA(
+	__out	LPSTR pszDest,
+	__in	size_t cbDest,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCSTR pszFormat,
+	__in	va_list argList
+);
+HRESULT StringCbVPrintfExW(
+	__out	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcbRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCWSTR pszFormat,
+	__in	va_list argList
 );
 
 /**

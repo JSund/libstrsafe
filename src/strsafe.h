@@ -68,6 +68,12 @@
 #define __in
 #define __inout
 
+/*
+ * A DWORD is used to set various arguments to extended versions of
+ * functions.
+ */
+#define DWORD uint32_t
+
 /**
  * A pointer to a string buffer.
  */

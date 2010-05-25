@@ -247,7 +247,7 @@ HRESULT StringCchCopyA(
 	__in	size_t cchDest,
 	__in	LPCSTR pszSrc
 );
-HRESULT StringCchCopyA(
+HRESULT StringCchCopyW(
 	__out	LPWSTR pszDest,
 	__in	size_t cchDest,
 	__in	LPCWSTR pszSrc

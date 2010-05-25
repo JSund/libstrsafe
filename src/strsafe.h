@@ -109,15 +109,25 @@
  *         pszDst and this truncated data has been null terminated and
  *         written after the current data in pszDst.
  */
+#ifdef UNICODE
+	#define StringCchCat StringCchCatW
+#else
+	#define StringCchCat StringCchCatA
+#endif
 HRESULT StringCchCatA(
-	__inout	LPTSTR pszDest,
+	__inout	LPSTR pszDest,
 	__in	size_t cchDest,
-	__in	LPCTSTR pszSrc
+	__in	LPCSTR pszSrc
+);
+HRESULT StringCchCatW(
+	__inout LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc
 );
 
 /**
  * Copies the content of pszSrc into pszDest until a null character is
- * found. StringCchCopyA assures that the string is null terminated.
+ * found. StringCchCopy assures that the string is null terminated.
  * If the data in pszSrc does not fit into pszDest, the string is
  * truncated and null terminated.
  *
@@ -141,10 +151,20 @@ HRESULT StringCchCatA(
  *         to fit in pszDst and this truncated data has been null terminated
  *         and written into pszDst.
  */
+#ifdef UNICODE
+	#define StringCchCopy StringCchCopyW
+#else
+	#define StringCchCopy StringCchCopyA
+#endif
 HRESULT StringCchCopyA(
-	__out	LPTSTR pszDest,
+	__out	LPSTR pszDest,
 	__in	size_t cchDest,
-	__in	LPCTSTR pszSrc
+	__in	LPCSTR pszSrc
+);
+HRESULT StringCchCopyA(
+	__out	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc
 );
 
 /**
@@ -167,8 +187,18 @@ HRESULT StringCchCopyA(
  *         is larger than the maximum capacity allowed or if a null
  *         termination is not found in psz.
  */
+#ifdef UNICODE
+	#define StringCchLength StringCchLengthW
+#else
+	#define StringCchLength StringCchLengthA
+#endif
 HRESULT StringCchLengthA(
-	__in	LPCTSTR psz,
+	__in	LPCSTR psz,
+	__in	size_t cchMax,
+	__out	size_t *pcch
+);
+HRESULT StringCchLengthA(
+	__in	LPCWSTR psz,
 	__in	size_t cchMax,
 	__out	size_t *pcch
 );
@@ -202,15 +232,25 @@ HRESULT StringCchLengthA(
  *         pszDst and this truncated data has been null terminated and
  *         written after the current data in pszDst.
  */
+#ifdef UNICODE
+	#define StringCbCat StringCbCatW
+#else
+	#define StringCbCat StringCbCatA
+#endif
 HRESULT StringCbCatA(
-	__inout	LPTSTR pszDest,
+	__inout	LPSTR pszDest,
 	__in	size_t cbDest,
-	__in	LPCTSTR pszSrc
+	__in	LPCSTR pszSrc
+);
+HRESULT StringCbCatW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc
 );
 
 /**
  * Copies the content of pszSrc into pszDest until a null byte is found.
- * StringCbCopyA assures that the string is null terminated. If the data in
+ * StringCbCopy assures that the string is null terminated. If the data in
  * pszSrc does not fit into pszDest, the string is truncated and null
  * terminated.
  *
@@ -234,10 +274,20 @@ HRESULT StringCbCatA(
  *         to fit in pszDst and this truncated data has been null terminated
  *         and written into pszDst.
  */
+#ifdef UNICODE
+	#define StringCbCopy StringCbCopyW
+#else
+	#define StringCbCopy StringCbCopyA
+#endif
 HRESULT StringCbCopyA(
-	__out	LPTSTR pszDest,
+	__out	LPSTR pszDest,
 	__in	size_t cbDest,
-	__in	LPCTSTR pszSrc
+	__in	LPCSTR pszSrc
+);
+HRESULT StringCbCopyW(
+	__out	LPWSTR pszDest,
+	__in	size_t cbDest,
+	__in	LPCWSTR pszSrc
 );
 
 /**
@@ -260,8 +310,18 @@ HRESULT StringCbCopyA(
  *         is larger than the maximum capacity allowed or if a null
  *         termination is not found in psz.
  */
+#ifdef UNICODE
+	#define StringCbLength StringCbLengthW
+#else
+	#define StringCbLength StringCbLengthA
+#endif
 HRESULT StringCbLengthA(
-	__in	LPCTSTR psz,
+	__in	LPCSTR psz,
+	__in	size_t cbMax,
+	__out	size_t *pcb
+);
+HRESULT StringCbLengthW(
+	__in	LPCWSTR psz,
 	__in	size_t cbMax,
 	__out	size_t *pcb
 );

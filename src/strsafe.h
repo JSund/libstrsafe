@@ -148,6 +148,50 @@ HRESULT StringCchCatExW(
 	__in	DWORD dwFlags
 );
 
+/* TODO: Documentation of StringCchCatN. */
+#ifdef UNICODE
+	#define StringCchCatN StringCchCatNW
+#else
+	#define StringCchCatN StringCchCatNA
+#endif
+HRESULT StringCchCatNA(
+	__inout	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cchMaxAppend
+);
+HRESULT StringCchCatNW(
+	__inout LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cchMaxAppend
+);
+
+/* TODO: Documentation of StringCchCatNEx. */
+#ifdef UNICODE
+	#define StringCchCatEx StringCchCatNExW
+#else
+	#define StringCchCatEx StringCchCatNExA
+#endif
+HRESULT StringCchCatNExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszSrc,
+	__in	size_t cchMaxAppend,
+	__out	LPSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCchCatNExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc,
+	__in	size_t cchMaxAppend,
+	__out	LPWSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+
 
 /**
  * Copies the content of pszSrc into pszDest until a null character is

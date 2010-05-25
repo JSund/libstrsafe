@@ -154,16 +154,16 @@ HRESULT StringCchCatExA(
 	__inout	LPSTR pszDest,
 	__in	size_t cchDest,
 	__in	LPCSTR pszSrc,
-	__out	LPSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 HRESULT StringCchCatExW(
 	__inout	LPWSTR pszDest,
 	__in	size_t cchDest,
 	__in	LPCWSTR pszSrc,
-	__out	LPWSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 
@@ -197,8 +197,8 @@ HRESULT StringCchCatNExA(
 	__in	size_t cchDest,
 	__in	LPCSTR pszSrc,
 	__in	size_t cchMaxAppend,
-	__out	LPSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 HRESULT StringCchCatNExW(
@@ -206,8 +206,8 @@ HRESULT StringCchCatNExW(
 	__in	size_t cchDest,
 	__in	LPCWSTR pszSrc,
 	__in	size_t cchMaxAppend,
-	__out	LPWSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 
@@ -264,15 +264,15 @@ HRESULT StringCchCopyExA(
 	__in	size_t cchDest,
 	__in	LPCSTR pszSrc,
 	__out	LPSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 HRESULT StringCchCopyExW(
 	__inout	LPWSTR pszDest,
 	__in	size_t cchDest,
 	__in	LPCWSTR pszSrc,
-	__out	LPWSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 
@@ -306,8 +306,8 @@ HRESULT StringCchCopyNExA(
 	__in	size_t cchDest,
 	__in	LPCSTR pszSrc,
 	__in	size_t cchSrc,
-	__out	LPSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 HRESULT StringCchCopyNExW(
@@ -315,8 +315,44 @@ HRESULT StringCchCopyNExW(
 	__in	size_t cchDest,
 	__in	LPCWSTR pszSrc,
 	__in	size_t cchSrc,
-	__out	LPWSTR *ppszDestEnd,
-	__out	size_t *pcchRemaining,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
+	__in	DWORD dwFlags
+);
+
+/* TODO: Documentation of StringCchGets. */
+#ifdef UNICODE
+	#define StringCchGets StringCchGetsW
+#else
+	#define StringCchGets StringCchGetsA
+#endif
+HRESULT StringCchGetsA(
+	__out	LPSTR pszDest,
+	__in	size_t cchDest
+);
+HRESULT StringCchGetsW(
+	__out	LPWSTR pszDest,
+	__in	size_t cchDest
+);
+
+/* TODO: Documentation of StringCchGetsEx. */
+#ifdef UNICODE
+	#define StringCchGetsEx StringCchGetsExW
+#else
+	#define StringCchGetsEx StringCchGetsExA
+#endif
+HRESULT StringCchGetsExA(
+	__out	LPSTR pszDest,
+	__in	size_t cchDest,
+	__out 	LPSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCchGetsExW(
+	__out	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__out 	LPWSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
 	__in	DWORD dwFlags
 );
 

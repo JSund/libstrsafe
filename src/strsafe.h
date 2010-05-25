@@ -5,8 +5,8 @@
  * details, see the LICENSE file.
  */
 
-/*!
- * \file strsafe.h
+/**
+ * @file strsafe.h
  *
  * Provides the public interface to the libstrsafe functions.
  *
@@ -19,12 +19,10 @@
 #include <stddef.h>
 #include <stdint.h>
 
-/*!
- * \brief The result of a function call.
- *
- * All function calls in libstrsafe returns an HRESULT, a value representing
- * the result of the function call. This can later be checked with the
- * SUCCEEDED or FAILED macros.
+/**
+ * The result of a function call. All function calls in libstrsafe returns
+ * an HRESULT, a value representing the result of the function call.
+ * This can later be checked with the SUCCEEDED or FAILED macros.
  */
 #define HRESULT uint32_t
 
@@ -41,27 +39,23 @@
  */
 #define STRSAFE_MAX_CCH 0x7fffffff /* 2^31 - 1 or 2,147,483,647 */
 
-/*!
- * \brief Checks that the previous call succeeded.
+/**
+ * Checks that the previous call succeeded. This is implemented as a macro
+ * that checks the data returned by a previous function call.
  *
- * A macro that checks that the data returned by previous call to a
- * libstrsafe function was successful.
+ * @param result The result to check.
  *
- * \param result The result to check.
- *
- * \return True if the result contained no errors and false otherwise.
+ * @return True if the result contained no errors and false otherwise.
  */
 #define SUCCEEDED(result) ((result) == S_OK)
 
-/*!
- * \brief Checks that the previous call failed.
+/**
+ * Checks that the previous call failed. This is implemented as a macro
+ * that checks the data returned by a previous function call. 
  *
- * A macro that checks that the data returned by previous call to a
- * libstrsafe function was not successful.
+ * @param result The result to check.
  *
- * \param result The result to check.
- *
- * \return True if the result contained errors and false otherwise.
+ * @return True if the result contained errors and false otherwise.
  */
 #define FAILED(result) ((result) != S_OK)
 
@@ -73,25 +67,20 @@
 #define __in
 #define __inout
 
-/*!
- * \brief A pointer to a string buffer.
- *
- * In this simplified version of the library, an LPTSTR is a pointer to
- * a string buffer consisting of chars.
+/**
+ * A pointer to a string buffer. In this simplified version of the library,
+ * an LPTSTR is a pointer to a string buffer consisting of chars.
  */
 #define LPTSTR char *
 
-/*!
- * \brief A pointer to an immutable string buffer.
- *
- * In this simplified version of the library, an LPCTSTR is a pointer to
- * a string buffer consisting of chars that should not be modified.
+/**
+ * A pointer to an immutable string buffer. In this simplified version of
+ * the library, an LPCTSTR is a pointer to a string buffer consisting of
+ * chars that should not be modified.
  */
 #define LPCTSTR const char *
 
-/*!
- * \brief Concatenates two strings.
- *
+/**
  * Concatenates the strings in pszDest and pszSrc and stores the result
  * in pszDest. If the concatenated string does not fit into pszDest, the
  * string is truncated and null terminated.
@@ -99,13 +88,13 @@
  * Running time is linear in the length of the strings pszSrc and pszDest
  * or the value of cchDest, whichever is lower.
  *
- * \param pszDest The first part of the concatenated string as well as the
+ * @param pszDest The first part of the concatenated string as well as the
  *                destination of the concatenated string.
- * \param cchDest Capacity of pszDest in number of characters.
- * \param pszSrc The second part of the concatenated string that is to be
+ * @param cchDest Capacity of pszDest in number of characters.
+ * @param pszSrc The second part of the concatenated string that is to be
  *               appended to pszDest.
  *
- * \return A HRESULT that should be checked with the SUCCEEDED or FAILED
+ * @return A HRESULT that should be checked with the SUCCEEDED or FAILED
  *         macros after use.
  *
  *         Returns S_OK if the concatenation was successful.
@@ -126,22 +115,20 @@ HRESULT StringCchCatA(
 	__in	LPCTSTR pszSrc
 );
 
-/*!
- * \brief Copies the content of a string into another string.
- *
- * Copies the content of pszSrc into pszDest until a null character is found.
- * StringCchCopyA assures that the string is null terminated. If the data in
- * pszSrc does not fit into pszDest, the string is truncated and null
- * terminated.
+/**
+ * Copies the content of pszSrc into pszDest until a null character is
+ * found. StringCchCopyA assures that the string is null terminated.
+ * If the data in pszSrc does not fit into pszDest, the string is
+ * truncated and null terminated.
  *
  * Running time is linear in the length of pszSrc or the value of cchDest,
  * whichever is lower.
  *
- * \param pszDest The destination of the copy.
- * \param cchDest Capacity of pszDest in number of characters.
- * \param pszSrc The source to copy data from.
+ * @param pszDest The destination of the copy.
+ * @param cchDest Capacity of pszDest in number of characters.
+ * @param pszSrc The source to copy data from.
  *
- * \return A HRESULT that should be checked with the SUCCEEDED or FAILED
+ * @return A HRESULT that should be checked with the SUCCEEDED or FAILED
  *         macros after use.
  *
  *         Returns S_OK if the copy was successful.
@@ -160,20 +147,18 @@ HRESULT StringCchCopyA(
 	__in	LPCTSTR pszSrc
 );
 
-/*!
- * \brief Calculates the length of a string.
- *
+/**
  * Calculates the length of psz by iterating over it until a null character
  * is reached. The null character is not counted as part of the string.
  *
  * Running time is linear in the length of the string.
  *
- * \param psz The string to calculate the length for.
- * \param cchMax Capacity of psz in number of characters.
- * \param pcch The calculated length. The calculated value is undefined if
+ * @param psz The string to calculate the length for.
+ * @param cchMax Capacity of psz in number of characters.
+ * @param pcch The calculated length. The calculated value is undefined if
  *             the function failed.
  *
- * \return A HRESULT that should be checked with the SUCCEEDED or FAILED
+ * @return A HRESULT that should be checked with the SUCCEEDED or FAILED
  *         macros after use.
  *
  *         Returns S_OK if the length was calculated correctly.
@@ -188,9 +173,7 @@ HRESULT StringCchLengthA(
 	__out	size_t *pcch
 );
 
-/*!
- * \brief Concatenates two strings.
- *
+/**
  * Concatenates the strings in pszDest and pszSrc and stores the result
  * in pszDest. If the concatenated string does not fit into pszDest, the
  * string is truncated and null terminated.
@@ -198,13 +181,13 @@ HRESULT StringCchLengthA(
  * Running time is linear in the length of the strings pszSrc and pszDest
  * or the value of cbDest, whichever is lower.
  *
- * \param pszDest The first part of the concatenated string as well as the
+ * @param pszDest The first part of the concatenated string as well as the
  *                destination of the concatenated string.
- * \param cbDest Capacity of pszDest in bytes.
- * \param pszSrc The second part of the concatenated string that is to be
+ * @param cbDest Capacity of pszDest in bytes.
+ * @param pszSrc The second part of the concatenated string that is to be
  *               appended to pszDest.
  *
- * \return A HRESULT that should be checked with the SUCCEEDED or FAILED
+ * @return A HRESULT that should be checked with the SUCCEEDED or FAILED
  *         macros after use.
  *
  *         Returns S_OK if the concatenation was successful.
@@ -225,9 +208,7 @@ HRESULT StringCbCatA(
 	__in	LPCTSTR pszSrc
 );
 
-/*!
- * \brief Copies the content of a string into another string.
- *
+/**
  * Copies the content of pszSrc into pszDest until a null byte is found.
  * StringCbCopyA assures that the string is null terminated. If the data in
  * pszSrc does not fit into pszDest, the string is truncated and null
@@ -236,11 +217,11 @@ HRESULT StringCbCatA(
  * Running time is linear in the length of pszSrc or the value of cbDest,
  * whichever is lower.
  *
- * \param pszDest The destination of the copy.
- * \param cbDest Capacity of pszDest in bytes.
- * \param pszSrc The source to copy data from.
+ * @param pszDest The destination of the copy.
+ * @param cbDest Capacity of pszDest in bytes.
+ * @param pszSrc The source to copy data from.
  *
- * \return A HRESULT that should be checked with the SUCCEEDED or FAILED
+ * @return A HRESULT that should be checked with the SUCCEEDED or FAILED
  *         macros after use.
  *
  *         Returns S_OK if the copy was successful.
@@ -259,20 +240,18 @@ HRESULT StringCbCopyA(
 	__in	LPCTSTR pszSrc
 );
 
-/*!
- * \brief Calculates the length of a string.
- *
+/**
  * Calculates the length of psz by iterating over it until a null character
  * is reached. The null character is not counted as part of the string.
  *
  * Running time is linear in the length of the string.
  *
- * \param psz The string to calculate the length for.
- * \param cbMax Capacity of psz in bytes.
- * \param pcb The calculated length. The calculated value is undefined if
+ * @param psz The string to calculate the length for.
+ * @param cbMax Capacity of psz in bytes.
+ * @param pcb The calculated length. The calculated value is undefined if
  *            the function failed.
  *
- * \return A HRESULT that should be checked with the SUCCEEDED or FAILED
+ * @return A HRESULT that should be checked with the SUCCEEDED or FAILED
  *         macros after use.
  *
  *         Returns S_OK if the length was calculated correctly.

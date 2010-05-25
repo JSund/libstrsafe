@@ -16,6 +16,7 @@
 #ifndef STRSAFE_H
 #define STRSAFE_H
 
+#include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -356,6 +357,94 @@ HRESULT StringCchGetsExW(
 	__in	DWORD dwFlags
 );
 
+/* TODO: Documentation of StringCchPrintf. */
+#ifdef UNICODE
+	#define StringCchPrintf StringCchPrintfW
+#else
+	#define StringCchPrintf StringCchPrintfA
+#endif
+HRESULT StringCchPrintfA(
+	__out	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszFormat,
+	__in	...
+);
+HRESULT StringCchPrintfW(
+	__out	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszFormat,
+	__in	...
+);
+
+/* TODO: Documentation of StringCchPrintfEx. */
+#ifdef UNICODE
+	#define StringCchPrintfEx StringCchPrintfExW
+#else
+	#define StringCchPrintfEx StringCchPrintfExA
+#endif
+HRESULT StringCchPrintfExA(
+	__out	LPSTR pszDest,
+	__in	size_t cchDest,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCSTR pszFormat,
+	__in	...
+);
+HRESULT StringCchPrintfExW(
+	__out	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCWSTR pszFormat,
+	__in	...
+);
+
+/* TODO: Documentation of StringCchVPrintf. */
+#ifdef UNICODE
+	#define StringCchVPrintf StringCchVPrintfW
+#else
+	#define StringCchVPrintf StringCchVPrintfA
+#endif
+HRESULT StringCchVPrintfA(
+	__out	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszFormat,
+	__in	va_list argList
+);
+HRESULT StringCchVPrintfW(
+	__out	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszFormat,
+	__in	va_list argList
+);
+
+/* TODO: Documentation of StringCchVPrintfEx. */
+#ifdef UNICODE
+	#define StringCchPrintExf StringCchVPrintfExW
+#else
+	#define StringCchPrintExf StringCchVPrintfExA
+#endif
+HRESULT StringCchVPrintfExA(
+	__out	LPSTR pszDest,
+	__in	size_t cchDest,
+	__out	LPSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCSTR pszFormat,
+	__in	va_list argList
+);
+HRESULT StringCchVPrintfExW(
+	__out	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__out	LPWSTR * ppszDestEnd,
+	__out	size_t * pcchRemaining,
+	__in	DWORD dwFlags,
+	__in	LPCWSTR pszFormat,
+	__in	va_list argList
+);
+
 /**
  * Calculates the length of psz by iterating over it until a null character
  * is reached. The null character is not counted as part of the string.
@@ -384,12 +473,12 @@ HRESULT StringCchGetsExW(
 HRESULT StringCchLengthA(
 	__in	LPCSTR psz,
 	__in	size_t cchMax,
-	__out	size_t *pcch
+	__out	size_t * pcch
 );
 HRESULT StringCchLengthA(
 	__in	LPCWSTR psz,
 	__in	size_t cchMax,
-	__out	size_t *pcch
+	__out	size_t * pcch
 );
 
 /**

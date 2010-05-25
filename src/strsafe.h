@@ -68,17 +68,36 @@
 #define __inout
 
 /**
- * A pointer to a string buffer. In this simplified version of the library,
- * an LPTSTR is a pointer to a string buffer consisting of chars.
+ * A pointer to a string buffer.
  */
-#define LPTSTR char *
+#ifdef UNICODE
+	#define LPTSTR LPWSTR
+#else
+	#define LPTSTR LPSTR
+#endif
+#define LPSTR char *
+#define LPWSTR wchar_t *
 
 /**
- * A pointer to an immutable string buffer. In this simplified version of
- * the library, an LPCTSTR is a pointer to a string buffer consisting of
- * chars that should not be modified.
+ * A pointer to an immutable string buffer.
  */
-#define LPCTSTR const char *
+#ifdef UNICODE
+	#define LPCTSTR LPCWSTR
+#else
+	#define LPCTSTR LPCSTR
+#endif
+#define LPCSTR const char *
+#define LPCWSTR const wchar_t *
+
+/**
+ * A macro that converts string literals to either C strings or Unicode
+ * strings depending on whether UNICODE is set or not.
+ */
+#ifdef UNICODE
+	#define TEXT(string) L(string)
+#else
+	#define TEXT(string) (string)
+#endif
 
 /**
  * Concatenates the strings in pszDest and pszSrc and stores the result
@@ -191,7 +210,6 @@ HRESULT StringCchCatNExW(
 	__out	size_t *pcchRemaining,
 	__in	DWORD dwFlags
 );
-
 
 /**
  * Copies the content of pszSrc into pszDest until a null character is

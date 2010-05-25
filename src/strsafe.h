@@ -125,6 +125,30 @@ HRESULT StringCchCatW(
 	__in	LPCWSTR pszSrc
 );
 
+/* TODO: Documentation of StringCchCatEx. */
+#ifdef UNICODE
+	#define StringCchCatEx StringCchCatExW
+#else
+	#define StringCchCatEx StringCchCatExA
+#endif
+HRESULT StringCchCatExA(
+	__inout	LPSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCSTR pszSrc,
+	__out	LPSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+HRESULT StringCchCatExW(
+	__inout	LPWSTR pszDest,
+	__in	size_t cchDest,
+	__in	LPCWSTR pszSrc,
+	__out	LPWSTR *ppszDestEnd,
+	__out	size_t *pcchRemaining,
+	__in	DWORD dwFlags
+);
+
+
 /**
  * Copies the content of pszSrc into pszDest until a null character is
  * found. StringCchCopy assures that the string is null terminated.

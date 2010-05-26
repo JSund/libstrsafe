@@ -195,9 +195,9 @@ HRESULT StringCchCatNW(
 
 /* TODO: Documentation of StringCchCatNEx. */
 #ifdef UNICODE
-	#define StringCchCatEx StringCchCatNExW
+	#define StringCchCatNEx StringCchCatNExW
 #else
-	#define StringCchCatEx StringCchCatNExA
+	#define StringCchCatNEx StringCchCatNExA
 #endif
 HRESULT StringCchCatNExA(
 	__inout	LPSTR pszDest,
@@ -304,9 +304,9 @@ HRESULT StringCchCopyNW(
 
 /* TODO: Documentation of StringCchCopyNEx. */
 #ifdef UNICODE
-	#define StringCchCopyEx StringCchCopyNExW
+	#define StringCchCopyNEx StringCchCopyNExW
 #else
-	#define StringCchCopyEx StringCchCopyNExA
+	#define StringCchCopyNEx StringCchCopyNExA
 #endif
 HRESULT StringCchCopyNExA(
 	__inout	LPSTR pszDest,
@@ -481,7 +481,7 @@ HRESULT StringCchLengthA(
 	__in	size_t cchMax,
 	__out	size_t * pcch
 );
-HRESULT StringCchLengthA(
+HRESULT StringCchLengthW(
 	__in	LPCWSTR psz,
 	__in	size_t cchMax,
 	__out	size_t * pcch
@@ -576,9 +576,9 @@ HRESULT StringCbCatNW(
 
 /* TODO: Documentation of StringCbCatNEx. */
 #ifdef UNICODE
-	#define StringCbCatEx StringCbCatNExW
+	#define StringCbCatNEx StringCbCatNExW
 #else
-	#define StringCbCatEx StringCbCatNExA
+	#define StringCbCatNEx StringCbCatNExA
 #endif
 HRESULT StringCbCatNExA(
 	__inout	LPSTR pszDest,
@@ -685,9 +685,9 @@ HRESULT StringCbCopyNW(
 
 /* TODO: Documentation of StringCbCopyNEx. */
 #ifdef UNICODE
-	#define StringCbCopyEx StringCbCopyNExW
+	#define StringCbCopyNEx StringCbCopyNExW
 #else
-	#define StringCbCopyEx StringCbCopyNExA
+	#define StringCbCopyNEx StringCbCopyNExA
 #endif
 HRESULT StringCbCopyNExA(
 	__inout	LPSTR pszDest,

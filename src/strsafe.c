@@ -127,7 +127,7 @@ HRESULT StringCbCopyNA(
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cbSrc){
-	return StringCchCopyA(pszDest, cbDest / sizeof(char),
+	return StringCchCopyNA(pszDest, cbDest / sizeof(char),
 			pszSrc, cbSrc / sizeof(char));
 }
 

@@ -9,31 +9,27 @@
 #include <string.h>
 
 HRESULT StringCchCatA(
-		__inout	LPTSTR pszDest,
+		__inout	LPSTR pszDest,
 		__in	size_t cchDest,
-		__in	LPCTSTR pszSrc){
+		__in	LPCSTR pszSrc){
 	size_t length;
 	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
-	result = StringCchLengthA(pszDest, cchDest, &length);
-	if(FAILED(result)){
+
+	if(FAILED(StringCchLengthA(pszDest, cchDest, &length))){
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
-	result = StringCchCopyA(pszDest + length, cchDest - length, pszSrc);
-	if(FAILED(result)){
-		return result;
-	}
-	return S_OK;
+	return StringCchCopyA(pszDest + length, cchDest - length, pszSrc);
 }
 
 HRESULT StringCchCopyA(
-		__out	LPTSTR pszDest,
+		__out	LPSTR pszDest,
 		__in	size_t cchDest,
-		__in	LPCTSTR pszSrc){
+		__in	LPCSTR pszSrc){
 	size_t length;
 	HRESULT result;
 
@@ -41,18 +37,58 @@ HRESULT StringCchCopyA(
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
-	strncpy(pszDest, pszSrc, cchDest);
-	result = StringCchLengthA(pszDest, cchDest, &length);
-	if(FAILED(result)){
-		/* A null termination was not copied into pszDest. */
-		pszDest[cchDest - 1] = '\0';
-		return STRSAFE_E_INSUFFICIENT_BUFFER;
+	if(FAILED(StringCchLengthA(pszSrc, STRSAFE_MAX_CCH, &length))){
+		/* Should not happen if pszSrc is null terminated. */
+		return STRSAFE_E_INVALID_PARAMETER;
 	}
-	return S_OK;
+
+	if(length >= cchDest){
+		/* pszSrc too long, copy first cchDest - 1 characters. */
+		length = cchDest - 1;
+		pszDest[length] = '\0';
+		result = STRSAFE_E_INSUFFICIENT_BUFFER;
+	}else{
+		result = S_OK;
+	}
+
+	strncpy(pszDest, pszSrc, length);
+	return result;
+}
+
+
+HRESULT StringCchCopyNA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cchSrc){
+	size_t length;
+	HRESULT result;
+
+	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(FAILED(StringCchLengthA(pszSrc, cchSrc + 1, &length))){
+		/* pszSrc is longer than the maximum length to copy. */
+		/* Copy only first cchSrc characters. */
+		length = cchSrc;
+	}
+
+	if(length >= cchDest){
+		/* pszSrc too long, copy first cchDest - 1 characters. */
+		length = cchDest - 1;
+		pszDest[length] = '\0';
+		result = STRSAFE_E_INSUFFICIENT_BUFFER;
+	}else{
+		result = S_OK;
+	}
+
+	strncpy(pszDest, pszSrc, length);
+	return result;
 }
 
 HRESULT StringCchLengthA(
-		__in	LPCTSTR psz,
+		__in	LPCSTR psz,
 		__in	size_t cchMax,
 		__out	size_t *pcch){
 	if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
@@ -73,21 +109,30 @@ HRESULT StringCchLengthA(
 }
 
 HRESULT StringCbCatA(
-		__inout	LPTSTR pszDest,
+		__inout	LPSTR pszDest,
 		__in	size_t cbDest,
-		__in	LPCTSTR pszSrc){
+		__in	LPCSTR pszSrc){
 	return StringCchCatA(pszDest, cbDest / sizeof(char), pszSrc);
 }
 
 HRESULT StringCbCopyA(
-		__out	LPTSTR pszDest,
+		__out	LPSTR pszDest,
 		__in	size_t cbDest,
-		__in	LPCTSTR pszSrc){
+		__in	LPCSTR pszSrc){
 	return StringCchCopyA(pszDest, cbDest / sizeof(char), pszSrc);
 }
 
+HRESULT StringCbCopyNA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cbSrc){
+	return StringCchCopyA(pszDest, cbDest / sizeof(char),
+			pszSrc, cbSrc / sizeof(char));
+}
+
 HRESULT StringCbLengthA(
-		__in	LPCTSTR psz,
+		__in	LPCSTR psz,
 		__in	size_t cbMax,
 		__out	size_t *pcb){
 	HRESULT result = StringCchLengthA(psz, cbMax / sizeof(char), pcb);

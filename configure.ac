@@ -12,13 +12,10 @@ AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
 # Checks for programs.
 AC_PROG_CC
-#AC_PROG_CC_C_0
+AM_PROG_CC_C_O
 AC_PROG_LIBTOOL
 
 # Checks for libraries.
-
-# Check for the Check testing framework.
-#AM_PATH_CHECK()
 
 # Checks for header files.
 AC_CHECK_HEADERS([stddef.h stdint.h string.h])

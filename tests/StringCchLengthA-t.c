@@ -1,12 +1,17 @@
 #include <stdlib.h>
 #include <check.h>
-#include "tests/tap/basic.h"
+#include <assert.h>
+#include "../src/strsafe.h"
+#include "tap/basic.h"
 
 int main(void){
-	plan(1);
+	plan(2);
+
 	size_t length;
-	assert(SUCCESSFUL(StringCchLengthA("", 1, &length)));
-	is_int(0, length, "Length of empty string.");
+	ok(SUCCEEDED(StringCchLengthA("", 1, &length)), "Calculate length of empty string.");
+	is_int(0, length, "Value for length of empty string.");
+	ok(SUCCEEDED(StringCchLengthA("test\0test", 10, &length)), "Calculate length of string with embedded null character.");
+	is_int(4, length, "Value for length of string with embedded null character.");
 
 	return 0;
 }

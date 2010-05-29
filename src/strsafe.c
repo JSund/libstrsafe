@@ -112,14 +112,14 @@ HRESULT StringCbCatA(
 		__inout	LPSTR pszDest,
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc){
-	return StringCchCatA(pszDest, cbDest / sizeof(char), pszSrc);
+	return StringCchCatA(pszDest, cbDest, pszSrc);
 }
 
 HRESULT StringCbCopyA(
 		__out	LPSTR pszDest,
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc){
-	return StringCchCopyA(pszDest, cbDest / sizeof(char), pszSrc);
+	return StringCchCopyA(pszDest, cbDest, pszSrc);
 }
 
 HRESULT StringCbCopyNA(
@@ -127,15 +127,12 @@ HRESULT StringCbCopyNA(
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cbSrc){
-	return StringCchCopyNA(pszDest, cbDest / sizeof(char),
-			pszSrc, cbSrc / sizeof(char));
+	return StringCchCopyNA(pszDest, cbDest, pszSrc, cbSrc);
 }
 
 HRESULT StringCbLengthA(
 		__in	LPCSTR psz,
 		__in	size_t cbMax,
 		__out	size_t *pcb){
-	HRESULT result = StringCchLengthA(psz, cbMax / sizeof(char), pcb);
-	*pcb *= sizeof(char);
-	return result;
+	return StringCchLengthA(psz, cbMax, pcb);
 }

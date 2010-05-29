@@ -5,7 +5,7 @@
 #include "tap/basic.h"
 
 int main(void){
-	plan(2);
+	plan(4);
 
 	size_t length;
 	ok(SUCCEEDED(StringCchLengthA("", 1, &length)), "Calculate length of empty string.");

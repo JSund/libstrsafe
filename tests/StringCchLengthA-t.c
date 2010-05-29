@@ -1,6 +1,3 @@
-#include <stdlib.h>
-#include <check.h>
-#include <assert.h>
 #include "../src/strsafe.h"
 #include "tap/basic.h"
 

@@ -17,4 +17,3 @@ aclocal.m4
 build-aux
 config.h.in
 configure
-m4

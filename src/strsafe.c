@@ -26,6 +26,26 @@ HRESULT StringCchCatA(
 	return StringCchCopyA(pszDest + length, cchDest - length, pszSrc);
 }
 
+HRESULT StringCchCatNA(
+		__inout	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cchSrc){
+	size_t length;
+	HRESULT result;
+
+	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(FAILED(StringCchLengthA(pszDest, cchDest, &length))){
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	return StringCchCopyNA(pszDest + length, cchDest - length,
+			pszSrc, cchSrc);
+}
+
 HRESULT StringCchCopyA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,

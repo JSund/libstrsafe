@@ -7,7 +7,9 @@
 
 #include "strsafe.h"
 #include "../config.h"
+#ifdef HAVE_STRING_H
 #include <string.h>
+#endif
 
 HRESULT StringCchCatA(
 		__inout	LPSTR pszDest,
@@ -82,7 +84,7 @@ HRESULT StringCchCopyA(
 		result = S_OK;
 	}
 
-	strncpy(pszDest, pszSrc, length);
+	memcpy(pszDest, pszSrc, length);
 	pszDest[length] = '\0';
 
 	return result;
@@ -115,7 +117,7 @@ HRESULT StringCchCopyNA(
 		result = S_OK;
 	}
 
-	strncpy(pszDest, pszSrc, length);
+	memcpy(pszDest, pszSrc, length);
 	pszDest[length] = '\0';
 
 	return result;
@@ -147,6 +149,14 @@ HRESULT StringCbCatA(
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc){
 	return StringCchCatA(pszDest, cbDest, pszSrc);
+}
+
+HRESULT StringCbCatNA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cbSrc){
+	return StringCchCatNA(pszDest, cbDest, pszSrc, cbSrc);
 }
 
 HRESULT StringCbCopyA(

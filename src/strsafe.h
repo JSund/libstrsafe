@@ -116,13 +116,9 @@
  * strings depending on whether UNICODE is set or not.
  */
 #ifdef UNICODE
-	#define TEXT(string) L(string)
-	#define _T(string) L(string)
-	#define T(string) L(string)
+	#define TEXT(string) L##string
 #else
-	#define TEXT(string) (string)
-	#define _T(string) (string)
-	#define T(string) (string)
+	#define TEXT(string) string
 #endif
 
 /**

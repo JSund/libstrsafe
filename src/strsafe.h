@@ -20,6 +20,20 @@
 #include <stddef.h>
 #include <stdint.h>
 
+/* Enable both versions of the UNICODE macro. */
+
+#ifdef _UNICODE
+	#ifndef UNICODE
+		#define UNICODE
+	#endif
+#endif
+
+#ifdef UNICODE
+	#ifndef _UNICODE
+		#define _UNICODE
+	#endif
+#endif
+
 /**
  * The result of a function call. All function calls in libstrsafe returns
  * an HRESULT, a value representing the result of the function call.
@@ -75,26 +89,27 @@
 #define DWORD uint32_t
 
 /**
- * A pointer to a string buffer.
+ * A single character.
  */
 #ifdef UNICODE
-	#define LPTSTR LPWSTR
+	#define TCHAR wchar_t
 #else
-	#define LPTSTR LPSTR
+	#define TCHAR char
 #endif
-#define LPSTR char *
+
+/**
+ * A pointer to a string buffer.
+ */
+#define LPTSTR TCHAR *
 #define LPWSTR wchar_t *
+#define LPSTR char *
 
 /**
  * A pointer to an immutable string buffer.
  */
-#ifdef UNICODE
-	#define LPCTSTR LPCWSTR
-#else
-	#define LPCTSTR LPCSTR
-#endif
-#define LPCSTR const char *
+#define LPCTSTR const TCHAR *
 #define LPCWSTR const wchar_t *
+#define LPCSTR const char *
 
 /**
  * A macro that converts string literals to either C strings or Unicode
@@ -102,8 +117,12 @@
  */
 #ifdef UNICODE
 	#define TEXT(string) L(string)
+	#define _T(string) L(string)
+	#define T(string) L(string)
 #else
 	#define TEXT(string) (string)
+	#define _T(string) (string)
+	#define T(string) (string)
 #endif
 
 /**

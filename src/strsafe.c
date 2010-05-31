@@ -6,6 +6,7 @@
  */
 
 #include "strsafe.h"
+#include "../config.h"
 #include <string.h>
 
 HRESULT StringCchCatA(
@@ -20,6 +21,12 @@ HRESULT StringCchCatA(
 	}
 
 	if(FAILED(StringCchLengthA(pszDest, cchDest, &length))){
+		/* pszDest not null terminated. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(cchDest - length < 2){
+		/* pszDest already full. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
@@ -39,6 +46,11 @@ HRESULT StringCchCatNA(
 	}
 
 	if(FAILED(StringCchLengthA(pszDest, cchDest, &length))){
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(cchDest - length < 2){
+		/* pszDest already full. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
@@ -65,13 +77,14 @@ HRESULT StringCchCopyA(
 	if(length >= cchDest){
 		/* pszSrc too long, copy first cchDest - 1 characters. */
 		length = cchDest - 1;
-		pszDest[length] = '\0';
 		result = STRSAFE_E_INSUFFICIENT_BUFFER;
 	}else{
 		result = S_OK;
 	}
 
 	strncpy(pszDest, pszSrc, length);
+	pszDest[length] = '\0';
+
 	return result;
 }
 
@@ -97,13 +110,14 @@ HRESULT StringCchCopyNA(
 	if(length >= cchDest){
 		/* pszSrc too long, copy first cchDest - 1 characters. */
 		length = cchDest - 1;
-		pszDest[length] = '\0';
 		result = STRSAFE_E_INSUFFICIENT_BUFFER;
 	}else{
 		result = S_OK;
 	}
 
 	strncpy(pszDest, pszSrc, length);
+	pszDest[length] = '\0';
+
 	return result;
 }
 

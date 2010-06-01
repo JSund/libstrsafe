@@ -30,12 +30,14 @@ int main(void){
 	is_string("testlonger", dest,
 			"Result of concatenating two strings that are too long.");
 	
-	ok(StringCchCatA(dest, 11, "test") == STRSAFE_E_INVALID_PARAMETER,
+	ok(StringCchCatA(dest, 11, "test") ==
+			STRSAFE_E_INVALID_PARAMETER,
 			"Concatenate to already full destination.");
 	is_string("testlonger", dest,
 			"Make sure destination was not modified.");
 	
-	ok(StringCchCatA(dest, 0, "test") == STRSAFE_E_INVALID_PARAMETER,
+	ok(StringCchCatA(dest, 0, "test") ==
+			STRSAFE_E_INVALID_PARAMETER,
 			"Make sure error is thrown if cchDest is zero.");
 	is_string("testlonger", dest,
 			"Make sure destination was not modified.");

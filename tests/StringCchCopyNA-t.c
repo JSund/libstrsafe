@@ -2,7 +2,7 @@
 #include "tap/basic.h"
 
 int main(void){
-	plan(7);
+	plan(9);
 
 	char dest[11];
 	char dest2[11];
@@ -16,6 +16,11 @@ int main(void){
 			"Copy from buffer with additional capacity.");
 	is_string("test", dest2,
 			"Result of copying from buffer with additional capacity.");
+
+	ok(SUCCEEDED(StringCchCopyNA(dest, 11, "", 1)),
+			"Copy empty string.");
+	is_string("", dest,
+			"Result of copying empty string.");
 	
 	ok(StringCchCopyNA(dest, 11, "longer string", 12) ==
 			STRSAFE_E_INSUFFICIENT_BUFFER,
@@ -23,7 +28,8 @@ int main(void){
 	is_string("longer str", dest,
 			"Result of copying a string that is too long.");
 	
-	ok(StringCchCopyNA(dest, 0, "test", 4) == STRSAFE_E_INVALID_PARAMETER,
+	ok(StringCchCopyNA(dest, 0, "test", 4) ==
+			STRSAFE_E_INVALID_PARAMETER,
 			"Make sure error is thrown if cchDest is zero.");
 
 	return 0;

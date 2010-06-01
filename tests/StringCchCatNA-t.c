@@ -41,12 +41,14 @@ int main(void){
 	is_string("TESTtestte", dest2,
 			"Result of concatenating a few characters.");
 	
-	ok(StringCchCatNA(dest, 11, "test", 4) == STRSAFE_E_INVALID_PARAMETER,
+	ok(StringCchCatNA(dest, 11, "test", 4) ==
+			STRSAFE_E_INVALID_PARAMETER,
 			"Concatenate to already full destination.");
 	is_string("testlonger", dest,
 			"Make sure destination was not modified.");
 
-	ok(StringCchCatNA(dest, 0, "test", 4) == STRSAFE_E_INVALID_PARAMETER,
+	ok(StringCchCatNA(dest, 0, "test", 4) ==
+			STRSAFE_E_INVALID_PARAMETER,
 			"Make sure error is thrown if cchDest is zero.");
 	is_string("testlonger", dest,
 			"Make sure destination was not modified.");

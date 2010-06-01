@@ -144,6 +144,8 @@ HRESULT StringCchLengthA(
 	return S_OK;
 }
 
+/* Since sizeof(char) == 1, we can let Cb functions wrap Cch functions. */
+
 HRESULT StringCbCatA(
 		__inout	LPSTR pszDest,
 		__in	size_t cbDest,

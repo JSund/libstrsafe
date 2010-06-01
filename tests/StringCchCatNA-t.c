@@ -2,10 +2,11 @@
 #include "tap/basic.h"
 
 int main(void){
-	plan(12);
+	plan(16);
 
 	char dest[11] = "test";
 	char dest2[11] = "TEST";
+	char empty[10] = "";
 	
 	ok(SUCCEEDED(StringCchCatNA(dest, 11, "test", 4)),
 			"Concatenate entire strings.");
@@ -13,6 +14,16 @@ int main(void){
 			"Result of concatenating entire strings.");
 
 	dest[4] = '\0'; /* Reset dest to "test". */
+
+	ok(SUCCEEDED(StringCchCatNA(dest, 11, "", 1)),
+			"Concatenate with empty source.");
+	is_string("test", dest,
+			"Result of concatenating with empty source.");
+
+	ok(SUCCEEDED(StringCchCatNA(empty, 10, "test", 4)),
+			"Concatenate with empty destination.");
+	is_string("test", empty,
+			"Result of concatenating with empty destination.");
 
 	ok(SUCCEEDED(StringCchCatNA(dest2, 11, dest, 11)),
 			"Concatenate two buffers with additional capacity.");

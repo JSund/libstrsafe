@@ -19,6 +19,7 @@ HRESULT StringCchCatA(
 	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
@@ -44,10 +45,12 @@ HRESULT StringCchCatNA(
 	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
 	if(FAILED(StringCchLengthA(pszDest, cchDest, &length))){
+		/* pszDest not null terminated. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
@@ -68,6 +71,7 @@ HRESULT StringCchCopyA(
 	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
@@ -99,6 +103,7 @@ HRESULT StringCchCopyNA(
 	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
@@ -127,6 +132,7 @@ HRESULT StringCchLengthA(
 		__in	size_t cchMax,
 		__out	size_t *pcch){
 	if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 

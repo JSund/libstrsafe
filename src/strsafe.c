@@ -90,7 +90,6 @@ HRESULT StringCchCopyA(
 	return result;
 }
 
-
 HRESULT StringCchCopyNA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,

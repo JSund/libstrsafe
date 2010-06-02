@@ -134,7 +134,7 @@ HRESULT StringCchGetsA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest){
 	size_t length = 0;
-	char c;
+	int c;
 	if(cchDest < 2){
 		return STRSAFE_E_INSUFFICIENT_BUFFER;
 	}
@@ -146,13 +146,28 @@ HRESULT StringCchGetsA(
 		if(c == EOF){
 			return STRSAFE_E_END_OF_FILE;
 		}
-		if(c == '\n'){
+		if((char)c == '\n'){
 			pszDest[length] = '\0';
 			return S_OK;
 		}
-		pszDest[length++] = c;
+		pszDest[length++] = (char)c;
 		c = getchar();
 	}
+}
+
+HRESULT StringCchPrintfA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszFormat,
+		__in	...){
+	va_list args;
+	HRESULT result;
+	
+	va_start(args, pszFormat);
+	result = StringCchVPrintfA(pszDest, cchDest, pszFormat, args);
+	va_end(args);
+
+	return result;
 }
 
 HRESULT StringCchLengthA(

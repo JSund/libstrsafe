@@ -182,7 +182,7 @@ HRESULT StringCchLengthA(
 		__in	size_t cchMax,
 		__out	size_t *pcch){
 	if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
+		/* Invalid value for psz or cchMax. */
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 

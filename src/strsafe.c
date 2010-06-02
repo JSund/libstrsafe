@@ -8,7 +8,10 @@
 #include "strsafe.h"
 #include "../config.h"
 #ifdef HAVE_STRING_H
-#include <string.h>
+	#include <string.h>
+#endif
+#ifdef HAVE_STDIO_H
+	#include <stdio.h>
 #endif
 
 HRESULT StringCchCatA(
@@ -125,6 +128,31 @@ HRESULT StringCchCopyNA(
 	pszDest[length] = '\0';
 
 	return result;
+}
+
+HRESULT StringCchGetsA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest){
+	size_t length = 0;
+	char c;
+	if(cchDest < 2){
+		return STRSAFE_E_INSUFFICIENT_BUFFER;
+	}
+	if(cchDest > STRSAFE_MAX_CCH){
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+	c = getchar();
+	while(length < cchDest){
+		if(c == EOF){
+			return STRSAFE_E_END_OF_FILE;
+		}
+		if(c == '\n'){
+			pszDest[length] = '\0';
+			return S_OK;
+		}
+		pszDest[length++] = c;
+		c = getchar();
+	}
 }
 
 HRESULT StringCchLengthA(

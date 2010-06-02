@@ -134,25 +134,24 @@ HRESULT StringCchGetsA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest){
 	size_t length = 0;
-	int c;
 	if(cchDest < 2){
 		return STRSAFE_E_INSUFFICIENT_BUFFER;
 	}
 	if(cchDest > STRSAFE_MAX_CCH){
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
-	c = getchar();
-	while(length < cchDest){
+	while(length < cchDest - 1){
+		int c = getchar();
 		if(c == EOF){
 			return STRSAFE_E_END_OF_FILE;
 		}
 		if((char)c == '\n'){
-			pszDest[length] = '\0';
-			return S_OK;
+			break;
 		}
 		pszDest[length++] = (char)c;
-		c = getchar();
 	}
+	pszDest[length] = '\0';
+	return S_OK;
 }
 
 HRESULT StringCchPrintfA(

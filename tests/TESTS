@@ -3,3 +3,8 @@ StringCchCatNA
 StringCchCopyA
 StringCchCopyNA
 StringCchLengthA
+StringCchCatW
+StringCchCatNW
+StringCchCopyW
+StringCchCopyNW
+StringCchLengthW

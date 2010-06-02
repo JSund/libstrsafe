@@ -8,6 +8,7 @@
  *     by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
  *     2002, 2003 by The Internet Software Consortium and Rich Salz
+ * Copyright (c) 2010 Jonas Sundberg <jsund@jsund.com>
  *
  * See LICENSE for licensing terms.
  */
@@ -90,6 +91,8 @@ void is_int(long wanted, long seen, const char *format, ...)
 void is_double(double wanted, double seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));
 void is_string(const char *wanted, const char *seen, const char *format, ...)
+    __attribute__((__format__(printf, 3, 4)));
+void is_wstring(const wchar_t *wanted, const wchar_t *seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));
 void is_hex(unsigned long wanted, unsigned long seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));

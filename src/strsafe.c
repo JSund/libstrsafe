@@ -160,14 +160,22 @@ HRESULT StringCchPrintfA(
 		__in	size_t cchDest,
 		__in	LPCSTR pszFormat,
 		__in	...){
-	va_list args;
+	va_list argList;
 	HRESULT result;
 	
-	va_start(args, pszFormat);
-	result = StringCchVPrintfA(pszDest, cchDest, pszFormat, args);
-	va_end(args);
+	va_start(argList, pszFormat);
+	result = StringCchVPrintfA(pszDest, cchDest, pszFormat, argList);
+	va_end(argList);
 
 	return result;
+}
+
+HRESULT StringCchVPrintfA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszFormat,
+		__in	va_list argList){
+	return 0;
 }
 
 HRESULT StringCchLengthA(

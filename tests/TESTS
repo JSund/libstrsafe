@@ -8,3 +8,8 @@ StringCchCatNW
 StringCchCopyW
 StringCchCopyNW
 StringCchLengthW
+StringCbCatW
+StringCbCatNW
+StringCbCopyW
+StringCbCopyNW
+StringCbLengthW

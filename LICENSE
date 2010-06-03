@@ -16,12 +16,19 @@ unless otherwise noted below.
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
-The file tests/runtests.c is released under the following copyright and
-license:
+The files tests/runtests.c and tests/tap/libtap.sh are released under the
+following copyrights and license:
 
+  tests/runtests.c:
   Copyright 2000, 2001, 2004, 2006, 2007, 2008, 2009, 2010
       Russ Allbery <rra@stanford.edu>
   
+  tests/tap/libtap.sh:
+  Written by Russ Allbery <rra@stanford.edu>
+  Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
+  Copyright 2006, 2007, 2008 Board of Trustees,
+    Leland Stanford Jr. University
+
   Permission is hereby granted, free of charge, to any person obtaining a
   copy of this software and associated documentation files (the
   "Software"), to deal in the Software without restriction, including
@@ -45,6 +52,7 @@ license:
 The files tests/tap/basic.c and tests/tap/basic.h are released under the
 following copyright and license:
 
+  Copyright 2010 Jonas Sundberg <jsund@jsund.com>
   Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
   Copyright 2006, 2007, 2008
       Board of Trustees, Leland Stanford Jr. University

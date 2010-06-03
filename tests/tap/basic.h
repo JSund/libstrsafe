@@ -1,6 +1,7 @@
 /*
  * Basic utility routines for the TAP protocol.
  *
+ * Copyright 2010 Jonas Sundberg <jsund@jsund.com>
  * Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
  * Copyright 2006, 2007, 2008
  *     Board of Trustees, Leland Stanford Jr. University
@@ -8,7 +9,6 @@
  *     by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
  *     2002, 2003 by The Internet Software Consortium and Rich Salz
- * Copyright (c) 2010 Jonas Sundberg <jsund@jsund.com>
  *
  * See LICENSE for licensing terms.
  */

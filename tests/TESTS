@@ -8,6 +8,11 @@ StringCchCatNW
 StringCchCopyW
 StringCchCopyNW
 StringCchLengthW
+StringCbCatA
+StringCbCatNA
+StringCbCopyA
+StringCbCopyNA
+StringCbLengthA
 StringCbCatW
 StringCbCatNW
 StringCbCopyW

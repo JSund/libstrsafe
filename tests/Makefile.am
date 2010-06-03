@@ -3,6 +3,8 @@ check_PROGRAMS = runtests \
 		 StringCchCopyNA-t StringCchLengthA-t \
 		 StringCchCatW-t StringCchCatNW-t StringCchCopyW-t \
 		 StringCchCopyNW-t StringCchLengthW-t \
+		 StringCbCatA-t StringCbCatNA-t StringCbCopyA-t \
+		 StringCbCopyNA-t StringCbLengthA-t \
 		 StringCbCatW-t StringCbCatNW-t StringCbCopyW-t \
 		 StringCbCopyNW-t StringCbLengthW-t 
 check_LIBRARIES = tap/libtap.a

@@ -1,6 +1,7 @@
 /*
  * Basic utility routines for the TAP protocol.
  *
+ * Copyright 2010 Jonas Sundberg <jsund@jsund.com>
  * Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
  * Copyright 2006, 2007, 2008
  *     Board of Trustees, Leland Stanford Jr. University
@@ -90,6 +91,8 @@ void is_int(long wanted, long seen, const char *format, ...)
 void is_double(double wanted, double seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));
 void is_string(const char *wanted, const char *seen, const char *format, ...)
+    __attribute__((__format__(printf, 3, 4)));
+void is_wstring(const wchar_t *wanted, const wchar_t *seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));
 void is_hex(unsigned long wanted, unsigned long seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));

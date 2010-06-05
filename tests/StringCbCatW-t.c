@@ -4,42 +4,42 @@
 int main(void){
 	plan(12);
 
-	char dest[11] = "test";
-	char empty[10] = "";
+	wchar_t dest[11] = L"test";
+	wchar_t empty[10] = L"";
 
-	ok(SUCCEEDED(StringCchCatA(dest, 11, "TEST")),
+	ok(SUCCEEDED(StringCbCatW(dest, 11 * sizeof(wchar_t), L"TEST")),
 			"Concatenate two short strings.");
-	is_string("testTEST", dest,
+	is_wstring(L"testTEST", dest,
 			"Result of concatenating short strings.");
 
 	dest[4] = '\0'; /* Reset dest to "test". */
 
-	ok(SUCCEEDED(StringCchCatA(dest, 11, "")),
+	ok(SUCCEEDED(StringCbCatW(dest, 11 * sizeof(wchar_t), L"")),
 			"Concatenate with empty source.");
-	is_string("test", dest,
+	is_wstring(L"test", dest,
 			"Result of concatenating with empty source.");
 
-	ok(SUCCEEDED(StringCchCatA(empty, 10, "test")),
+	ok(SUCCEEDED(StringCbCatW(empty, 10 * sizeof(wchar_t), L"test")),
 			"Concatenate with empty destination.");
-	is_string("test", empty,
+	is_wstring(L"test", empty,
 			"Result of concatenating with empty destination.");
 
-	ok(StringCchCatA(dest, 11, "longer string") ==
+	ok(StringCbCatW(dest, 11 * sizeof(wchar_t), L"longer string") ==
 			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Concatenate two strings that are too long.");
-	is_string("testlonger", dest,
+	is_wstring(L"testlonger", dest,
 			"Result of concatenating two strings that are too long.");
 	
-	ok(StringCchCatA(dest, 11, "test") ==
+	ok(StringCbCatW(dest, 11 * sizeof(wchar_t), L"test") ==
 			STRSAFE_E_INVALID_PARAMETER,
 			"Concatenate to already full destination.");
-	is_string("testlonger", dest,
+	is_wstring(L"testlonger", dest,
 			"Make sure destination was not modified.");
 	
-	ok(StringCchCatA(dest, 0, "test") ==
+	ok(StringCbCatW(dest, 0 * sizeof(wchar_t), L"test") ==
 			STRSAFE_E_INVALID_PARAMETER,
 			"Make sure error is thrown if cchDest is zero.");
-	is_string("testlonger", dest,
+	is_wstring(L"testlonger", dest,
 			"Make sure destination was not modified.");
 
 	return 0;

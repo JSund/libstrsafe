@@ -285,6 +285,14 @@ HRESULT StringCchPrintfA(
 	return result;
 }
 
+HRESULT StringCchPrintfW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCWSTR pszFormat,
+		__in	...){
+	return 0;
+}
+
 HRESULT StringCchVPrintfA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,
@@ -298,6 +306,25 @@ HRESULT StringCchVPrintfA(
 	if(vsnprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
 		/* Data did not fit in pszDest. */
 		pszDest[cchDest - 1] = '\0';
+		return STRSAFE_E_INSUFFICIENT_BUFFER;
+	}
+
+	return S_OK;
+}
+
+HRESULT StringCchVPrintfW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCWSTR pszFormat,
+		__in	va_list argList){
+	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(vswprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
+		/* Data did not fit in pszDest. */
+		pszDest[cchDest - 1] = L'\0';
 		return STRSAFE_E_INSUFFICIENT_BUFFER;
 	}
 
@@ -410,6 +437,46 @@ HRESULT StringCbCopyNW(
 		__in	size_t cbSrc){
 	return StringCchCopyNW(pszDest, cbDest / sizeof(wchar_t),
 			pszSrc, cbSrc / sizeof(wchar_t));
+}
+
+HRESULT StringCbPrintfA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszFormat,
+		__in	...){
+	va_list argList;
+	HRESULT result;
+	
+	va_start(argList, pszFormat);
+	result = StringCchVPrintfA(pszDest, cbDest, pszFormat, argList);
+	va_end(argList);
+
+	return result;
+}
+
+HRESULT StringCbPrintfW(
+		__out	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCWSTR pszFormat,
+		__in	...){
+	return 0;
+}
+
+HRESULT StringCbVPrintfA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszFormat,
+		__in	va_list argList){
+	return StringCchVPrintfA(pszDest, cbDest, pszFormat, argList);
+}
+
+HRESULT StringCbVPrintfW(
+		__out	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCWSTR pszFormat,
+		__in	va_list argList){
+	return StringCchVPrintfW(pszDest, cbDest / sizeof(wchar_t),
+			pszFormat, argList);
 }
 
 HRESULT StringCbLengthA(

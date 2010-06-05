@@ -1,12 +1,12 @@
 check_PROGRAMS = runtests \
 		 StringCchCatA-t StringCchCatNA-t StringCchCopyA-t \
-		 StringCchCopyNA-t StringCchLengthA-t \
+		 StringCchCopyNA-t StringCchLengthA-t StringCchPrintfA-t \
 		 StringCchCatW-t StringCchCatNW-t StringCchCopyW-t \
-		 StringCchCopyNW-t StringCchLengthW-t \
+		 StringCchCopyNW-t StringCchLengthW-t StringCchPrintfW-t \
 		 StringCbCatA-t StringCbCatNA-t StringCbCopyA-t \
-		 StringCbCopyNA-t StringCbLengthA-t \
+		 StringCbCopyNA-t StringCbLengthA-t StringCbPrintfA-t \
 		 StringCbCatW-t StringCbCatNW-t StringCbCopyW-t \
-		 StringCbCopyNW-t StringCbLengthW-t 
+		 StringCbCopyNW-t StringCbLengthW-t StringCbPrintfW-t
 check_LIBRARIES = tap/libtap.a
 tap_libtap_a_SOURCES = tap/basic.c tap/basic.h
 AM_LDFLAGS = ../src/libstrsafe.la tap/libtap.a

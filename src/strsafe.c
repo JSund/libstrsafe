@@ -290,7 +290,18 @@ HRESULT StringCchVPrintfA(
 		__in	size_t cchDest,
 		__in	LPCSTR pszFormat,
 		__in	va_list argList){
-	return 0;
+	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(vsnprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
+		/* Data did not fit in pszDest. */
+		pszDest[cchDest - 1] = '\0';
+		return STRSAFE_E_INSUFFICIENT_BUFFER;
+	}
+
+	return S_OK;
 }
 
 HRESULT StringCchLengthA(

@@ -290,7 +290,14 @@ HRESULT StringCchPrintfW(
 		__in	size_t cchDest,
 		__in	LPCWSTR pszFormat,
 		__in	...){
-	return 0;
+	va_list argList;
+	HRESULT result;
+
+	va_start(argList, pszFormat);
+	result = StringCchVPrintfW(pszDest, cchDest, pszFormat, argList);
+	va_end(argList);
+
+	return result;
 }
 
 HRESULT StringCchVPrintfA(
@@ -459,7 +466,13 @@ HRESULT StringCbPrintfW(
 		__in	size_t cbDest,
 		__in	LPCWSTR pszFormat,
 		__in	...){
-	return 0;
+	va_list argList;
+	HRESULT result;
+
+	va_start(argList, pszFormat);
+	result = StringCchVPrintfW(pszDest, cbDest / sizeof(wchar_t),
+			pszFormat, argList);
+	va_end(argList);
 }
 
 HRESULT StringCbVPrintfA(

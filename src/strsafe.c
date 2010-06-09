@@ -473,6 +473,8 @@ HRESULT StringCbPrintfW(
 	result = StringCchVPrintfW(pszDest, cbDest / sizeof(wchar_t),
 			pszFormat, argList);
 	va_end(argList);
+
+	return result;
 }
 
 HRESULT StringCbVPrintfA(

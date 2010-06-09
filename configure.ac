@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.65])
 AC_INIT([libstrsafe], [0.0.0], [libstrsafe@jsund.com])
-AC_CONFIG_SRCDIR([src/strsafe.c])
+AC_CONFIG_SRCDIR([src/strsafe.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 

@@ -7,11 +7,14 @@
 
 #include "strsafe.h"
 #include "../config.h"
+#ifdef HAVE_STDIO_H
+	#include <stdio.h>
+#endif
 #ifdef HAVE_STRING_H
 	#include <string.h>
 #endif
-#ifdef HAVE_STDIO_H
-	#include <stdio.h>
+#ifdef HAVE_WCHAR_H
+	#include <wchar.h>
 #endif
 
 HRESULT StringCchCatA(
@@ -19,7 +22,6 @@ HRESULT StringCchCatA(
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc){
 	size_t length;
-	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
 		/* Invalid value for cchDest. */
@@ -44,7 +46,6 @@ HRESULT StringCchCatW(
 		__in	size_t cchDest,
 		__in	LPCWSTR pszSrc){
 	size_t length;
-	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
 		/* Invalid value for cchDest. */
@@ -70,7 +71,6 @@ HRESULT StringCchCatNA(
 		__in	LPCSTR pszSrc,
 		__in	size_t cchSrc){
 	size_t length;
-	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
 		/* Invalid value for cchDest. */
@@ -97,7 +97,6 @@ HRESULT StringCchCatNW(
 		__in	LPCWSTR pszSrc,
 		__in	size_t cchSrc){
 	size_t length;
-	HRESULT result;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
 		/* Invalid value for cchDest. */

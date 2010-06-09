@@ -18,7 +18,7 @@ AC_PROG_LIBTOOL
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([stddef.h stdint.h string.h stdio.h])
+AC_CHECK_HEADERS([stdarg.h stddef.h stdint.h stdio.h string.h wchar.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T

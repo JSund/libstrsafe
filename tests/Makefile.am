@@ -8,7 +8,7 @@ check_PROGRAMS = runtests \
 		 StringCbCatW-t StringCbCatNW-t StringCbCopyW-t \
 		 StringCbCopyNW-t StringCbLengthW-t StringCbPrintfW-t
 check_LIBRARIES = tap/libtap.a
-tap_libtap_a_SOURCES = tap/basic.c tap/basic.h
+tap_libtap_a_SOURCES = tap/basic.c tap/basic.h tap/wide.c tap/wide.h
 AM_LDFLAGS = ../src/libstrsafe.la tap/libtap.a
 
 check-local: $(check_PROGRAMS)

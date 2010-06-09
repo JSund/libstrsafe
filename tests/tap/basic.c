@@ -7,7 +7,6 @@
  * arguments, and print out something appropriate for that test number.  Other
  * utility routines help in constructing more complex tests.
  *
- * Copyright 2010 Jonas Sundberg <jsund@jsund.com>
  * Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
  * Copyright 2006, 2007, 2008
  *     Board of Trustees, Leland Stanford Jr. University
@@ -28,7 +27,6 @@
 #include <sys/time.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <wchar.h>
 
 #include <tap/basic.h>
 
@@ -178,6 +176,21 @@ ok(int success, const char *format, ...)
 
 
 /*
+ * Same as ok(), but takes the format arguments as a va_list.
+ */
+void
+okv(int success, const char *format, va_list args)
+{
+    printf("%sok %lu", success ? "" : "not ", testnum++);
+    if (!success)
+        _failed++;
+    if (format != NULL)
+        print_desc(format, args);
+    putchar('\n');
+}
+
+
+/*
  * Skip a test.
  */
 void
@@ -283,34 +296,6 @@ is_string(const char *wanted, const char *seen, const char *format, ...)
         printf("ok %lu", testnum++);
     else {
         printf("# wanted: %s\n#   seen: %s\n", wanted, seen);
-        printf("not ok %lu", testnum++);
-        _failed++;
-    }
-    if (format != NULL) {
-        va_list args;
-
-        va_start(args, format);
-        print_desc(format, args);
-        va_end(args);
-    }
-    putchar('\n');
-}
-
-/*
- * Takes a string and what the string should be, and assumes the test passes
- * if those strings match (using strcmp).
- */
-void
-is_wstring(const wchar_t *wanted, const wchar_t *seen, const char *format, ...)
-{
-    if (wanted == NULL)
-        wanted = L"(null)";
-    if (seen == NULL)
-        seen = L"(null)";
-    if (wcscmp(wanted, seen) == 0)
-        printf("ok %lu", testnum++);
-    else {
-        printf("# wanted: %ls\n#   seen: %ls\n", wanted, seen);
         printf("not ok %lu", testnum++);
         _failed++;
     }

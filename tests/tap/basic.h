@@ -1,7 +1,6 @@
 /*
  * Basic utility routines for the TAP protocol.
  *
- * Copyright 2010 Jonas Sundberg <jsund@jsund.com>
  * Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
  * Copyright 2006, 2007, 2008
  *     Board of Trustees, Leland Stanford Jr. University
@@ -16,6 +15,7 @@
 #ifndef TAP_BASIC_H
 #define TAP_BASIC_H 1
 
+#include <stdarg.h>             /* va_list */
 #include <sys/types.h>          /* pid_t */
 
 /*
@@ -73,9 +73,14 @@ void plan_lazy(void);
 void skip_all(const char *format, ...)
     __attribute__((__noreturn__, __format__(printf, 1, 2)));
 
-/* Basic reporting functions. */
+/*
+ * Basic reporting functions.  The okv() function is the same as ok() but
+ * takes the test description as a va_list to make it easier to reuse the
+ * reporting infrastructure when writing new tests.
+ */
 void ok(int success, const char *format, ...)
     __attribute__((__format__(printf, 2, 3)));
+void okv(int success, const char *format, va_list args);
 void skip(const char *reason, ...)
     __attribute__((__format__(printf, 1, 2)));
 
@@ -91,8 +96,6 @@ void is_int(long wanted, long seen, const char *format, ...)
 void is_double(double wanted, double seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));
 void is_string(const char *wanted, const char *seen, const char *format, ...)
-    __attribute__((__format__(printf, 3, 4)));
-void is_wstring(const wchar_t *wanted, const wchar_t *seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));
 void is_hex(unsigned long wanted, unsigned long seen, const char *format, ...)
     __attribute__((__format__(printf, 3, 4)));

@@ -57,7 +57,7 @@ HRESULT StringCchGetsW(
 	}
 
 	while(length < cchDest - 1){
-		wint_t c = getwchar(stdin);
+		wint_t c = getwchar();
 		if(c == WEOF){
 			pszDest[length] = L'\0';
 			return STRSAFE_E_END_OF_FILE;

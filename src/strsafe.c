@@ -309,7 +309,7 @@ HRESULT StringCchVPrintfA(
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
-	if(vsnprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
+	if((size_t)vsnprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
 		/* Data did not fit in pszDest. */
 		pszDest[cchDest - 1] = '\0';
 		return STRSAFE_E_INSUFFICIENT_BUFFER;
@@ -328,7 +328,7 @@ HRESULT StringCchVPrintfW(
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
-	if(vswprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
+	if((size_t)vswprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
 		/* Data did not fit in pszDest. */
 		pszDest[cchDest - 1] = L'\0';
 		return STRSAFE_E_INSUFFICIENT_BUFFER;

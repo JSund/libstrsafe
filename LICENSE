@@ -52,7 +52,6 @@ following copyrights and license:
 The files tests/tap/basic.c and tests/tap/basic.h are released under the
 following copyright and license:
 
-  Copyright 2010 Jonas Sundberg <jsund@jsund.com>
   Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
   Copyright 2006, 2007, 2008
       Board of Trustees, Leland Stanford Jr. University

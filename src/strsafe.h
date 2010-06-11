@@ -44,10 +44,19 @@
 /*
  * Bits set in a HRESULT correspond to various error messages.
  */
-#define S_OK (uint32_t)0x0000
-#define STRSAFE_E_END_OF_FILE (uint32_t)0x0001
-#define STRSAFE_E_INVALID_PARAMETER (uint32_t)0x0002
-#define STRSAFE_E_INSUFFICIENT_BUFFER (uint32_t)0x0004
+#define S_OK (uint32_t)0x00000000
+#define STRSAFE_E_END_OF_FILE (uint32_t)0x00000001
+#define STRSAFE_E_INVALID_PARAMETER (uint32_t)0x00000002
+#define STRSAFE_E_INSUFFICIENT_BUFFER (uint32_t)0x00000004
+
+/*
+ * Flags to set in parameters to the extended functions.
+ */
+#define STRSAFE_IGNORE_NULLS (uint32_t)0x00000100
+#define STRSAFE_FILL_BEHIND_NULL (uint32_t)0x00000200
+#define STRSAFE_FILL_ON_FAILURE (uint32_t)0x00000400
+#define STRSAFE_NULL_ON_FAILURE (uint32_t)0x00000800
+#define STRSAFE_NO_TRUNCATION (uint32_t)0x00001000
 
 /*
  * The maximum number of characters allowed.

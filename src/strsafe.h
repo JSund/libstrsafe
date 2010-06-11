@@ -39,7 +39,7 @@
  * an HRESULT, a value representing the result of the function call.
  * This can later be checked with the SUCCEEDED or FAILED macros.
  */
-#define HRESULT uint32_t
+typedef uint32_t HRESULT;
 
 /*
  * Bits set in a HRESULT correspond to various error messages.
@@ -61,7 +61,7 @@
 /*
  * The maximum number of characters allowed.
  */
-#define STRSAFE_MAX_CCH 0x7fffffff /* 2^31 - 1 or 2,147,483,647 */
+#define STRSAFE_MAX_CCH (size_t)0x7fffffff /* 2^31 - 1 or 2,147,483,647 */
 
 /**
  * Checks that the previous call succeeded. This is implemented as a macro
@@ -87,38 +87,38 @@
  * __out, __in and __inout marks whether a parameter to a function call
  * is used for output, input or both input and output, respectively.
  */
-#define __out
-#define __in
-#define __inout
+#define __out /* empty string */
+#define __in /* empty string */
+#define __inout /* empty string */
 
 /*
  * A DWORD is used to set various arguments to extended versions of
  * functions.
  */
-#define DWORD uint32_t
+typedef uint32_t DWORD;
 
 /**
  * A single character.
  */
 #ifdef UNICODE
-	#define TCHAR wchar_t
+	typedef wchar_t TCHAR;
 #else
-	#define TCHAR char
+	typedef char TCHAR;
 #endif
 
 /**
  * A pointer to a string buffer.
  */
-#define LPTSTR TCHAR *
-#define LPWSTR wchar_t *
-#define LPSTR char *
+typedef TCHAR * LPTSTR;
+typedef wchar_t * LPWSTR;
+typedef char * LPSTR;
 
 /**
  * A pointer to an immutable string buffer.
  */
-#define LPCTSTR const TCHAR *
-#define LPCWSTR const wchar_t *
-#define LPCSTR const char *
+typedef const LPTSTR LPCTSTR;
+typedef const LPWSTR LPCWSTR;
+typedef const LPSTR LPCSTR;
 
 /**
  * A macro that converts string literals to either C strings or Unicode

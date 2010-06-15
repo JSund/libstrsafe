@@ -1,0 +1,5 @@
+"test" - OK
+"123456789" - OK
+"0" - OK
+"TESTING" - OK
+"" - End of file

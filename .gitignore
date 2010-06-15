@@ -28,5 +28,6 @@ stamp-h1
 .dirstamp
 tests/*
 !tests/tap
+!tests/gets_data
 !tests/*.[ch]
 !tests/*.sh

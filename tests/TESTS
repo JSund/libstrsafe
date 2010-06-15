@@ -22,3 +22,4 @@ StringCbCopyW
 StringCbCopyNW
 StringCbLengthW
 StringCbPrintfW
+Gets

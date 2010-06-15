@@ -1,4 +1,4 @@
-check_PROGRAMS = runtests \
+check_PROGRAMS = runtests echo \
 		 StringCchCatA-t StringCchCatNA-t StringCchCopyA-t \
 		 StringCchCopyNA-t StringCchLengthA-t StringCchPrintfA-t \
 		 StringCchCatW-t StringCchCatNW-t StringCchCopyW-t \

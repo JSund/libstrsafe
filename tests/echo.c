@@ -96,12 +96,14 @@ void StringCbEchoW(size_t width){
 			case STRSAFE_E_END_OF_FILE:
 				res = "End of file";
 				break;
+
 			case STRSAFE_E_INVALID_PARAMETER:
 				res = "Invalid parameter";
 				break;
 			case STRSAFE_E_INSUFFICIENT_BUFFER:
 				res = "Insufficient buffer";
 		}
+
 		printf("\"%ls\" - %s\n", buf, res);
 	}
 }
@@ -140,7 +142,7 @@ int main(int argc, const char * argv[]){
 		if(strcmp(type, "W")){
 			StringCbEchoA(width);
 		} else {
-			StringCbEchoW(width);
+			StringCbEchoW(width * sizeof(wchar_t));
 		}
 	}
 

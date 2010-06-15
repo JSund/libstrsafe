@@ -14,4 +14,4 @@ EXTRA_DIST = tap/libtap.sh
 
 check-local: $(check_PROGRAMS)
 	./runtests TESTS
-	./StringCchGetsA-t.sh
+	./Gets-t.sh

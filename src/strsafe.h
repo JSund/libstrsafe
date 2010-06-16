@@ -44,9 +44,35 @@ typedef uint32_t HRESULT;
 /*
  * Bits set in a HRESULT correspond to various error messages.
  */
+
+/**
+ * Function ran successfully.
+ *
+ * No errors occured during execution.
+ */
 #define S_OK (uint32_t)0x00000000
+
+/**
+ * End of file was reached.
+ *
+ * During execution, the end of an input file or stream was reached.
+ */
 #define STRSAFE_E_END_OF_FILE (uint32_t)0x00000001
+
+/**
+ * An invalid parameter was sent.
+ *
+ * One or more of the input parameters was invalid.
+ */
 #define STRSAFE_E_INVALID_PARAMETER (uint32_t)0x00000002
+
+/**
+ * An output buffer was too small.
+ *
+ * An output buffer used by the function was too small to contain the
+ * data that was supposed to write into. The data written into the buffer
+ * was truncated unless STRSAFE_NO_TRUNCATION was set.
+ */
 #define STRSAFE_E_INSUFFICIENT_BUFFER (uint32_t)0x00000004
 
 /*

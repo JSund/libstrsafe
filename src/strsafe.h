@@ -41,37 +41,30 @@
  */
 typedef uint32_t HRESULT;
 
-/*
- * Bits set in a HRESULT correspond to various error messages.
- */
-
 /**
- * Function ran successfully.
- *
- * No errors occured during execution.
+ * Function ran successfully. No errors occured during execution.
  */
 #define S_OK (uint32_t)0x00000000
 
 /**
- * End of file was reached.
- *
- * During execution, the end of an input file or stream was reached.
+ * End of file was reached. During execution, the end of an input file
+ * or stream was reached.
  */
 #define STRSAFE_E_END_OF_FILE (uint32_t)0x00000001
 
 /**
- * An invalid parameter was sent.
- *
- * One or more of the input parameters was invalid.
+ * An invalid parameter was sent. One or more of the input parameters
+ * was invalid.
  */
 #define STRSAFE_E_INVALID_PARAMETER (uint32_t)0x00000002
 
 /**
- * An output buffer was too small.
+ * An output buffer was too small. An output buffer used by the function
+ * was too small to contain the data that was supposed to be written
+ * into it.
  *
- * An output buffer used by the function was too small to contain the
- * data that was supposed to write into. The data written into the buffer
- * was truncated unless STRSAFE_NO_TRUNCATION was set.
+ * The data written into the buffer was truncated unless
+ * STRSAFE_NO_TRUNCATION was set.
  */
 #define STRSAFE_E_INSUFFICIENT_BUFFER (uint32_t)0x00000004
 
@@ -84,8 +77,9 @@ typedef uint32_t HRESULT;
 #define STRSAFE_NULL_ON_FAILURE (uint32_t)0x00000800
 #define STRSAFE_NO_TRUNCATION (uint32_t)0x00001000
 
-/*
- * The maximum number of characters allowed.
+/**
+ * The maximum allowed buffer capacity. It specifies the maximum number
+ * of characters that a buffer is allowed to contain.
  */
 #define STRSAFE_MAX_CCH (size_t)0x7fffffff /* 2^31 - 1 or 2,147,483,647 */
 
@@ -113,11 +107,11 @@ typedef uint32_t HRESULT;
  * __out, __in and __inout marks whether a parameter to a function call
  * is used for output, input or both input and output, respectively.
  */
-#define __out /* empty string */
-#define __in /* empty string */
-#define __inout /* empty string */
+#define __out	/* empty string */
+#define __in	/* empty string */
+#define __inout	/* empty string */
 
-/*
+/**
  * A DWORD is used to set various arguments to extended versions of
  * functions.
  */

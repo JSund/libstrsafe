@@ -10,8 +10,7 @@ check_PROGRAMS = runtests echo \
 check_LIBRARIES = tap/libtap.a
 tap_libtap_a_SOURCES = tap/basic.c tap/basic.h tap/wide.c tap/wide.h
 AM_LDFLAGS = ../src/libstrsafe.la tap/libtap.a
-EXTRA_DIST = tap/libtap.sh
+EXTRA_DIST = tap/libtap.sh Gets-t
 
 check-local: $(check_PROGRAMS)
 	./runtests TESTS
-	./Gets-t.sh

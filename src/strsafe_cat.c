@@ -21,6 +21,23 @@ HRESULT StringCchCatA(
 		__inout	LPSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc){
+	return StringCchCatExA(pszDest, cchDest, pszSrc, NULL, NULL, 0);
+}
+
+HRESULT StringCchCatW(
+		__inout LPWSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCWSTR pszSrc){
+	return StringCchCatExW(pszDest, cchDest, pszSrc, NULL, NULL, 0);
+}
+
+HRESULT StringCchCatExA(
+		__inout	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszSrc,
+		__out	LPSTR * ppszDestEnd __attribute__((unused)),
+		__out	size_t * pcchRemaining __attribute__((unused)),
+		__in	DWORD dwFlags __attribute__((unused))){
 	size_t length;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
@@ -41,10 +58,13 @@ HRESULT StringCchCatA(
 	return StringCchCopyA(pszDest + length, cchDest - length, pszSrc);
 }
 
-HRESULT StringCchCatW(
+HRESULT StringCchCatExW(
 		__inout	LPWSTR pszDest,
 		__in	size_t cchDest,
-		__in	LPCWSTR pszSrc){
+		__in	LPCWSTR pszSrc,
+		__out	LPWSTR * ppszDestEnd __attribute__((unused)),
+		__out	size_t * pcchRemaining __attribute__((unused)),
+		__in	DWORD dwFlags __attribute__((unused))){
 	size_t length;
 
 	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
@@ -77,4 +97,26 @@ HRESULT StringCbCatW(
 		__in	size_t cbDest,
 		__in	LPCWSTR pszSrc){
 	return StringCchCatW(pszDest, cbDest / sizeof(wchar_t), pszSrc);
+}
+
+HRESULT StringCbCatExA(
+		__inout	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszSrc,
+		__out	LPSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	return StringCchCatExA(pszDest, cbDest, pszSrc,
+			ppszDestEnd, pcbRemaining, dwFlags);
+}
+
+HRESULT StringCbCatExW(
+		__inout	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCWSTR pszSrc,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	return StringCchCatExW(pszDest, cbDest, pszSrc,
+			ppszDestEnd, pcbRemaining, dwFlags);
 }

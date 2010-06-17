@@ -21,6 +21,23 @@ HRESULT StringCchCopyA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc){
+	return StringCchCopyExA(pszDest, cchDest, pszSrc, NULL, NULL, 0);
+}
+
+HRESULT StringCchCopyW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCWSTR pszSrc){
+	return StringCchCopyExW(pszDest, cchDest, pszSrc, NULL, NULL, 0);
+}
+
+HRESULT StringCchCopyExA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszSrc,
+		__out	LPSTR *ppszDestEnd __attribute__((unused)),
+		__out	size_t * pcbRemaining __attribute__((unused)),
+		__in	DWORD dwFlags __attribute__((unused))){
 	size_t length;
 	HRESULT result;
 
@@ -48,10 +65,13 @@ HRESULT StringCchCopyA(
 	return result;
 }
 
-HRESULT StringCchCopyW(
+HRESULT StringCchCopyExW(
 		__out	LPWSTR pszDest,
 		__in	size_t cchDest,
-		__in	LPCWSTR pszSrc){
+		__in	LPCWSTR pszSrc,
+		__out	LPWSTR *ppszDestEnd __attribute__((unused)),
+		__out	size_t * pcbRemaining __attribute__((unused)),
+		__in	DWORD dwFlags __attribute__((unused))){
 	size_t length;
 	HRESULT result;
 
@@ -91,4 +111,30 @@ HRESULT StringCbCopyW(
 		__in	size_t cbDest,
 		__in	LPCWSTR pszSrc){
 	return StringCchCopyW(pszDest, cbDest / sizeof(wchar_t), pszSrc);
+}
+
+HRESULT StringCbCopyExA(
+		__inout	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszSrc,
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	return StringCchCopyExA(pszDest, cbDest, pszSrc,
+			ppszDestEnd, pcbRemaining, dwFlags);
+}
+
+HRESULT StringCbCopyExW(
+		__inout	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCWSTR pszSrc,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	HRESULT result = StringCchCopyExW(pszDest, cbDest / sizeof(wchar_t),
+			pszSrc, ppszDestEnd, pcbRemaining, dwFlags);
+	if(pcbRemaining != NULL){
+		*pcbRemaining *= sizeof(wchar_t);
+	}
+	return result;
 }

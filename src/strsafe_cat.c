@@ -117,6 +117,10 @@ HRESULT StringCbCatExW(
 		__out	LPWSTR * ppszDestEnd,
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
-	return StringCchCatExW(pszDest, cbDest, pszSrc,
-			ppszDestEnd, pcbRemaining, dwFlags);
+	HRESULT result = StringCchCatExW(pszDest, cbDest / sizeof(wchar_t),
+			pszSrc, ppszDestEnd, pcbRemaining, dwFlags);
+	if(pcbRemaining != NULL){
+		*pcbRemaining *= sizeof(wchar_t);
+	}
+	return result;
 }

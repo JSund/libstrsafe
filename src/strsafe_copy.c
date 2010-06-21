@@ -35,9 +35,9 @@ HRESULT StringCchCopyExA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc,
-		__out	LPSTR *ppszDestEnd __attribute__((unused)),
-		__out	size_t * pcbRemaining __attribute__((unused)),
-		__in	DWORD dwFlags __attribute__((unused))){
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
 	size_t length;
 	HRESULT result;
 
@@ -46,9 +46,13 @@ HRESULT StringCchCopyExA(
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
-	if(FAILED(StringCchLengthA(pszSrc, STRSAFE_MAX_CCH, &length))){
-		/* Should not happen if pszSrc is null terminated. */
-		return STRSAFE_E_INVALID_PARAMETER;
+	if(pszSrc == NULL && (dwFlags & STRSAFE_IGNORE_NULLS)){
+		length = 0;
+	}else{
+		if(FAILED(StringCchLengthA(pszSrc, STRSAFE_MAX_CCH, &length))){
+			/* Should not happen if pszSrc is null terminated. */
+			return STRSAFE_E_INVALID_PARAMETER;
+		}
 	}
 
 	if(length >= cchDest){
@@ -61,6 +65,15 @@ HRESULT StringCchCopyExA(
 
 	memcpy(pszDest, pszSrc, length);
 	pszDest[length] = '\0';
+	if(ppszDestEnd != NULL){
+		*ppszDestEnd = pszDest + length;
+	}
+	if(pcchRemaining != NULL){
+		*pcchRemaining = cchDest - length;
+	}
+	if(dwFlags & STRSAFE_FILL_BEHIND_NULL && length + 1 < cchDest){
+		memset(pszDest + length + 1, dwFlags & 0xff, cchDest - length - 1);
+	}
 
 	return result;
 }
@@ -69,9 +82,9 @@ HRESULT StringCchCopyExW(
 		__out	LPWSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCWSTR pszSrc,
-		__out	LPWSTR *ppszDestEnd __attribute__((unused)),
-		__out	size_t * pcbRemaining __attribute__((unused)),
-		__in	DWORD dwFlags __attribute__((unused))){
+		__out	LPWSTR *ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
 	size_t length;
 	HRESULT result;
 
@@ -80,9 +93,13 @@ HRESULT StringCchCopyExW(
 		return STRSAFE_E_INVALID_PARAMETER;
 	}
 
-	if(FAILED(StringCchLengthW(pszSrc, STRSAFE_MAX_CCH, &length))){
-		/* Should not happen if pszSrc is null terminated. */
-		return STRSAFE_E_INVALID_PARAMETER;
+	if(pszSrc == NULL && (dwFlags & STRSAFE_IGNORE_NULLS)){
+		length = 0;
+	}else{
+		if(FAILED(StringCchLengthW(pszSrc, STRSAFE_MAX_CCH, &length))){
+			/* Should not happen if pszSrc is null terminated. */
+			return STRSAFE_E_INVALID_PARAMETER;
+		}
 	}
 
 	if(length >= cchDest){
@@ -95,6 +112,15 @@ HRESULT StringCchCopyExW(
 
 	memcpy(pszDest, pszSrc, length * sizeof(wchar_t));
 	pszDest[length] = L'\0';
+	if(ppszDestEnd != NULL){
+		*ppszDestEnd = pszDest + length;
+	}
+	if(pcchRemaining != NULL){
+		*pcchRemaining = cchDest - length;
+	}
+	if(dwFlags & STRSAFE_FILL_BEHIND_NULL && length + 1 < cchDest){
+		memset(pszDest + length + 1, dwFlags & 0xff, cchDest - length - 1);
+	}
 
 	return result;
 }

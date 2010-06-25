@@ -22,25 +22,8 @@ HRESULT StringCchCatNA(
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cchSrc){
-	size_t length;
-
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if(FAILED(StringCchLengthA(pszDest, cchDest, &length))){
-		/* pszDest not null terminated. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if(cchDest - length < 2){
-		/* pszDest already full. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	return StringCchCopyNA(pszDest + length, cchDest - length,
-			pszSrc, cchSrc);
+	return StringCchCatNExA(pszDest, cchDest, pszSrc, cchSrc,
+			NULL, NULL, 0);
 }
 
 HRESULT StringCchCatNW(
@@ -48,25 +31,30 @@ HRESULT StringCchCatNW(
 		__in	size_t cchDest,
 		__in	LPCWSTR pszSrc,
 		__in	size_t cchSrc){
-	size_t length;
+	return StringCchCatNExW(pszDest, cchDest, pszSrc, cchSrc,
+			NULL, NULL, 0);
+}
 
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
+HRESULT StringCchCatNExA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cchSrc,
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
+	return -1;
+}
 
-	if(FAILED(StringCchLengthW(pszDest, cchDest, &length))){
-		/* pszDest not null terminated. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if(cchDest - length < 2){
-		/* pszDest already full. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	return StringCchCopyNW(pszDest + length, cchDest - length,
-			pszSrc, cchSrc);
+HRESULT StringCchCatNExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCWSTR pszSrc,
+		__in	size_t cchSrc,
+		__out	LPWSTR *ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
+	return -1;
 }
 
 HRESULT StringCbCatNA(
@@ -74,7 +62,8 @@ HRESULT StringCbCatNA(
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cbSrc){
-	return StringCchCatNA(pszDest, cbDest, pszSrc, cbSrc);
+	return StringCbCatNExA(pszDest, cbDest, pszSrc, cbSrc,
+			NULL, NULL, 0);
 }
 
 HRESULT StringCbCatNW(
@@ -82,6 +71,35 @@ HRESULT StringCbCatNW(
 		__in	size_t cbDest,
 		__in	LPCWSTR pszSrc,
 		__in	size_t cbSrc){
-	return StringCchCatNW(pszDest, cbDest / sizeof(wchar_t),
-			pszSrc, cbSrc / sizeof(wchar_t));
+	return StringCbCatNExW(pszDest, cbDest, pszSrc, cbSrc,
+			NULL, NULL, 0);
+}
+
+HRESULT StringCbCatNExA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cbSrc,
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	return StringCchCatNExA(pszDest, cbDest, pszSrc, cbSrc,
+			ppszDestEnd, pcbRemaining, dwFlags);
+}
+
+HRESULT StringCbCatNExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCWSTR pszSrc,
+		__in	size_t cbSrc,
+		__out	LPWSTR *ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	HRESULT result = StringCchCatNExW(pszDest, cbDest / sizeof(wchar_t),
+			pszSrc, cbDest / sizeof(wchar_t),
+			ppszDestEnd, pcbRemaining, dwFlags);
+	if(pcbRemaining != NULL){
+		*pcbRemaining *= sizeof(wchar_t);
+	}
+	return result;
 }

@@ -43,9 +43,8 @@ HRESULT StringCchCatNExA(
 		__out	LPSTR *ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	/*
-	 * This function has a generic implementation in strsafe_catn_generic.h.
-	 */
+	/* This function has a generic implementation in
+	 * strsafe_catn_generic.h. */
 #define STRSAFE_GENERIC_WIDE_CHAR 0
 #include "strsafe_catn_generic.h"
 #undef STRSAFE_GENERIC_WIDE_CHAR
@@ -59,9 +58,8 @@ HRESULT StringCchCatNExW(
 		__out	LPWSTR *ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	/*
-	 * This function has a generic implementation in strsafe_catn_generic.h.
-	 */
+	/* This function has a generic implementation in
+	 * strsafe_catn_generic.h. */
 #define STRSAFE_GENERIC_WIDE_CHAR 1
 #include "strsafe_catn_generic.h"
 #undef STRSAFE_GENERIC_WIDE_CHAR

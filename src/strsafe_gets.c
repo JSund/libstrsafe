@@ -35,16 +35,11 @@ HRESULT StringCchGetsExA(
 		__out	LPSTR * ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	if(ppszDestEnd != NULL || pcchRemaining != NULL || dwFlags != 0){
-		/* Not implemented yet. */
-		return 4711;
-	}{
 	/* This function has a generic implementation in
 	 * strsafe_gets_generic.h. */
 	#define STRSAFE_GENERIC_WIDE_CHAR 0
 	#include "strsafe_gets_generic.h"
 	#undef STRSAFE_GENERIC_WIDE_CHAR
-	} /* Remove! */
 }
 
 HRESULT StringCchGetsExW(
@@ -53,16 +48,11 @@ HRESULT StringCchGetsExW(
 		__out	LPWSTR * ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	if(ppszDestEnd != NULL || pcchRemaining != NULL || dwFlags != 0){
-		/* Not implemented yet. */
-		return 4711;
-	}{
 	/* This function has a generic implementation in
 	 * strsafe_gets_generic.h. */
 	#define STRSAFE_GENERIC_WIDE_CHAR 1
 	#include "strsafe_gets_generic.h"
 	#undef STRSAFE_GENERIC_WIDE_CHAR
-	} /* Remove! */
 }
 
 HRESULT StringCbGetsA(

@@ -43,16 +43,11 @@ HRESULT StringCchVPrintfExA(
 		__in	DWORD dwFlags,
 		__in	LPCSTR pszFormat,
 		__in	va_list argList){
-	if(ppszDestEnd != NULL || pcchRemaining != NULL || dwFlags != 0){
-		/* Not implemented yet. */
-		return 4711;
-	}{
  	/* This function has a generic implementation in
 	 * strsafe_vprintf_generic.h. */
 	#define STRSAFE_GENERIC_WIDE_CHAR 0
 	#include "strsafe_vprintf_generic.h"
 	#undef STRSAFE_GENERIC_WIDE_CHAR
-	} /* Remove! */
 }
 
 HRESULT StringCchVPrintfExW(
@@ -63,16 +58,11 @@ HRESULT StringCchVPrintfExW(
 		__in	DWORD dwFlags,
 		__in	LPCWSTR pszFormat,
 		__in	va_list argList){
-	if(ppszDestEnd != NULL || pcchRemaining != NULL || dwFlags != 0){
-		/* Not implemented yet. */
-		return 4711;
-	}{
 	/* This function has a generic implementation in
 	 * strsafe_vprintf_generic.h. */
 	#define STRSAFE_GENERIC_WIDE_CHAR 1
 	#include "strsafe_vprintf_generic.h"
 	#undef STRSAFE_GENERIC_WIDE_CHAR
-	} /* Remove! */
 }
 
 HRESULT StringCbVPrintfA(

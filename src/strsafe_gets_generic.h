@@ -28,6 +28,9 @@
 size_t length = 0;
 
 if(cchDest < 2){
+	if(cchDest == 1){
+		*pszDest = STRSAFE_TEXT('\0');
+	}
 	return STRSAFE_E_INSUFFICIENT_BUFFER;
 }
 if(cchDest > STRSAFE_MAX_CCH){
@@ -46,6 +49,18 @@ while(length < cchDest - 1){
 	pszDest[length++] = (STRSAFE_CHAR)c;
 }
 pszDest[length] = STRSAFE_TEXT('\0');
+
+if(ppszDestEnd != NULL){
+	*ppszDestEnd = pszDest + length;
+}
+if(pcchRemaining != NULL){
+	*pcchRemaining = cchDest - length;
+}
+if(dwFlags & STRSAFE_FILL_BEHIND_NULL){
+	memset(pszDest + length + 1, dwFlags & 0xff,
+			(cchDest - length - 1) * sizeof(STRSAFE_CHAR));
+}
+
 return S_OK;
 
 #undef STRSAFE_CHAR_INT

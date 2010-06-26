@@ -13,12 +13,12 @@
 #error "STRSAFE_GENERIC_WIDE_CHAR must be defined."
 #elif STRSAFE_GENERIC_WIDE_CHAR == 0
 #define STRSAFE_LENGTH StringCchLengthA
-#define STRSAFE_SIZE sizeof(char)
-#define STRSAFE_CHAR(c) c
+#define STRSAFE_CHAR char
+#define STRSAFE_TEXT(c) c
 #else
 #define STRSAFE_LENGTH StringCchLengthW
-#define STRSAFE_SIZE sizeof(wchar_t)
-#define STRSAFE_CHAR(c) L##c
+#define STRSAFE_CHAR wchar_t
+#define STRSAFE_TEXT(c) L##c
 #endif
 
 size_t srcLength;
@@ -72,20 +72,20 @@ if(FAILED(result)){
 	}
 	if(dwFlags & STRSAFE_NULL_ON_FAILURE){
 		/* pszDest should be set to the empty string. */
-		*pszDest = STRSAFE_CHAR('\0');
+		*pszDest = STRSAFE_TEXT('\0');
 		return result;
 	}
 	if(dwFlags & STRSAFE_FILL_ON_FAILURE){
 		/* pszDest should be filled with the lower byte of dwFlags
 		 * and null terminated. */
-		memset(pszDest, dwFlags & 0xff, cchDest - 1 * STRSAFE_SIZE);
-		pszDest[cchDest - 1] = STRSAFE_CHAR('\0');
+		memset(pszDest, dwFlags & 0xff, cchDest - 1 * sizeof(STRSAFE_CHAR));
+		pszDest[cchDest - 1] = STRSAFE_TEXT('\0');
 		return result;
 	}
 }
 
-memcpy(pszDest + destLength, pszSrc, srcLength * STRSAFE_SIZE);
-pszDest[length] = STRSAFE_CHAR('\0');
+memcpy(pszDest + destLength, pszSrc, srcLength * sizeof(STRSAFE_CHAR));
+pszDest[length] = STRSAFE_TEXT('\0');
 if(ppszDestEnd != NULL){
 	*ppszDestEnd = pszDest + length;
 }
@@ -94,11 +94,11 @@ if(pcchRemaining != NULL){
 }
 if((dwFlags & STRSAFE_FILL_BEHIND_NULL) && length + 1 < cchDest){
 	memset(pszDest + length + 1, dwFlags & 0xff,
-			(cchDest - length - 1) * STRSAFE_SIZE);
+			(cchDest - length - 1) * sizeof(STRSAFE_CHAR));
 }
 
 return result;
 
 #undef STRSAFE_LENGTH
-#undef STRSAFE_SIZE
 #undef STRSAFE_CHAR
+#undef STRSAFE_TEXT

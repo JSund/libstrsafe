@@ -8,9 +8,9 @@
 #ifndef STRSAFE_GENERIC_WIDE_CHAR
 #error "STRSAFE_GENERIC_WIDE_CHAR must be defined."
 #elif STRSAFE_GENERIC_WIDE_CHAR == 0
-#define STRSAFE_CHAR(c) c
+#define STRSAFE_TEXT(c) c
 #else
-#define STRSAFE_CHAR(c) L##c
+#define STRSAFE_TEXT(c) L##c
 #endif
 
 if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
@@ -20,7 +20,7 @@ if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
 
 /* This might be a good target for optimization. */
 for(*pcch = 0; *pcch < cchMax; ){
-	if(psz[*pcch] == STRSAFE_CHAR('\0')){
+	if(psz[*pcch] == STRSAFE_TEXT('\0')){
 		break;
 	}
 	(*pcch)++;
@@ -32,4 +32,4 @@ if(*pcch == cchMax) return STRSAFE_E_INVALID_PARAMETER;
 
 return S_OK;
 
-#undef STRSAFE_CHAR
+#undef STRSAFE_TEXT

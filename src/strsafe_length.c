@@ -23,9 +23,9 @@ HRESULT StringCchLengthA(
 		__out	size_t *pcch){
 	/* This function has a generic implementation in
 	 * strsafe_length_generic.h. */
-#define STRSAFE_GENERIC_WIDE_CHAR 0
-#include "strsafe_length_generic.h"
-#undef STRSAFE_GENERIC_WIDE_CHAR
+	#define STRSAFE_GENERIC_WIDE_CHAR 0
+	#include "strsafe_length_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
 }
 
 HRESULT StringCchLengthW(
@@ -34,9 +34,9 @@ HRESULT StringCchLengthW(
 		__out	size_t *pcch){
 	/* This function has a generic implementation in
 	 * strsafe_length_generic.h. */
-#define STRSAFE_GENERIC_WIDE_CHAR 1
-#include "strsafe_length_generic.h"
-#undef STRSAFE_GENERIC_WIDE_CHAR
+	#define STRSAFE_GENERIC_WIDE_CHAR 1
+	#include "strsafe_length_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
 }
 
 HRESULT StringCbLengthA(

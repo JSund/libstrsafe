@@ -5,80 +5,51 @@
  * details, see the LICENSE file.
  */
 
-#include "strsafe.h"
-#include "../config.h"
-#ifdef HAVE_STDIO_H
-	#include <stdio.h>
+/*
+ * Internal header for generic implementation of libstrsafe functions.
+ */
+
+#ifndef STRSAFE_GENERIC_WIDE_CHAR
+#error "STRSAFE_GENERIC_WIDE_CHAR must be defined."
+#elif STRSAFE_GENERIC_WIDE_CHAR == 0
+#define STRSAFE_CHAR_INT int
+#define STRSAFE_GETCHAR getchar
+#define STRSAFE_EOF EOF
+#define STRSAFE_CHAR char
+#define STRSAFE_TEXT(c) c
+#else
+#define STRSAFE_CHAR_INT wint_t
+#define STRSAFE_GETCHAR getwchar
+#define STRSAFE_EOF WEOF
+#define STRSAFE_CHAR wchar_t
+#define STRSAFE_TEXT(c) L##c
 #endif
-#ifdef HAVE_STRING_H
-	#include <string.h>
-#endif
-#ifdef HAVE_WCHAR_H
-	#include <wchar.h>
-#endif
 
-HRESULT StringCchGetsA(
-		__out	LPSTR pszDest,
-		__in	size_t cchDest){
-	size_t length = 0;
+size_t length = 0;
 
-	if(cchDest < 2){
-		return STRSAFE_E_INSUFFICIENT_BUFFER;
-	}
-	if(cchDest > STRSAFE_MAX_CCH){
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	while(length < cchDest - 1){
-		int c = getchar();
-		if(c == EOF){
-			pszDest[length] = L'\0';
-			return STRSAFE_E_END_OF_FILE;
-		}
-		if((char)c == '\n'){
-			break;
-		}
-		pszDest[length++] = (char)c;
-	}
-	pszDest[length] = '\0';
-	return S_OK;
+if(cchDest < 2){
+	return STRSAFE_E_INSUFFICIENT_BUFFER;
+}
+if(cchDest > STRSAFE_MAX_CCH){
+	return STRSAFE_E_INVALID_PARAMETER;
 }
 
-HRESULT StringCchGetsW(
-		__out	LPWSTR pszDest,
-		__in	size_t cchDest){
-	size_t length = 0;
-
-	if(cchDest < 2){
-		return STRSAFE_E_INSUFFICIENT_BUFFER;
+while(length < cchDest - 1){
+	STRSAFE_CHAR_INT c = STRSAFE_GETCHAR();
+	if(c == STRSAFE_EOF){
+		pszDest[length] = STRSAFE_TEXT('\0');
+		return STRSAFE_E_END_OF_FILE;
 	}
-	if(cchDest > STRSAFE_MAX_CCH){
-		return STRSAFE_E_INVALID_PARAMETER;
+	if((STRSAFE_CHAR)c == STRSAFE_TEXT('\n')){
+		break;
 	}
-
-	while(length < cchDest - 1){
-		wint_t c = getwchar();
-		if(c == WEOF){
-			pszDest[length] = L'\0';
-			return STRSAFE_E_END_OF_FILE;
-		}
-		if((wchar_t)c == L'\n'){
-			break;
-		}
-		pszDest[length++] = (wchar_t)c;
-	}
-	pszDest[length] = L'\0';
-	return S_OK;
+	pszDest[length++] = (STRSAFE_CHAR)c;
 }
+pszDest[length] = STRSAFE_TEXT('\0');
+return S_OK;
 
-HRESULT StringCbGetsA(
-		__out	LPSTR pszDest,
-		__in	size_t cbDest){
-	return StringCchGetsA(pszDest, cbDest);
-}
-
-HRESULT StringCbGetsW(
-		__out	LPWSTR pszDest,
-		__in	size_t cbDest){
-	return StringCchGetsW(pszDest, cbDest / sizeof(wchar_t));
-}
+#undef STRSAFE_CHAR_INT
+#undef STRSAFE_GETCHAR
+#undef STRSAFE_EOF
+#undef STRSAFE_CHAR
+#undef STRSAFE_TEXT

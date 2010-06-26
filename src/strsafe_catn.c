@@ -40,14 +40,14 @@ HRESULT StringCchCatNExA(
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cchSrc,
-		__out	LPSTR *ppszDestEnd,
+		__out	LPSTR * ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
 	/* This function has a generic implementation in
 	 * strsafe_catn_generic.h. */
-#define STRSAFE_GENERIC_WIDE_CHAR 0
-#include "strsafe_catn_generic.h"
-#undef STRSAFE_GENERIC_WIDE_CHAR
+	#define STRSAFE_GENERIC_WIDE_CHAR 0
+	#include "strsafe_catn_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
 }
 
 HRESULT StringCchCatNExW(
@@ -55,14 +55,14 @@ HRESULT StringCchCatNExW(
 		__in	size_t cchDest,
 		__in	LPCWSTR pszSrc,
 		__in	size_t cchSrc,
-		__out	LPWSTR *ppszDestEnd,
+		__out	LPWSTR * ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
 	/* This function has a generic implementation in
 	 * strsafe_catn_generic.h. */
-#define STRSAFE_GENERIC_WIDE_CHAR 1
-#include "strsafe_catn_generic.h"
-#undef STRSAFE_GENERIC_WIDE_CHAR
+	#define STRSAFE_GENERIC_WIDE_CHAR 1
+	#include "strsafe_catn_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
 }
 
 HRESULT StringCbCatNA(
@@ -88,7 +88,7 @@ HRESULT StringCbCatNExA(
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cbSrc,
-		__out	LPSTR *ppszDestEnd,
+		__out	LPSTR * ppszDestEnd,
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
 	return StringCchCatNExA(pszDest, cbDest, pszSrc, cbSrc,
@@ -100,7 +100,7 @@ HRESULT StringCbCatNExW(
 		__in	size_t cbDest,
 		__in	LPCWSTR pszSrc,
 		__in	size_t cbSrc,
-		__out	LPWSTR *ppszDestEnd,
+		__out	LPWSTR * ppszDestEnd,
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
 	HRESULT result = StringCchCatNExW(pszDest, cbDest / sizeof(wchar_t),

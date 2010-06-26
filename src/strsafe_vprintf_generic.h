@@ -5,69 +5,29 @@
  * details, see the LICENSE file.
  */
 
-#include "strsafe.h"
-#include "../config.h"
-#ifdef HAVE_STDIO_H
-	#include <stdio.h>
-#endif
-#ifdef HAVE_STRING_H
-	#include <string.h>
-#endif
-#ifdef HAVE_WCHAR_H
-	#include <wchar.h>
+#ifndef STRSAFE_GENERIC_WIDE_CHAR
+#error "STRSAFE_GENERIC_WIDE_CHAR must be defined."
+#elif STRSAFE_GENERIC_WIDE_CHAR == 0
+#define STRSAFE_VPRINTF vsnprintf
+#define STRSAFE_TEXT(c) c
+#else
+#define STRSAFE_VPRINTF vswprintf
+#define STRSAFE_TEXT(c) L##c
 #endif
 
-HRESULT StringCchVPrintfA(
-		__out	LPSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCSTR pszFormat,
-		__in	va_list argList){
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if((size_t)vsnprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
-		/* Data did not fit in pszDest. */
-		pszDest[cchDest - 1] = '\0';
-		return STRSAFE_E_INSUFFICIENT_BUFFER;
-	}
-
-	return S_OK;
+if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+	/* Invalid value for cchDest. */
+	return STRSAFE_E_INVALID_PARAMETER;
 }
 
-HRESULT StringCchVPrintfW(
-		__out	LPWSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCWSTR pszFormat,
-		__in	va_list argList){
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if((size_t)vswprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
-		/* Data did not fit in pszDest. */
-		pszDest[cchDest - 1] = L'\0';
-		return STRSAFE_E_INSUFFICIENT_BUFFER;
-	}
-
-	return S_OK;
+if((size_t)STRSAFE_VPRINTF(pszDest, cchDest, pszFormat, argList)
+		>= cchDest){
+	/* Data did not fit in pszDest. */
+	pszDest[cchDest - 1] = STRSAFE_TEXT('\0');
+	return STRSAFE_E_INSUFFICIENT_BUFFER;
 }
 
-HRESULT StringCbVPrintfA(
-		__out	LPSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCSTR pszFormat,
-		__in	va_list argList){
-	return StringCchVPrintfA(pszDest, cbDest, pszFormat, argList);
-}
+return S_OK;
 
-HRESULT StringCbVPrintfW(
-		__out	LPWSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCWSTR pszFormat,
-		__in	va_list argList){
-	return StringCchVPrintfW(pszDest, cbDest / sizeof(wchar_t),
-			pszFormat, argList);
-}
+#undef STRSAFE_VPRINTF
+#undef STRSAFE_TEXT

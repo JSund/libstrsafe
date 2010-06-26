@@ -14,10 +14,10 @@ StringCchCopyNA
 StringCchCopyNW
 StringCbCopyNA
 StringCbCopyNW
-StringCchGetsA-sh
-StringCchGetsW-sh
-StringCbGetsA-sh
-StringCbGetsW-sh
+StringCchGetsA
+StringCchGetsW
+StringCbGetsA
+StringCbGetsW
 StringCchPrintfA
 StringCchPrintfW
 StringCbPrintfA

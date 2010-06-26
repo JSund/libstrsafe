@@ -38,13 +38,14 @@ HRESULT StringCchCopyNExA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc,
+		__in	size_t cchSrc,
 		__out	LPSTR *ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = '\0';
 	}
-	return StringCchCatNExA(pszDest, cchDest, pszSrc, cchDest,
+	return StringCchCatNExA(pszDest, cchDest, pszSrc, cchSrc,
 			ppszDestEnd, pcchRemaining, dwFlags);
 }
 
@@ -52,13 +53,14 @@ HRESULT StringCchCopyNExW(
 		__out	LPWSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCWSTR pszSrc,
-		__out	LPWSTR *ppszDestEnd,
+		__in	size_t cchSrc,
+		__out	LPWSTR * ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = L'\0';
 	}
-	return StringCchCatNExW(pszDest, cchDest, pszSrc, cchDest,
+	return StringCchCatNExW(pszDest, cchDest, pszSrc, cchSrc,
 			ppszDestEnd, pcchRemaining, dwFlags);
 }
 
@@ -84,13 +86,14 @@ HRESULT StringCbCopyNExA(
 		__out	LPSTR pszDest,
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc,
+		__in	size_t cbSrc,
 		__out	LPSTR *ppszDestEnd,
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = '\0';
 	}
-	return StringCbCatNExA(pszDest, cbDest, pszSrc, cbDest,
+	return StringCbCatNExA(pszDest, cbDest, pszSrc, cbSrc,
 			ppszDestEnd, pcbRemaining, dwFlags);
 }
 
@@ -98,12 +101,13 @@ HRESULT StringCbCopyNExW(
 		__out	LPWSTR pszDest,
 		__in	size_t cbDest,
 		__in	LPCWSTR pszSrc,
+		__in	size_t cbSrc,
 		__out	LPWSTR *ppszDestEnd,
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = L'\0';
 	}
-	return StringCbCatNExW(pszDest, cbDest, pszSrc, cbDest,
+	return StringCbCatNExW(pszDest, cbDest, pszSrc, cbSrc,
 			ppszDestEnd, pcbRemaining, dwFlags);
 }

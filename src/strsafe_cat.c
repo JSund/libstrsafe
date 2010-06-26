@@ -74,7 +74,7 @@ HRESULT StringCbCatExA(
 		__out	LPSTR * ppszDestEnd,
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
-	return StringCbCatNExA(pszDest, cbDest, pszSrc, cbDest
+	return StringCbCatNExA(pszDest, cbDest, pszSrc, cbDest,
 			ppszDestEnd, pcbRemaining, dwFlags);
 }
 
@@ -85,6 +85,6 @@ HRESULT StringCbCatExW(
 		__out	LPWSTR * ppszDestEnd,
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
-	return StringCbCatNExW(pszDest, cbDest, pszSrc, cbDest
+	return StringCbCatNExW(pszDest, cbDest, pszSrc, cbDest,
 			ppszDestEnd, pcbRemaining, dwFlags);
 }

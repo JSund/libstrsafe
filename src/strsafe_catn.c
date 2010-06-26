@@ -43,7 +43,16 @@ HRESULT StringCchCatNExA(
 		__out	LPSTR *ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	return -1;
+	size_t min = (cchDest < cchSrc ? cchDest : cchSrc);
+	strncat(pszDest, pszSrc, min);
+	if(ppszDestEnd != NULL){
+		*ppszDestEnd = pszDest + strlen(pszDest);
+	}
+	if(pcchRemaining != NULL){
+		*pcchRemaining = cchDest - strlen(pszDest);
+	}
+	dwFlags = 0;
+	return S_OK;
 }
 
 HRESULT StringCchCatNExW(
@@ -54,7 +63,16 @@ HRESULT StringCchCatNExW(
 		__out	LPWSTR *ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	return -1;
+	size_t min = (cchDest < cchSrc ? cchDest : cchSrc);
+	wcsncat(pszDest, pszSrc, min);
+	if(ppszDestEnd != NULL){
+		*ppszDestEnd = pszDest + wcslen(pszDest);
+	}
+	if(pcchRemaining != NULL){
+		*pcchRemaining = cchDest - wcslen(pszDest);
+	}
+	dwFlags = 0;
+	return S_OK;
 }
 
 HRESULT StringCbCatNA(
@@ -96,7 +114,7 @@ HRESULT StringCbCatNExW(
 		__out	size_t * pcbRemaining,
 		__in	DWORD dwFlags){
 	HRESULT result = StringCchCatNExW(pszDest, cbDest / sizeof(wchar_t),
-			pszSrc, cbDest / sizeof(wchar_t),
+			pszSrc, cbSrc / sizeof(wchar_t),
 			ppszDestEnd, pcbRemaining, dwFlags);
 	if(pcbRemaining != NULL){
 		*pcbRemaining *= sizeof(wchar_t);

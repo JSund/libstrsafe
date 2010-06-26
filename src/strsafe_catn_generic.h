@@ -1,4 +1,11 @@
 /*
+ * Copyright (c) 2010, Jonas Sundberg <jsund@jsund.com>
+ *
+ * This software has been released under the terms of the ISC license. For
+ * details, see the LICENSE file.
+ */
+
+/*
  * Internal header for generic implementation of libstrsafe functions.
  */
 

@@ -43,16 +43,59 @@ HRESULT StringCchCatNExA(
 		__out	LPSTR *ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	size_t min = (cchDest < cchSrc ? cchDest : cchSrc);
-	strncat(pszDest, pszSrc, min);
+	size_t srcLength;
+	size_t destLength;
+	size_t destCapacity;
+	size_t length;
+	HRESULT result = S_OK;
+
+	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(FAILED(StringCchLengthA(pszDest, cchDest, &destLength))){
+		/* pszDest not null terminated. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(pszSrc == NULL && (dwFlags & STRSAFE_IGNORE_NULLS)){
+		srcLength = 0;
+	} else {
+		if(FAILED(StringCchLengthA(pszSrc, cchSrc, &srcLength))){
+			/* pszSrc longer than length required. */
+			srcLength = cchSrc;
+		}
+	}
+
+	destCapacity = cchDest - destLength;
+
+	if(destCapacity < 2 && srcLength != 0){
+		/* pszDest already full. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(srcLength >= destCapacity){
+		/* pszSrc too long, copy first destCapacity - 1 characters. */
+		srcLength = destCapacity - 1;
+		result = STRSAFE_E_INSUFFICIENT_BUFFER;
+	}
+
+	length = destLength + srcLength;
+
+	memcpy(pszDest + destLength, pszSrc, srcLength);
+	pszDest[length] = '\0';
 	if(ppszDestEnd != NULL){
-		*ppszDestEnd = pszDest + strlen(pszDest);
+		*ppszDestEnd = pszDest + length;
 	}
 	if(pcchRemaining != NULL){
-		*pcchRemaining = cchDest - strlen(pszDest);
+		*pcchRemaining = cchDest - length;
 	}
-	dwFlags = 0;
-	return S_OK;
+	if((dwFlags & STRSAFE_FILL_BEHIND_NULL) && length + 1 < cchDest){
+		memset(pszDest + length + 1, dwFlags & 0xff, cchDest - length - 1);
+	}
+
+	return result;
 }
 
 HRESULT StringCchCatNExW(
@@ -63,16 +106,60 @@ HRESULT StringCchCatNExW(
 		__out	LPWSTR *ppszDestEnd,
 		__out	size_t * pcchRemaining,
 		__in	DWORD dwFlags){
-	size_t min = (cchDest < cchSrc ? cchDest : cchSrc);
-	wcsncat(pszDest, pszSrc, min);
+	size_t srcLength;
+	size_t destLength;
+	size_t destCapacity;
+	size_t length;
+	HRESULT result = S_OK;
+
+	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
+		/* Invalid value for cchDest. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(FAILED(StringCchLengthW(pszDest, cchDest, &destLength))){
+		/* pszDest not null terminated. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(pszSrc == NULL && (dwFlags & STRSAFE_IGNORE_NULLS)){
+		srcLength = 0;
+	} else {
+		if(FAILED(StringCchLengthW(pszSrc, cchSrc, &srcLength))){
+			/* pszSrc longer than length required. */
+			srcLength = cchSrc;
+		}
+	}
+
+	destCapacity = cchDest - destLength;
+
+	if(destCapacity < 2 && srcLength != 0){
+		/* pszDest already full. */
+		return STRSAFE_E_INVALID_PARAMETER;
+	}
+
+	if(srcLength >= destCapacity){
+		/* pszSrc too long, copy first destCapacity - 1 characters. */
+		srcLength = destCapacity - 1;
+		result = STRSAFE_E_INSUFFICIENT_BUFFER;
+	}
+
+	length = destLength + srcLength;
+
+	memcpy(pszDest + destLength, pszSrc, srcLength * sizeof(wchar_t));
+	pszDest[length] = L'\0';
 	if(ppszDestEnd != NULL){
-		*ppszDestEnd = pszDest + wcslen(pszDest);
+		*ppszDestEnd = pszDest + length;
 	}
 	if(pcchRemaining != NULL){
-		*pcchRemaining = cchDest - wcslen(pszDest);
+		*pcchRemaining = cchDest - length;
 	}
-	dwFlags = 0;
-	return S_OK;
+	if((dwFlags & STRSAFE_FILL_BEHIND_NULL) && length + 1 < cchDest){
+		memset(pszDest + length + 1, dwFlags & 0xff,
+				(cchDest - length - 1) * sizeof(wchar_t));
+	}
+
+	return result;
 }
 
 HRESULT StringCbCatNA(

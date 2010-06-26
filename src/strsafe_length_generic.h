@@ -5,75 +5,31 @@
  * details, see the LICENSE file.
  */
 
-#include "strsafe.h"
-#include "../config.h"
-#ifdef HAVE_STDIO_H
-	#include <stdio.h>
-#endif
-#ifdef HAVE_STRING_H
-	#include <string.h>
-#endif
-#ifdef HAVE_WCHAR_H
-	#include <wchar.h>
+#ifndef STRSAFE_GENERIC_WIDE_CHAR
+#error "STRSAFE_GENERIC_WIDE_CHAR must be defined."
+#elif STRSAFE_GENERIC_WIDE_CHAR == 0
+#define STRSAFE_CHAR(c) c
+#else
+#define STRSAFE_CHAR(c) L##c
 #endif
 
-HRESULT StringCchLengthA(
-		__in	LPCSTR psz,
-		__in	size_t cchMax,
-		__out	size_t *pcch){
-	if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
-		/* Invalid value for psz or cchMax. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	/* This might be a good target for optimization. */
-	for(*pcch = 0; *pcch < cchMax; ){
-		if(psz[*pcch] == '\0'){
-			break;
-		}
-		(*pcch)++;
-	}
-	/* If *pcch was incremented to cchMax, the first cchMax characters
-	 * did not contain a null termination. */
-	if(*pcch == cchMax) return STRSAFE_E_INVALID_PARAMETER;
-	return S_OK;
+if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
+	/* Invalid value for psz or cchMax. */
+	return STRSAFE_E_INVALID_PARAMETER;
 }
 
-HRESULT StringCchLengthW(
-		__in	LPCWSTR psz,
-		__in	size_t cchMax,
-		__out	size_t *pcch){
-	if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
-		/* Invalid value for psz or cchMax. */
-		return STRSAFE_E_INVALID_PARAMETER;
+/* This might be a good target for optimization. */
+for(*pcch = 0; *pcch < cchMax; ){
+	if(psz[*pcch] == STRSAFE_CHAR('\0')){
+		break;
 	}
-
-	/* This might be a good target for optimization. */
-	for(*pcch = 0; *pcch < cchMax; ){
-		if(psz[*pcch] == L'\0'){
-			break;
-		}
-		(*pcch)++;
-	}
-	/* If *pcch was incremented to cchMax, the first cchMax characters
-	 * did not contain a null termination. */
-	if(*pcch == cchMax) return STRSAFE_E_INVALID_PARAMETER;
-	return S_OK;
+	(*pcch)++;
 }
 
-HRESULT StringCbLengthA(
-		__in	LPCSTR psz,
-		__in	size_t cbMax,
-		__out	size_t *pcb){
-	return StringCchLengthA(psz, cbMax, pcb);
-}
+/* If *pcch was incremented to cchMax, the first cchMax characters
+ * did not contain a null termination. */
+if(*pcch == cchMax) return STRSAFE_E_INVALID_PARAMETER;
 
-HRESULT StringCbLengthW(
-		__in	LPCWSTR psz,
-		__in	size_t cbMax,
-		__out	size_t *pcb){
-	size_t pcch;
-	HRESULT result = StringCchLengthW(psz, cbMax / sizeof(wchar_t), &pcch);
-	*pcb = pcch * sizeof(wchar_t);
-	return result;
-}
+return S_OK;
+
+#undef STRSAFE_CHAR

@@ -31,7 +31,7 @@ int main(void){
 			"Result of concatenating two strings that are too long.");
 	
 	ok(StringCbCatA(dest, 11, "test") ==
-			STRSAFE_E_INVALID_PARAMETER,
+			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Concatenate to already full destination.");
 	is_string("testlonger", dest,
 			"Make sure destination was not modified.");

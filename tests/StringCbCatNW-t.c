@@ -49,7 +49,7 @@ int main(void){
 	
 	ok(StringCbCatNW(dest, 11 * sizeof(wchar_t),
 				L"test", 4 * sizeof(wchar_t)) ==
-			STRSAFE_E_INVALID_PARAMETER,
+			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Concatenate to already full destination.");
 	is_wstring(L"testlonger", dest,
 			"Make sure destination was not modified.");

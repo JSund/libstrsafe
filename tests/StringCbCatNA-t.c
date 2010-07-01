@@ -42,7 +42,7 @@ int main(void){
 			"Result of concatenating a few characters.");
 	
 	ok(StringCbCatNA(dest, 11, "test", 4) ==
-			STRSAFE_E_INVALID_PARAMETER,
+			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Concatenate to already full destination.");
 	is_string("testlonger", dest,
 			"Make sure destination was not modified.");

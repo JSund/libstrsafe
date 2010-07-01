@@ -32,7 +32,7 @@ int main(void){
 			"Result of concatenating two strings that are too long.");
 	
 	ok(StringCchCatW(dest, 11, L"test") ==
-			STRSAFE_E_INVALID_PARAMETER,
+			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Concatenate to already full destination.");
 	is_wstring(L"testlonger", dest,
 			"Make sure destination was not modified.");

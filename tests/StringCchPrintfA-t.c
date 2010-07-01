@@ -1,10 +1,10 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(9);
-
 	char dest[11];
+
+	plan(9);
 
 	ok(SUCCEEDED(StringCchPrintfA(dest, 11, "")),
 			"Print empty string.");

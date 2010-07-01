@@ -1,11 +1,11 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(12);
-
 	char dest[11] = "test";
 	char empty[10] = "";
+
+	plan(12);
 
 	ok(SUCCEEDED(StringCbCatA(dest, 11, "TEST")),
 			"Concatenate two short strings.");

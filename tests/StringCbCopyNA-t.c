@@ -1,12 +1,12 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(9);
-
 	char dest[11];
 	char dest2[11];
 	
+	plan(9);
+
 	ok(SUCCEEDED(StringCbCopyNA(dest, 11, "test", 4)),
 			"Copy entire string.");
 	is_string("test", dest,

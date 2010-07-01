@@ -1,13 +1,14 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
+#include <wchar.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(16);
-
 	wchar_t dest[11] = L"test";
 	wchar_t dest2[11] = L"TEST";
 	wchar_t empty[10] = L"";
 	
+	plan(16);
+
 	ok(SUCCEEDED(StringCchCatNW(dest, 11, L"test", 4)),
 			"Concatenate entire strings.");
 	is_wstring(L"testtest", dest,

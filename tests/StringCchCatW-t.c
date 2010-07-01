@@ -1,11 +1,12 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
+#include <wchar.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(12);
-
 	wchar_t dest[11] = L"test";
 	wchar_t empty[10] = L"";
+
+	plan(12);
 
 	ok(SUCCEEDED(StringCchCatW(dest, 11, L"TEST")),
 			"Concatenate two short strings.");

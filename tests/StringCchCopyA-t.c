@@ -1,11 +1,11 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(7);
-
 	char dest[11];
 	
+	plan(7);
+
 	ok(SUCCEEDED(StringCchCopyA(dest, 11, "test")),
 			"Copy short string.");
 	is_string("test", dest,

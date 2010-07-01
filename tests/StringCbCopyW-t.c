@@ -1,11 +1,12 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
+#include <wchar.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(7);
-
 	wchar_t dest[11];
 	
+	plan(7);
+
 	ok(SUCCEEDED(StringCbCopyW(dest, 11 * sizeof(wchar_t), L"test")),
 			"Copy short string.");
 	is_wstring(L"test", dest,

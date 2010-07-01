@@ -1,10 +1,11 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
+#include <wchar.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(9);
-
 	wchar_t dest[11];
+
+	plan(9);
 
 	ok(SUCCEEDED(StringCbPrintfW(dest, 11 * sizeof(wchar_t), L"")),
 			"Print empty string.");

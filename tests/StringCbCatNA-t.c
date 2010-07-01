@@ -1,13 +1,13 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(16);
-
 	char dest[11] = "test";
 	char dest2[11] = "TEST";
 	char empty[10] = "";
 	
+	plan(16);
+
 	ok(SUCCEEDED(StringCbCatNA(dest, 11, "test", 4)),
 			"Concatenate entire strings.");
 	is_string("testtest", dest,

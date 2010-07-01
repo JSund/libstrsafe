@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../src/strsafe.h"
+#include <strsafe.h>
 
 #define USAGE "Usage: %s UNIT TYPE WIDTH\n"\
               "  Where\n"\

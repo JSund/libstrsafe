@@ -1,10 +1,12 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
+#include <wchar.h>
 #include "tap/basic.h"
 
 int main(void){
+	size_t length;
+
 	plan(7);
 
-	size_t length;
 	ok(SUCCEEDED(StringCchLengthW(L"", 1, &length)),
 			"Calculate length of empty string.");
 	is_int(0, length,

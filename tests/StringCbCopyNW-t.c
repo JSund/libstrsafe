@@ -1,12 +1,13 @@
-#include "../src/strsafe.h"
+#include <strsafe.h>
+#include <wchar.h>
 #include "tap/basic.h"
 
 int main(void){
-	plan(9);
-
 	wchar_t dest[11];
 	wchar_t dest2[11];
 	
+	plan(9);
+
 	ok(SUCCEEDED(StringCbCopyNW(dest, 11 * sizeof(wchar_t),
 					L"test", 4 * sizeof(wchar_t))),
 			"Copy entire string.");

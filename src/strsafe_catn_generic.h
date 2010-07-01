@@ -52,11 +52,6 @@ if(pszSrc == NULL && (dwFlags & STRSAFE_IGNORE_NULLS)){
 
 destCapacity = cchDest - destLength;
 
-if(destCapacity < 2 && srcLength != 0){
-	/* pszDest already full. */
-	return STRSAFE_E_INVALID_PARAMETER;
-}
-
 if(srcLength >= destCapacity){
 	/* pszSrc too long, copy first destCapacity - 1 characters. */
 	srcLength = destCapacity - 1;

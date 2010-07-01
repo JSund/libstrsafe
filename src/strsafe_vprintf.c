@@ -22,18 +22,8 @@ HRESULT StringCchVPrintfA(
 		__in	size_t cchDest,
 		__in	LPCSTR pszFormat,
 		__in	va_list argList){
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if((size_t)vsnprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
-		/* Data did not fit in pszDest. */
-		pszDest[cchDest - 1] = '\0';
-		return STRSAFE_E_INSUFFICIENT_BUFFER;
-	}
-
-	return S_OK;
+	return StringCchVPrintfExA(pszDest, cchDest, NULL, NULL, 0,
+			pszFormat, argList);
 }
 
 HRESULT StringCchVPrintfW(
@@ -41,18 +31,38 @@ HRESULT StringCchVPrintfW(
 		__in	size_t cchDest,
 		__in	LPCWSTR pszFormat,
 		__in	va_list argList){
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
+	return StringCchVPrintfExW(pszDest, cchDest, NULL, NULL, 0,
+			pszFormat, argList);
+}
 
-	if((size_t)vswprintf(pszDest, cchDest, pszFormat, argList) >= cchDest){
-		/* Data did not fit in pszDest. */
-		pszDest[cchDest - 1] = L'\0';
-		return STRSAFE_E_INSUFFICIENT_BUFFER;
-	}
+HRESULT StringCchVPrintfExA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__out	LPSTR * ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCSTR pszFormat,
+		__in	va_list argList){
+ 	/* This function has a generic implementation in
+	 * strsafe_vprintf_generic.h. */
+	#define STRSAFE_GENERIC_WIDE_CHAR 0
+	#include "strsafe_vprintf_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
+}
 
-	return S_OK;
+HRESULT StringCchVPrintfExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCWSTR pszFormat,
+		__in	va_list argList){
+	/* This function has a generic implementation in
+	 * strsafe_vprintf_generic.h. */
+	#define STRSAFE_GENERIC_WIDE_CHAR 1
+	#include "strsafe_vprintf_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
 }
 
 HRESULT StringCbVPrintfA(
@@ -60,7 +70,8 @@ HRESULT StringCbVPrintfA(
 		__in	size_t cbDest,
 		__in	LPCSTR pszFormat,
 		__in	va_list argList){
-	return StringCchVPrintfA(pszDest, cbDest, pszFormat, argList);
+	return StringCbVPrintfExA(pszDest, cbDest, NULL, NULL, 0,
+			pszFormat, argList);
 }
 
 HRESULT StringCbVPrintfW(
@@ -68,6 +79,34 @@ HRESULT StringCbVPrintfW(
 		__in	size_t cbDest,
 		__in	LPCWSTR pszFormat,
 		__in	va_list argList){
-	return StringCchVPrintfW(pszDest, cbDest / sizeof(wchar_t),
+	return StringCbVPrintfExW(pszDest, cbDest, NULL, NULL, 0,
 			pszFormat, argList);
+}
+
+HRESULT StringCbVPrintfExA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__out	LPSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCSTR pszFormat,
+		__in	va_list argList){
+	return StringCchVPrintfExA(pszDest, cbDest, ppszDestEnd,
+			pcbRemaining, dwFlags, pszFormat, argList);
+}
+
+HRESULT StringCbVPrintfExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCWSTR pszFormat,
+		__in	va_list argList){
+	HRESULT result = StringCchVPrintfExW(pszDest, cbDest / sizeof(wchar_t),
+			ppszDestEnd, pcbRemaining, dwFlags, pszFormat, argList);
+	if(pcbRemaining != NULL){
+		*pcbRemaining *= sizeof(wchar_t);
+	}
+	return result;
 }

@@ -21,74 +21,70 @@ HRESULT StringCchCopyA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc){
-	size_t length;
-	HRESULT result;
-
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if(FAILED(StringCchLengthA(pszSrc, STRSAFE_MAX_CCH, &length))){
-		/* Should not happen if pszSrc is null terminated. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if(length >= cchDest){
-		/* pszSrc too long, copy first cchDest - 1 characters. */
-		length = cchDest - 1;
-		result = STRSAFE_E_INSUFFICIENT_BUFFER;
-	}else{
-		result = S_OK;
-	}
-
-	memcpy(pszDest, pszSrc, length);
-	pszDest[length] = '\0';
-
-	return result;
+	return StringCchCopyNA(pszDest, cchDest, pszSrc, cchDest);
 }
 
 HRESULT StringCchCopyW(
 		__out	LPWSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCWSTR pszSrc){
-	size_t length;
-	HRESULT result;
+	return StringCchCopyNW(pszDest, cchDest, pszSrc, cchDest);
+}
 
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
+HRESULT StringCchCopyExA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszSrc,
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
+	return StringCchCopyNExA(pszDest, cchDest, pszSrc, cchDest,
+			ppszDestEnd, pcchRemaining, dwFlags);
+}
 
-	if(FAILED(StringCchLengthW(pszSrc, STRSAFE_MAX_CCH, &length))){
-		/* Should not happen if pszSrc is null terminated. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if(length >= cchDest){
-		/* pszSrc too long, copy first cchDest - 1 characters. */
-		length = cchDest - 1;
-		result = STRSAFE_E_INSUFFICIENT_BUFFER;
-	}else{
-		result = S_OK;
-	}
-
-	memcpy(pszDest, pszSrc, length * sizeof(wchar_t));
-	pszDest[length] = L'\0';
-
-	return result;
+HRESULT StringCchCopyExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCWSTR pszSrc,
+		__out	LPWSTR *ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
+	return StringCchCopyNExW(pszDest, cchDest, pszSrc, cchDest,
+			ppszDestEnd, pcchRemaining, dwFlags);
 }
 
 HRESULT StringCbCopyA(
 		__out	LPSTR pszDest,
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc){
-	return StringCchCopyA(pszDest, cbDest, pszSrc);
+	return StringCbCopyNA(pszDest, cbDest, pszSrc, cbDest);
 }
 
 HRESULT StringCbCopyW(
 		__out	LPWSTR pszDest,
 		__in	size_t cbDest,
 		__in	LPCWSTR pszSrc){
-	return StringCchCopyW(pszDest, cbDest / sizeof(wchar_t), pszSrc);
+	return StringCbCopyNW(pszDest, cbDest, pszSrc, cbDest);
+}
+
+HRESULT StringCbCopyExA(
+		__inout	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszSrc,
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	return StringCbCopyNExA(pszDest, cbDest, pszSrc, cbDest,
+			ppszDestEnd, pcbRemaining, dwFlags);
+}
+
+HRESULT StringCbCopyExW(
+		__inout	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCWSTR pszSrc,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	return StringCbCopyNExW(pszDest, cbDest, pszSrc, cbDest,
+			ppszDestEnd, pcbRemaining, dwFlags);
 }

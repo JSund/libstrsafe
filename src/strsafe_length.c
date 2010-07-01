@@ -21,44 +21,22 @@ HRESULT StringCchLengthA(
 		__in	LPCSTR psz,
 		__in	size_t cchMax,
 		__out	size_t *pcch){
-	if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
-		/* Invalid value for psz or cchMax. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	/* This might be a good target for optimization. */
-	for(*pcch = 0; *pcch < cchMax; ){
-		if(psz[*pcch] == '\0'){
-			break;
-		}
-		(*pcch)++;
-	}
-	/* If *pcch was incremented to cchMax, the first cchMax characters
-	 * did not contain a null termination. */
-	if(*pcch == cchMax) return STRSAFE_E_INVALID_PARAMETER;
-	return S_OK;
+	/* This function has a generic implementation in
+	 * strsafe_length_generic.h. */
+	#define STRSAFE_GENERIC_WIDE_CHAR 0
+	#include "strsafe_length_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
 }
 
 HRESULT StringCchLengthW(
 		__in	LPCWSTR psz,
 		__in	size_t cchMax,
 		__out	size_t *pcch){
-	if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
-		/* Invalid value for psz or cchMax. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	/* This might be a good target for optimization. */
-	for(*pcch = 0; *pcch < cchMax; ){
-		if(psz[*pcch] == L'\0'){
-			break;
-		}
-		(*pcch)++;
-	}
-	/* If *pcch was incremented to cchMax, the first cchMax characters
-	 * did not contain a null termination. */
-	if(*pcch == cchMax) return STRSAFE_E_INVALID_PARAMETER;
-	return S_OK;
+	/* This function has a generic implementation in
+	 * strsafe_length_generic.h. */
+	#define STRSAFE_GENERIC_WIDE_CHAR 1
+	#include "strsafe_length_generic.h"
+	#undef STRSAFE_GENERIC_WIDE_CHAR
 }
 
 HRESULT StringCbLengthA(

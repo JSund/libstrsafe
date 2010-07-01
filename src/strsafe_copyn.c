@@ -16,38 +16,13 @@
 #ifdef HAVE_WCHAR_H
 	#include <wchar.h>
 #endif
-
 HRESULT StringCchCopyNA(
 		__out	LPSTR pszDest,
 		__in	size_t cchDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cchSrc){
-	size_t length;
-	HRESULT result;
-
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
-
-	if(FAILED(StringCchLengthA(pszSrc, cchSrc + 1, &length))){
-		/* pszSrc is longer than the maximum length to copy. */
-		/* Copy only first cchSrc characters. */
-		length = cchSrc;
-	}
-
-	if(length >= cchDest){
-		/* pszSrc too long, copy first cchDest - 1 characters. */
-		length = cchDest - 1;
-		result = STRSAFE_E_INSUFFICIENT_BUFFER;
-	}else{
-		result = S_OK;
-	}
-
-	memcpy(pszDest, pszSrc, length);
-	pszDest[length] = '\0';
-
-	return result;
+	return StringCchCopyNExA(pszDest, cchDest, pszSrc, cchSrc,
+			NULL, NULL, 0);
 }
 
 HRESULT StringCchCopyNW(
@@ -55,32 +30,38 @@ HRESULT StringCchCopyNW(
 		__in	size_t cchDest,
 		__in	LPCWSTR pszSrc,
 		__in	size_t cchSrc){
-	size_t length;
-	HRESULT result;
+	return StringCchCopyNExW(pszDest, cchDest, pszSrc, cchSrc,
+			NULL, NULL, 0);
+}
 
-	if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-		/* Invalid value for cchDest. */
-		return STRSAFE_E_INVALID_PARAMETER;
+HRESULT StringCchCopyNExA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cchSrc,
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
+	if(pszDest != NULL){
+		*pszDest = '\0';
 	}
+	return StringCchCatNExA(pszDest, cchDest, pszSrc, cchSrc,
+			ppszDestEnd, pcchRemaining, dwFlags);
+}
 
-	if(FAILED(StringCchLengthW(pszSrc, cchSrc + 1, &length))){
-		/* pszSrc is longer than the maximum length to copy. */
-		/* Copy only first cchSrc characters. */
-		length = cchSrc;
+HRESULT StringCchCopyNExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__in	LPCWSTR pszSrc,
+		__in	size_t cchSrc,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags){
+	if(pszDest != NULL){
+		*pszDest = L'\0';
 	}
-
-	if(length >= cchDest){
-		/* pszSrc too long, copy first cchDest - 1 characters. */
-		length = cchDest - 1;
-		result = STRSAFE_E_INSUFFICIENT_BUFFER;
-	}else{
-		result = S_OK;
-	}
-
-	memcpy(pszDest, pszSrc, length * sizeof(wchar_t));
-	pszDest[length] = L'\0';
-
-	return result;
+	return StringCchCatNExW(pszDest, cchDest, pszSrc, cchSrc,
+			ppszDestEnd, pcchRemaining, dwFlags);
 }
 
 HRESULT StringCbCopyNA(
@@ -88,7 +69,8 @@ HRESULT StringCbCopyNA(
 		__in	size_t cbDest,
 		__in	LPCSTR pszSrc,
 		__in	size_t cbSrc){
-	return StringCchCopyNA(pszDest, cbDest, pszSrc, cbSrc);
+	return StringCbCopyNExA(pszDest, cbDest, pszSrc, cbSrc,
+			NULL, NULL, 0);
 }
 
 HRESULT StringCbCopyNW(
@@ -96,6 +78,36 @@ HRESULT StringCbCopyNW(
 		__in	size_t cbDest,
 		__in	LPCWSTR pszSrc,
 		__in	size_t cbSrc){
-	return StringCchCopyNW(pszDest, cbDest / sizeof(wchar_t),
-			pszSrc, cbSrc / sizeof(wchar_t));
+	return StringCbCopyNExW(pszDest, cbDest, pszSrc, cbSrc,
+			NULL, NULL, 0);
+}
+
+HRESULT StringCbCopyNExA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCSTR pszSrc,
+		__in	size_t cbSrc,
+		__out	LPSTR *ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	if(pszDest != NULL){
+		*pszDest = '\0';
+	}
+	return StringCbCatNExA(pszDest, cbDest, pszSrc, cbSrc,
+			ppszDestEnd, pcbRemaining, dwFlags);
+}
+
+HRESULT StringCbCopyNExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__in	LPCWSTR pszSrc,
+		__in	size_t cbSrc,
+		__out	LPWSTR *ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags){
+	if(pszDest != NULL){
+		*pszDest = L'\0';
+	}
+	return StringCbCatNExW(pszDest, cbDest, pszSrc, cbSrc,
+			ppszDestEnd, pcbRemaining, dwFlags);
 }

@@ -4,7 +4,7 @@
  * Copyright 2010 Jonas Sundberg <jsund@jsund.com>
  */
 
-#include "tap/wide.h"
+#include "wide.h"
 
 /*
  * Takes a wide character string and what the string should be, and assumes

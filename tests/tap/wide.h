@@ -8,7 +8,7 @@
 #define TAP_WIDE_H
 
 #include <wchar.h>
-#include <tap/basic.h>
+#include "basic.h"
 
 BEGIN_DECLS
 

@@ -23,10 +23,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef _WIN32
+/* Fix to make these tests build on Windows. */
+#include <windows.h>
+#define pid_t int
+#define getpid _getpid
+#else
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#endif
 
 #include <tap/basic.h>
 

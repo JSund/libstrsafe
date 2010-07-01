@@ -16,7 +16,9 @@
 #define TAP_BASIC_H 1
 
 #include <stdarg.h>             /* va_list */
+#ifndef _WIN32
 #include <sys/types.h>          /* pid_t */
+#endif
 
 /*
  * __attribute__ is available in gcc 2.5 and later, but only with gcc 2.7

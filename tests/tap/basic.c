@@ -35,7 +35,7 @@
 #include <unistd.h>
 #endif
 
-#include <tap/basic.h>
+#include "basic.h"
 
 /*
  * The test count.  Always contains the number that will be used for the next

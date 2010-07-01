@@ -38,7 +38,7 @@ void StringCchEchoA(size_t width){
 }
 
 void StringCchEchoW(size_t width){
-	HRESULT result;
+	HRESULT result = S_OK;
 	wchar_t * buf = malloc(width * sizeof(wchar_t));
 	while(result != STRSAFE_E_END_OF_FILE){
 		const char * res;
@@ -61,7 +61,7 @@ void StringCchEchoW(size_t width){
 }
 
 void StringCbEchoA(size_t width){
-	HRESULT result;
+	HRESULT result = S_OK;
 	char * buf = malloc(width);
 	while(result != STRSAFE_E_END_OF_FILE){
 		const char * res;
@@ -84,7 +84,7 @@ void StringCbEchoA(size_t width){
 }
 
 void StringCbEchoW(size_t width){
-	HRESULT result;
+	HRESULT result = S_OK;
 	wchar_t * buf = malloc(width);
 	while(result != STRSAFE_E_END_OF_FILE){
 		const char * res;
@@ -126,7 +126,7 @@ int main(int argc, const char * argv[]){
 	if((strcmp(unit, "ch") && strcmp(unit, "b")) ||
 			(strcmp(type, "A") && strcmp(type, "W")) ||
 			(width == 0 && strcmp(argv[3], "0")) ||
-			width == INT_MIN || width == INT_MAX){ 
+			width == INT_MIN || width == INT_MAX){
 		printf("Wrong data in parameters.\n\n");
 		printf(USAGE, argv[0]);
 		return 2;

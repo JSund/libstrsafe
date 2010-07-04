@@ -26,3 +26,4 @@ StringCchLengthA
 StringCchLengthW
 StringCbLengthA
 StringCbLengthW
+StringCchCopyExA

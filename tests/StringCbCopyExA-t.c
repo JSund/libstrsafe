@@ -7,7 +7,7 @@ void testDestEnd(){
 
 	diag("Test calculation of destEnd.");
 
-	ok(SUCCEEDED(StringCchCopyExA(dest, 11, "Data", &destEnd, NULL, 0)),
+	ok(SUCCEEDED(StringCbCopyExA(dest, 11, "Data", &destEnd, NULL, 0)),
 			"Test calculation of destEnd "
 			"while copying short string.");
 	is_string("Data", dest,
@@ -15,7 +15,7 @@ void testDestEnd(){
 	ok(destEnd == &dest[4],
 			"Value of destEnd after copying short string.");
 
-	ok(SUCCEEDED(StringCchCopyExA(dest, 11, "", &destEnd, NULL, 0)),
+	ok(SUCCEEDED(StringCbCopyExA(dest, 11, "", &destEnd, NULL, 0)),
 			"Test calculation of destEnd "
 			"while copying empty string.");
 	is_string("", dest,
@@ -23,7 +23,7 @@ void testDestEnd(){
 	ok(destEnd == &dest[0],
 			"Value of destEnd after copying empty string.");
 
-	ok(StringCchCopyExA(dest, 11, "longer string", &destEnd, NULL, 0) ==
+	ok(StringCbCopyExA(dest, 11, "longer string", &destEnd, NULL, 0) ==
 			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Test calculation of destEnd "
 			"while copying a too long string.");
@@ -39,7 +39,7 @@ void testRemaining(){
 
 	diag("Test calculation of remaining space.");
 
-	ok(SUCCEEDED(StringCchCopyExA(dest, 11, "STR", NULL, &remaining, 0)),
+	ok(SUCCEEDED(StringCbCopyExA(dest, 11, "STR", NULL, &remaining, 0)),
 			"Test calculation of remaining space "
 			"while copying short string.");
 	is_string("STR", dest,
@@ -47,7 +47,7 @@ void testRemaining(){
 	is_int(8, remaining,
 			"Number of remaining characters after copying short string.");
 
-	ok(SUCCEEDED(StringCchCopyExA(dest, 11, "", NULL, &remaining, 0)),
+	ok(SUCCEEDED(StringCbCopyExA(dest, 11, "", NULL, &remaining, 0)),
 			"Test calculation of remaining space "
 			"while copying empty string.");
 	is_string("", dest,
@@ -55,7 +55,7 @@ void testRemaining(){
 	is_int(11, remaining,
 			"Number of remaining characters after copying empty string.");
 
-	ok(StringCchCopyExA(dest, 11, "too long string", NULL, &remaining, 0) ==
+	ok(StringCbCopyExA(dest, 11, "too long string", NULL, &remaining, 0) ==
 			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Test calculation of remaining space "
 			"while copying a too long string.");
@@ -71,7 +71,7 @@ void testFlags(){
 
 	diag("Test the STRSAFE_IGNORE_NULLS flag.");
 
-	ok(SUCCEEDED(StringCchCopyExA(dest, 11, NULL, NULL, NULL,
+	ok(SUCCEEDED(StringCbCopyExA(dest, 11, NULL, NULL, NULL,
 					STRSAFE_IGNORE_NULLS)),
 			"Test copying a NULL string.");
 	is_string("", dest,
@@ -79,7 +79,7 @@ void testFlags(){
 
 	diag("Test the STRSAFE_FILL_BEHIND_NULL flag.");
 
-	ok(SUCCEEDED(StringCchCopyExA(dest, 11, "testing", NULL, NULL,
+	ok(SUCCEEDED(StringCbCopyExA(dest, 11, "testing", NULL, NULL,
 					STRSAFE_FILL_BEHIND_NULL | '@')),
 			"Test filling with '@' behind null termination.");
 	is_string("testing", dest,
@@ -93,7 +93,7 @@ void testFlags(){
 
 	diag("Test the STRSAFE_FILL_ON_FAILURE flag.");
 
-	ok(FAILED(StringCchCopyExA(dest, 11, "too much data", NULL, NULL,
+	ok(FAILED(StringCbCopyExA(dest, 11, "too much data", NULL, NULL,
 					STRSAFE_FILL_ON_FAILURE | '@')),
 			"Test filling with '@' on failure.");
 	is_string("@@@@@@@@@@", dest,
@@ -101,7 +101,7 @@ void testFlags(){
 
 	diag("Test the STRSAFE_NULL_ON_FAILURE flag.");
 
-	ok(FAILED(StringCchCopyExA(dest, 11, "Also too much", NULL, NULL,
+	ok(FAILED(StringCbCopyExA(dest, 11, "Also too much", NULL, NULL,
 					STRSAFE_NULL_ON_FAILURE)),
 			"Test nulling string on failure.");
 	is_string("", dest,
@@ -109,7 +109,7 @@ void testFlags(){
 
 	diag("Test the STRSAFE_NO_TRUNCATION flag.");
 
-	ok(FAILED(StringCchCopyExA(dest, 11, "Won't fit in dest", NULL, NULL,
+	ok(FAILED(StringCbCopyExA(dest, 11, "Won't fit in dest", NULL, NULL,
 					STRSAFE_NO_TRUNCATION)),
 			"Test copying with truncating disabled.");
 	is_string("", dest,
@@ -121,7 +121,7 @@ int main(void){
 	
 	plan(31);
 
-	ok(SUCCEEDED(StringCchCopyExA(dest, 11, "test", NULL, NULL, 0)),
+	ok(SUCCEEDED(StringCbCopyExA(dest, 11, "test", NULL, NULL, 0)),
 			"Copy short string without any extended functionality.");
 	is_string("test", dest,
 			"Result of copying short string.");

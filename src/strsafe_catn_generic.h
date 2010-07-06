@@ -73,7 +73,8 @@ if(FAILED(result)){
 	if(dwFlags & STRSAFE_FILL_ON_FAILURE){
 		/* pszDest should be filled with the lower byte of dwFlags
 		 * and null terminated. */
-		memset(pszDest, dwFlags & 0xff, cchDest - 1 * sizeof(STRSAFE_CHAR));
+		memset(pszDest, dwFlags & 0xff,
+				(cchDest - 1) * sizeof(STRSAFE_CHAR));
 		pszDest[cchDest - 1] = STRSAFE_TEXT('\0');
 		return result;
 	}

@@ -7,9 +7,10 @@ check_PROGRAMS = runtests echo \
 		 StringCbCopyNA-t StringCbLengthA-t StringCbPrintfA-t \
 		 StringCbCatW-t StringCbCatNW-t StringCbCopyW-t \
 		 StringCbCopyNW-t StringCbLengthW-t StringCbPrintfW-t \
+		 StringCchCatExA-t \
 		 StringCchCopyExA-t StringCchCopyExW-t \
-		 StringCbCopyExA-t StringCbCopyExW-t \
 		 StringCchCopyNExA-t StringCchCopyNExW-t \
+		 StringCbCopyExA-t StringCbCopyExW-t \
 		 StringCbCopyNExA-t StringCbCopyNExW-t
 check_LIBRARIES = tap/libtap.a
 AM_CPPFLAGS = -I../src

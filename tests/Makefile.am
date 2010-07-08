@@ -9,7 +9,8 @@ check_PROGRAMS = runtests echo \
 		 StringCbCopyNW-t StringCbLengthW-t StringCbPrintfW-t \
 		 StringCchCopyExA-t StringCchCopyExW-t \
 		 StringCbCopyExA-t StringCbCopyExW-t \
-		 StringCchCopyNExA-t StringCbCopyNExA-t
+		 StringCchCopyNExA-t StringCchCopyNExW-t \
+		 StringCbCopyNExA-t StringCbCopyNExW-t
 check_LIBRARIES = tap/libtap.a
 AM_CPPFLAGS = -I../src
 tap_libtap_a_SOURCES = tap/basic.c tap/basic.h tap/wide.c tap/wide.h

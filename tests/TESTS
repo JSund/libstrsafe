@@ -31,4 +31,6 @@ StringCchCopyExW
 StringCbCopyExA
 StringCbCopyExW
 StringCchCopyNExA
+StringCchCopyNExW
 StringCbCopyNExA
+StringCbCopyNExW

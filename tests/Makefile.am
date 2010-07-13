@@ -10,7 +10,7 @@ check_PROGRAMS = runtests echo \
 		 StringCchCatExA-t StringCchCatExW-t \
 		 StringCchCopyExA-t StringCchCopyExW-t \
 		 StringCchCopyNExA-t StringCchCopyNExW-t \
-		 StringCbCatExA-t \
+		 StringCbCatExA-t StringCbCatExW-t \
 		 StringCbCopyExA-t StringCbCopyExW-t \
 		 StringCbCopyNExA-t StringCbCopyNExW-t
 check_LIBRARIES = tap/libtap.a

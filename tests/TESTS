@@ -29,6 +29,7 @@ StringCbLengthW
 StringCchCatExA
 StringCchCatExW
 StringCbCatExA
+StringCbCatExW
 StringCchCopyExA
 StringCchCopyExW
 StringCbCopyExA

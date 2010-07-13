@@ -27,11 +27,13 @@ StringCchLengthW
 StringCbLengthA
 StringCbLengthW
 StringCchCatExA
+StringCchCatExW
+StringCbCatExA
 StringCchCopyExA
 StringCchCopyExW
-StringCchCopyNExA
-StringCchCopyNExW
 StringCbCopyExA
 StringCbCopyExW
+StringCchCopyNExA
+StringCchCopyNExW
 StringCbCopyNExA
 StringCbCopyNExW

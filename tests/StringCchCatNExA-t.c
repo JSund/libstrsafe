@@ -43,6 +43,15 @@ void testDestEnd(){
 			"Result of appending a too long string.");
 	ok(destEnd == &dest[10],
 			"Value of destEnd after appending a too long string.");
+
+	strcpy(dest, "Test: ");
+	ok(SUCCEEDED(StringCchCatNExA(dest, 11, "okay", 2, &destEnd, NULL, 0)),
+			"Test calculation of destEnd "
+			"while appending part of a string.");
+	is_string("Test: ok", dest,
+			"Result of appending part of a string.");
+	ok(destEnd == &dest[8],
+			"Value of destEnd after appending part of a string.");
 }
 
 void testRemaining(){
@@ -90,6 +99,16 @@ void testRemaining(){
 	is_int(1, remaining,
 			"Number of remaining characters after appending "
 			"a too long string.");
+
+	strcpy(dest, "Foo ");
+	ok(SUCCEEDED(StringCchCatNExA(dest, 11, "bar baz", 3,
+					NULL, &remaining, 0)),
+			"Test calculation of remaining space "
+			"while appending part of a string.");
+	is_string("Foo bar", dest,
+			"Result of appending part of a string.");
+	is_int(4, remaining,
+			"Number of remaining characters after appending part of a string.");
 }
 
 void testFlags(){
@@ -107,7 +126,7 @@ void testFlags(){
 	diag("Test the STRSAFE_FILL_BEHIND_NULL flag.");
 
 	strcpy(dest, "test");
-	ok(SUCCEEDED(StringCchCatNExA(dest, 11, "ing", 4, NULL, NULL,
+	ok(SUCCEEDED(StringCchCatNExA(dest, 11, "ingenious", 3, NULL, NULL,
 					STRSAFE_FILL_BEHIND_NULL | '@')),
 			"Test filling with '@' behind null termination.");
 	is_string("testing", dest,
@@ -146,7 +165,7 @@ void testFlags(){
 int main(void){
 	char dest[11] = "TEST";
 	
-	plan(37);
+	plan(43);
 
 	ok(SUCCEEDED(StringCchCatNExA(dest, 11, "testing", 4, NULL, NULL, 0)),
 			"Concatenate short strings without any extended functionality.");

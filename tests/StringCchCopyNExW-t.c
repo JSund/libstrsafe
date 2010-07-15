@@ -113,7 +113,7 @@ void testFlags(){
 	}
 	memset(wanted, '@', 6 * sizeof(wchar_t));
 
-	ok(memcmp(&dest[5], wanted, 6) == 0,
+	ok(memcmp(&dest[5], wanted, 6 * sizeof(wchar_t)) == 0,
 			"Correct data filled after null termination.");
 
 	free(wanted);

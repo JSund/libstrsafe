@@ -4,7 +4,7 @@
 int main(void){
 	char dest[11];
 
-	plan(9);
+	plan(11);
 
 	ok(SUCCEEDED(StringCchPrintfA(dest, 11, "")),
 			"Print empty string.");
@@ -15,6 +15,12 @@ int main(void){
 			"Print without format parameters.");
 	is_string("test", dest,
 			"Result of printing without format parameters.");
+
+	ok(StringCchPrintfA(dest, 11, "longer string") ==
+			STRSAFE_E_INSUFFICIENT_BUFFER,
+			"Print too long string.");
+	is_string("longer str", dest,
+			"Result of printing a too long string.");
 
 	ok(SUCCEEDED(StringCchPrintfA(dest, 11, "%d", 17)),
 			"Print integer to string.");

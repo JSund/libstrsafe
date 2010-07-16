@@ -19,6 +19,10 @@ is_wstring(const wchar_t *wanted, const wchar_t *seen, const char *format, ...)
         wanted = L"(null)";
     if (seen == NULL)
         seen = L"(null)";
+	if(wcscmp(wanted, seen) != 0){
+		printf("# wanted: %ls\n", wanted);
+		printf("#   seen: %ls\n", seen);
+	}
 	okv(wcscmp(wanted, seen) == 0, format, argList);
 	va_end(argList);
 }

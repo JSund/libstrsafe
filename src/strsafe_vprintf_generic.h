@@ -36,7 +36,18 @@ if((dwFlags & STRSAFE_IGNORE_NULLS) && pszFormat == NULL){
 	length = (size_t)requiredLength;
 	if(requiredLength < 0 || length >= cchDest){
 		/* Data did not fit in pszDest. */
-		length = cchDest - 1;
+		if(dwFlags & (STRSAFE_NULL_ON_FAILURE | STRSAFE_NO_TRUNCATION)){
+			/* pszDest should be set to the empty string. */
+			length = 0;
+		} else if(dwFlags & STRSAFE_FILL_ON_FAILURE){
+			/* pszDest should be filled with the lower byte of dwFlags
+			 * and null terminated. */
+			memset(pszDest, dwFlags & 0xff,
+					(cchDest - 1) * sizeof(STRSAFE_CHAR));
+			length = cchDest - 1;
+		} else {
+			length = cchDest - 1;
+		}
 		pszDest[length] = STRSAFE_TEXT('\0');
 		result = STRSAFE_E_INSUFFICIENT_BUFFER;
 	}

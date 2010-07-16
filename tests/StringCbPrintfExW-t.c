@@ -28,7 +28,7 @@ void testDestEnd(){
 			"Value of destEnd after printing empty string.");
 
 	ok(StringCbPrintfExW(dest, 11 * sizeof(wchar_t), &destEnd,
-				NULL, 0, L"longer %s", L"string") ==
+				NULL, 0, L"longer %ls", L"string") ==
 			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Test calculation of destEnd "
 			"while printing a too long string.");

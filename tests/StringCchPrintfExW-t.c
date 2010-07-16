@@ -25,7 +25,7 @@ void testDestEnd(){
 	ok(destEnd == &dest[0],
 			"Value of destEnd after printing empty string.");
 
-	ok(StringCchPrintfExW(dest, 11, &destEnd, NULL, 0, L"longer %s",
+	ok(StringCchPrintfExW(dest, 11, &destEnd, NULL, 0, L"longer %ls",
 				L"string") ==
 			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Test calculation of destEnd "

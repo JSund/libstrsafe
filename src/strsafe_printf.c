@@ -136,7 +136,6 @@ HRESULT StringCbPrintfExA(
 	return result;
 }
 
-
 HRESULT StringCbPrintfExW(
 		__out	LPWSTR pszDest,
 		__in	size_t cbDest,

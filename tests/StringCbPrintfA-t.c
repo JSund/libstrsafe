@@ -16,6 +16,12 @@ int main(void){
 	is_string("test", dest,
 			"Result of printing without format parameters.");
 
+	ok(StringCbPrintfA(dest, 11, "longer string") ==
+			STRSAFE_E_INSUFFICIENT_BUFFER,
+			"Print too long string.");
+	is_string("longer str", dest,
+			"Result of printing a too long string.");
+
 	ok(SUCCEEDED(StringCbPrintfA(dest, 11, "%d", 17)),
 			"Print integer to string.");
 	is_string("17", dest,

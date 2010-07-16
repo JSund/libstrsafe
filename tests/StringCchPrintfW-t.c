@@ -17,6 +17,12 @@ int main(void){
 	is_wstring(L"test", dest,
 			"Result of printing without format parameters.");
 
+	ok(StringCchPrintfW(dest, 11, L"longer string") ==
+			STRSAFE_E_INSUFFICIENT_BUFFER,
+			"Print too long string.");
+	is_wstring(L"longer str", dest,
+			"Result of printing a too long string.");
+
 	ok(SUCCEEDED(StringCchPrintfW(dest, 11, L"%d", 17)),
 			"Print integer to string.");
 	is_wstring(L"17", dest,

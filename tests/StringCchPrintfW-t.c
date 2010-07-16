@@ -5,7 +5,7 @@
 int main(void){
 	wchar_t dest[11];
 
-	plan(9);
+	plan(11);
 
 	ok(SUCCEEDED(StringCchPrintfW(dest, 11, L"")),
 			"Print empty string.");

@@ -5,7 +5,7 @@
 int main(void){
 	wchar_t dest[11];
 
-	plan(9);
+	plan(11);
 
 	ok(SUCCEEDED(StringCbPrintfW(dest, 11 * sizeof(wchar_t), L"")),
 			"Print empty string.");
@@ -17,7 +17,7 @@ int main(void){
 	is_wstring(L"test", dest,
 			"Result of printing without format parameters.");
 
-	ok(StringCchPrintfA(dest, 11 * sizeof(wchar_t), L"longer string") ==
+	ok(StringCbPrintfW(dest, 11 * sizeof(wchar_t), L"longer string") ==
 			STRSAFE_E_INSUFFICIENT_BUFFER,
 			"Print too long string.");
 	is_wstring(L"longer str", dest,

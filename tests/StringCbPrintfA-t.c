@@ -4,7 +4,7 @@
 int main(void){
 	char dest[11];
 
-	plan(9);
+	plan(11);
 
 	ok(SUCCEEDED(StringCbPrintfA(dest, 11, "")),
 			"Print empty string.");

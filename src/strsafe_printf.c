@@ -47,6 +47,45 @@ HRESULT StringCchPrintfW(
 	return result;
 }
 
+HRESULT StringCchPrintfExA(
+		__out	LPSTR pszDest,
+		__in	size_t cchDest,
+		__out	LPSTR * ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCSTR pszFormat,
+		__in	...){
+	va_list argList;
+	HRESULT result;
+
+	va_start(argList, pszFormat);
+	result = StringCchVPrintfExA(pszDest, cchDest, ppszDestEnd,
+			pcchRemaining, dwFlags, pszFormat, argList);
+	va_end(argList);
+
+	return result;
+}
+
+
+HRESULT StringCchPrintfExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cchDest,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcchRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCWSTR pszFormat,
+		__in	...){
+	va_list argList;
+	HRESULT result;
+
+	va_start(argList, pszFormat);
+	result = StringCchVPrintfExW(pszDest, cchDest, ppszDestEnd,
+			pcchRemaining, dwFlags, pszFormat, argList);
+	va_end(argList);
+
+	return result;
+}
+
 HRESULT StringCbPrintfA(
 		__out	LPSTR pszDest,
 		__in	size_t cbDest,
@@ -73,6 +112,45 @@ HRESULT StringCbPrintfW(
 	va_start(argList, pszFormat);
 	result = StringCchVPrintfW(pszDest, cbDest / sizeof(wchar_t),
 			pszFormat, argList);
+	va_end(argList);
+
+	return result;
+}
+
+HRESULT StringCbPrintfExA(
+		__out	LPSTR pszDest,
+		__in	size_t cbDest,
+		__out	LPSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCSTR pszFormat,
+		__in	...){
+	va_list argList;
+	HRESULT result;
+
+	va_start(argList, pszFormat);
+	result = StringCbVPrintfExA(pszDest, cbDest, ppszDestEnd,
+			pcbRemaining, dwFlags, pszFormat, argList);
+	va_end(argList);
+
+	return result;
+}
+
+
+HRESULT StringCbPrintfExW(
+		__out	LPWSTR pszDest,
+		__in	size_t cbDest,
+		__out	LPWSTR * ppszDestEnd,
+		__out	size_t * pcbRemaining,
+		__in	DWORD dwFlags,
+		__in	LPCWSTR pszFormat,
+		__in	...){
+	va_list argList;
+	HRESULT result;
+
+	va_start(argList, pszFormat);
+	result = StringCbVPrintfExW(pszDest, cbDest, ppszDestEnd,
+			pcbRemaining, dwFlags, pszFormat, argList);
 	va_end(argList);
 
 	return result;

@@ -1,4 +1,5 @@
 #include <string.h>
+#define STRSAFE_NO_DEPRECATE
 #include <strsafe.h>
 #include "tap/basic.h"
 

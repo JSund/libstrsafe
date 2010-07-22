@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#define STRSAFE_NO_DEPRECATE
 #include <strsafe.h>
 #include "tap/wide.h"
 

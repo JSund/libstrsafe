@@ -95,7 +95,7 @@ HRESULT StringCbPrintfA(
 	HRESULT result;
 	
 	va_start(argList, pszFormat);
-	result = StringCchVPrintfA(pszDest, cbDest, pszFormat, argList);
+	result = StringCbVPrintfA(pszDest, cbDest, pszFormat, argList);
 	va_end(argList);
 
 	return result;
@@ -110,8 +110,7 @@ HRESULT StringCbPrintfW(
 	HRESULT result;
 
 	va_start(argList, pszFormat);
-	result = StringCchVPrintfW(pszDest, cbDest / sizeof(wchar_t),
-			pszFormat, argList);
+	result = StringCbVPrintfW(pszDest, cbDest, pszFormat, argList);
 	va_end(argList);
 
 	return result;

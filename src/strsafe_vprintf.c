@@ -7,6 +7,9 @@
 
 #include "strsafe.h"
 #include "../config.h"
+#ifdef HAVE_STDARG_H
+	#include <stdarg.h>
+#endif
 #ifdef HAVE_STDIO_H
 	#include <stdio.h>
 #endif

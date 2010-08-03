@@ -9,6 +9,16 @@ software to use a single library for safe string operations. This will reduce
 the risk for buffer overflows and will increase code sharing between code for
 different platforms.
 
+Most of the functionality of the library has been unit tested and the unit
+tests have been verified against the Microsoft implementation. For more
+information on the testing, see the TESTING file.
+
+Some things haven't been tested and it is possible that the behaviour is
+different from the behaviour of the Microsoft implementation in those cases.
+These things include but might not be limited to using more than one flag
+at the same time to the extended functions as well as sending input to
+the Gets functions that encounters EOF without a preceding line break.
+
 For more information on the project, see the Google Summer of Code project
 site [1] or the GitHub repository [2].
 

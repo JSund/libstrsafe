@@ -17,31 +17,31 @@
 	#include <wchar.h>
 #endif
 HRESULT StringCchCopyNA(
-		__out	LPSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCSTR pszSrc,
-		__in	size_t cchSrc){
+		LPSTR pszDest,
+		size_t cchDest,
+		LPCSTR pszSrc,
+		size_t cchSrc){
 	return StringCchCopyNExA(pszDest, cchDest, pszSrc, cchSrc,
 			NULL, NULL, 0);
 }
 
 HRESULT StringCchCopyNW(
-		__out	LPWSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCWSTR pszSrc,
-		__in	size_t cchSrc){
+		LPWSTR pszDest,
+		size_t cchDest,
+		LPCWSTR pszSrc,
+		size_t cchSrc){
 	return StringCchCopyNExW(pszDest, cchDest, pszSrc, cchSrc,
 			NULL, NULL, 0);
 }
 
 HRESULT StringCchCopyNExA(
-		__out	LPSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCSTR pszSrc,
-		__in	size_t cchSrc,
-		__out	LPSTR *ppszDestEnd,
-		__out	size_t * pcchRemaining,
-		__in	DWORD dwFlags){
+		LPSTR pszDest,
+		size_t cchDest,
+		LPCSTR pszSrc,
+		size_t cchSrc,
+		LPSTR *ppszDestEnd,
+		size_t * pcchRemaining,
+		DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = '\0';
 	}
@@ -50,13 +50,13 @@ HRESULT StringCchCopyNExA(
 }
 
 HRESULT StringCchCopyNExW(
-		__out	LPWSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCWSTR pszSrc,
-		__in	size_t cchSrc,
-		__out	LPWSTR * ppszDestEnd,
-		__out	size_t * pcchRemaining,
-		__in	DWORD dwFlags){
+		LPWSTR pszDest,
+		size_t cchDest,
+		LPCWSTR pszSrc,
+		size_t cchSrc,
+		LPWSTR * ppszDestEnd,
+		size_t * pcchRemaining,
+		DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = L'\0';
 	}
@@ -65,31 +65,31 @@ HRESULT StringCchCopyNExW(
 }
 
 HRESULT StringCbCopyNA(
-		__out	LPSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCSTR pszSrc,
-		__in	size_t cbSrc){
+		LPSTR pszDest,
+		size_t cbDest,
+		LPCSTR pszSrc,
+		size_t cbSrc){
 	return StringCbCopyNExA(pszDest, cbDest, pszSrc, cbSrc,
 			NULL, NULL, 0);
 }
 
 HRESULT StringCbCopyNW(
-		__out	LPWSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCWSTR pszSrc,
-		__in	size_t cbSrc){
+		LPWSTR pszDest,
+		size_t cbDest,
+		LPCWSTR pszSrc,
+		size_t cbSrc){
 	return StringCbCopyNExW(pszDest, cbDest, pszSrc, cbSrc,
 			NULL, NULL, 0);
 }
 
 HRESULT StringCbCopyNExA(
-		__out	LPSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCSTR pszSrc,
-		__in	size_t cbSrc,
-		__out	LPSTR *ppszDestEnd,
-		__out	size_t * pcbRemaining,
-		__in	DWORD dwFlags){
+		LPSTR pszDest,
+		size_t cbDest,
+		LPCSTR pszSrc,
+		size_t cbSrc,
+		LPSTR *ppszDestEnd,
+		size_t * pcbRemaining,
+		DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = '\0';
 	}
@@ -98,13 +98,13 @@ HRESULT StringCbCopyNExA(
 }
 
 HRESULT StringCbCopyNExW(
-		__out	LPWSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCWSTR pszSrc,
-		__in	size_t cbSrc,
-		__out	LPWSTR *ppszDestEnd,
-		__out	size_t * pcbRemaining,
-		__in	DWORD dwFlags){
+		LPWSTR pszDest,
+		size_t cbDest,
+		LPCWSTR pszSrc,
+		size_t cbSrc,
+		LPWSTR *ppszDestEnd,
+		size_t * pcbRemaining,
+		DWORD dwFlags){
 	if(pszDest != NULL){
 		*pszDest = L'\0';
 	}

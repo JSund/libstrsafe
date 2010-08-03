@@ -18,73 +18,73 @@
 #endif
 
 HRESULT StringCchCatA(
-		__inout	LPSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCSTR pszSrc){
+		LPSTR pszDest,
+		size_t cchDest,
+		LPCSTR pszSrc){
 	return StringCchCatNA(pszDest, cchDest, pszSrc, cchDest);
 }
 
 HRESULT StringCchCatW(
-		__inout LPWSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCWSTR pszSrc){
+		LPWSTR pszDest,
+		size_t cchDest,
+		LPCWSTR pszSrc){
 	return StringCchCatNW(pszDest, cchDest, pszSrc, cchDest);
 }
 
 HRESULT StringCchCatExA(
-		__inout	LPSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCSTR pszSrc,
-		__out	LPSTR * ppszDestEnd,
-		__out	size_t * pcchRemaining,
-		__in	DWORD dwFlags){
+		LPSTR pszDest,
+		size_t cchDest,
+		LPCSTR pszSrc,
+		LPSTR * ppszDestEnd,
+		size_t * pcchRemaining,
+		DWORD dwFlags){
 	return StringCchCatNExA(pszDest, cchDest, pszSrc, cchDest,
 			ppszDestEnd, pcchRemaining, dwFlags);
 }
 
 HRESULT StringCchCatExW(
-		__inout	LPWSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCWSTR pszSrc,
-		__out	LPWSTR * ppszDestEnd,
-		__out	size_t * pcchRemaining,
-		__in	DWORD dwFlags){
+		LPWSTR pszDest,
+		size_t cchDest,
+		LPCWSTR pszSrc,
+		LPWSTR * ppszDestEnd,
+		size_t * pcchRemaining,
+		DWORD dwFlags){
 	return StringCchCatNExW(pszDest, cchDest, pszSrc, cchDest,
 			ppszDestEnd, pcchRemaining, dwFlags);
 }
 
 HRESULT StringCbCatA(
-		__inout	LPSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCSTR pszSrc){
+		LPSTR pszDest,
+		size_t cbDest,
+		LPCSTR pszSrc){
 	return StringCbCatNA(pszDest, cbDest, pszSrc, cbDest);
 }
 
 HRESULT StringCbCatW(
-		__inout	LPWSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCWSTR pszSrc){
+		LPWSTR pszDest,
+		size_t cbDest,
+		LPCWSTR pszSrc){
 	return StringCbCatNW(pszDest, cbDest, pszSrc, cbDest);
 }
 
 HRESULT StringCbCatExA(
-		__inout	LPSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCSTR pszSrc,
-		__out	LPSTR * ppszDestEnd,
-		__out	size_t * pcbRemaining,
-		__in	DWORD dwFlags){
+		LPSTR pszDest,
+		size_t cbDest,
+		LPCSTR pszSrc,
+		LPSTR * ppszDestEnd,
+		size_t * pcbRemaining,
+		DWORD dwFlags){
 	return StringCbCatNExA(pszDest, cbDest, pszSrc, cbDest,
 			ppszDestEnd, pcbRemaining, dwFlags);
 }
 
 HRESULT StringCbCatExW(
-		__inout	LPWSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCWSTR pszSrc,
-		__out	LPWSTR * ppszDestEnd,
-		__out	size_t * pcbRemaining,
-		__in	DWORD dwFlags){
+		LPWSTR pszDest,
+		size_t cbDest,
+		LPCWSTR pszSrc,
+		LPWSTR * ppszDestEnd,
+		size_t * pcbRemaining,
+		DWORD dwFlags){
 	return StringCbCatNExW(pszDest, cbDest, pszSrc, cbDest,
 			ppszDestEnd, pcbRemaining, dwFlags);
 }

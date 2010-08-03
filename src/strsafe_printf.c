@@ -18,10 +18,10 @@
 #endif
 
 HRESULT StringCchPrintfA(
-		__out	LPSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCSTR pszFormat,
-		__in	...){
+		LPSTR pszDest,
+		size_t cchDest,
+		LPCSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 	
@@ -33,10 +33,10 @@ HRESULT StringCchPrintfA(
 }
 
 HRESULT StringCchPrintfW(
-		__out	LPWSTR pszDest,
-		__in	size_t cchDest,
-		__in	LPCWSTR pszFormat,
-		__in	...){
+		LPWSTR pszDest,
+		size_t cchDest,
+		LPCWSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 
@@ -48,13 +48,13 @@ HRESULT StringCchPrintfW(
 }
 
 HRESULT StringCchPrintfExA(
-		__out	LPSTR pszDest,
-		__in	size_t cchDest,
-		__out	LPSTR * ppszDestEnd,
-		__out	size_t * pcchRemaining,
-		__in	DWORD dwFlags,
-		__in	LPCSTR pszFormat,
-		__in	...){
+		LPSTR pszDest,
+		size_t cchDest,
+		LPSTR * ppszDestEnd,
+		size_t * pcchRemaining,
+		DWORD dwFlags,
+		LPCSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 
@@ -68,13 +68,13 @@ HRESULT StringCchPrintfExA(
 
 
 HRESULT StringCchPrintfExW(
-		__out	LPWSTR pszDest,
-		__in	size_t cchDest,
-		__out	LPWSTR * ppszDestEnd,
-		__out	size_t * pcchRemaining,
-		__in	DWORD dwFlags,
-		__in	LPCWSTR pszFormat,
-		__in	...){
+		LPWSTR pszDest,
+		size_t cchDest,
+		LPWSTR * ppszDestEnd,
+		size_t * pcchRemaining,
+		DWORD dwFlags,
+		LPCWSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 
@@ -87,10 +87,10 @@ HRESULT StringCchPrintfExW(
 }
 
 HRESULT StringCbPrintfA(
-		__out	LPSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCSTR pszFormat,
-		__in	...){
+		LPSTR pszDest,
+		size_t cbDest,
+		LPCSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 	
@@ -102,10 +102,10 @@ HRESULT StringCbPrintfA(
 }
 
 HRESULT StringCbPrintfW(
-		__out	LPWSTR pszDest,
-		__in	size_t cbDest,
-		__in	LPCWSTR pszFormat,
-		__in	...){
+		LPWSTR pszDest,
+		size_t cbDest,
+		LPCWSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 
@@ -117,13 +117,13 @@ HRESULT StringCbPrintfW(
 }
 
 HRESULT StringCbPrintfExA(
-		__out	LPSTR pszDest,
-		__in	size_t cbDest,
-		__out	LPSTR * ppszDestEnd,
-		__out	size_t * pcbRemaining,
-		__in	DWORD dwFlags,
-		__in	LPCSTR pszFormat,
-		__in	...){
+		LPSTR pszDest,
+		size_t cbDest,
+		LPSTR * ppszDestEnd,
+		size_t * pcbRemaining,
+		DWORD dwFlags,
+		LPCSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 
@@ -136,13 +136,13 @@ HRESULT StringCbPrintfExA(
 }
 
 HRESULT StringCbPrintfExW(
-		__out	LPWSTR pszDest,
-		__in	size_t cbDest,
-		__out	LPWSTR * ppszDestEnd,
-		__out	size_t * pcbRemaining,
-		__in	DWORD dwFlags,
-		__in	LPCWSTR pszFormat,
-		__in	...){
+		LPWSTR pszDest,
+		size_t cbDest,
+		LPWSTR * ppszDestEnd,
+		size_t * pcbRemaining,
+		DWORD dwFlags,
+		LPCWSTR pszFormat,
+		...){
 	va_list argList;
 	HRESULT result;
 

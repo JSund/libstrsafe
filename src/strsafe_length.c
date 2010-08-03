@@ -18,9 +18,9 @@
 #endif
 
 HRESULT StringCchLengthA(
-		__in	LPCSTR psz,
-		__in	size_t cchMax,
-		__out	size_t *pcch){
+		LPCSTR psz,
+		size_t cchMax,
+		size_t *pcch){
 	/* This function has a generic implementation in
 	 * strsafe_length_generic.h. */
 	#define STRSAFE_GENERIC_WIDE_CHAR 0
@@ -29,9 +29,9 @@ HRESULT StringCchLengthA(
 }
 
 HRESULT StringCchLengthW(
-		__in	LPCWSTR psz,
-		__in	size_t cchMax,
-		__out	size_t *pcch){
+		LPCWSTR psz,
+		size_t cchMax,
+		size_t *pcch){
 	/* This function has a generic implementation in
 	 * strsafe_length_generic.h. */
 	#define STRSAFE_GENERIC_WIDE_CHAR 1
@@ -40,16 +40,16 @@ HRESULT StringCchLengthW(
 }
 
 HRESULT StringCbLengthA(
-		__in	LPCSTR psz,
-		__in	size_t cbMax,
-		__out	size_t *pcb){
+		LPCSTR psz,
+		size_t cbMax,
+		size_t *pcb){
 	return StringCchLengthA(psz, cbMax, pcb);
 }
 
 HRESULT StringCbLengthW(
-		__in	LPCWSTR psz,
-		__in	size_t cbMax,
-		__out	size_t *pcb){
+		LPCWSTR psz,
+		size_t cbMax,
+		size_t *pcb){
 	size_t pcch;
 	HRESULT result = StringCchLengthW(psz, cbMax / sizeof(wchar_t), &pcch);
 	*pcb = pcch * sizeof(wchar_t);

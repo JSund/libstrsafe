@@ -14,16 +14,16 @@
 #endif
 
 if(psz == NULL || cchMax > STRSAFE_MAX_CCH){
-	/* Invalid value for psz or cchMax. */
-	return STRSAFE_E_INVALID_PARAMETER;
+    /* Invalid value for psz or cchMax. */
+    return STRSAFE_E_INVALID_PARAMETER;
 }
 
 /* This might be a good target for optimization. */
 for(*pcch = 0; *pcch < cchMax; ){
-	if(psz[*pcch] == STRSAFE_TEXT('\0')){
-		break;
-	}
-	(*pcch)++;
+    if(psz[*pcch] == STRSAFE_TEXT('\0')){
+        break;
+    }
+    (*pcch)++;
 }
 
 /* If *pcch was incremented to cchMax, the first cchMax characters

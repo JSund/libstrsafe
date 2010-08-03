@@ -2,7 +2,7 @@
 #include "tap/basic.h"
 
 int main(void){
-	skip_all("Not implemented yet");
+    skip_all("Not implemented yet");
 
-	return 0;
+    return 0;
 }

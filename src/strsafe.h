@@ -18,15 +18,15 @@
 /* Enable both versions of the UNICODE macro. */
 
 #ifdef _UNICODE
-	#ifndef UNICODE
-		#define UNICODE
-	#endif
+    #ifndef UNICODE
+        #define UNICODE
+    #endif
 #endif
 
 #ifdef UNICODE
-	#ifndef _UNICODE
-		#define _UNICODE
-	#endif
+    #ifndef _UNICODE
+        #define _UNICODE
+    #endif
 #endif
 
 /**
@@ -108,9 +108,9 @@ typedef uint32_t DWORD;
  * A single character.
  */
 #ifdef UNICODE
-	typedef wchar_t TCHAR;
+    typedef wchar_t TCHAR;
 #else
-	typedef char TCHAR;
+    typedef char TCHAR;
 #endif
 
 /**
@@ -132,597 +132,597 @@ typedef const LPSTR LPCSTR;
  * strings depending on whether UNICODE is set or not.
  */
 #ifdef UNICODE
-	#define TEXT(string) L##string
+    #define TEXT(string) L##string
 #else
-	#define TEXT(string) string
+    #define TEXT(string) string
 #endif
 
 #ifdef UNICODE
-	#define StringCchCat StringCchCatW
+    #define StringCchCat StringCchCatW
 #else
-	#define StringCchCat StringCchCatA
+    #define StringCchCat StringCchCatA
 #endif
 HRESULT StringCchCatA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc
 );
 HRESULT StringCchCatW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc
 );
 
 #ifdef UNICODE
-	#define StringCchCatEx StringCchCatExW
+    #define StringCchCatEx StringCchCatExW
 #else
-	#define StringCchCatEx StringCchCatExA
+    #define StringCchCatEx StringCchCatExA
 #endif
 HRESULT StringCchCatExA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc,
-	LPSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc,
+    LPSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCchCatExW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc,
-	LPWSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc,
+    LPWSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCchCatN StringCchCatNW
+    #define StringCchCatN StringCchCatNW
 #else
-	#define StringCchCatN StringCchCatNA
+    #define StringCchCatN StringCchCatNA
 #endif
 HRESULT StringCchCatNA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc,
-	size_t cchMaxAppend
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc,
+    size_t cchMaxAppend
 );
 HRESULT StringCchCatNW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc,
-	size_t cchMaxAppend
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc,
+    size_t cchMaxAppend
 );
 
 #ifdef UNICODE
-	#define StringCchCatNEx StringCchCatNExW
+    #define StringCchCatNEx StringCchCatNExW
 #else
-	#define StringCchCatNEx StringCchCatNExA
+    #define StringCchCatNEx StringCchCatNExA
 #endif
 HRESULT StringCchCatNExA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc,
-	size_t cchMaxAppend,
-	LPSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc,
+    size_t cchMaxAppend,
+    LPSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCchCatNExW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc,
-	size_t cchMaxAppend,
-	LPWSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc,
+    size_t cchMaxAppend,
+    LPWSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCchCopy StringCchCopyW
+    #define StringCchCopy StringCchCopyW
 #else
-	#define StringCchCopy StringCchCopyA
+    #define StringCchCopy StringCchCopyA
 #endif
 HRESULT StringCchCopyA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc
 );
 HRESULT StringCchCopyW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc
 );
 
 #ifdef UNICODE
-	#define StringCchCopyEx StringCchCopyExW
+    #define StringCchCopyEx StringCchCopyExW
 #else
-	#define StringCchCopyEx StringCchCopyExA
+    #define StringCchCopyEx StringCchCopyExA
 #endif
 HRESULT StringCchCopyExA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc,
-	LPSTR *ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc,
+    LPSTR *ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCchCopyExW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc,
-	LPWSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc,
+    LPWSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCchCopyN StringCchCopyNW
+    #define StringCchCopyN StringCchCopyNW
 #else
-	#define StringCchCopyN StringCchCopyNA
+    #define StringCchCopyN StringCchCopyNA
 #endif
 HRESULT StringCchCopyNA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc,
-	size_t cchSrc
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc,
+    size_t cchSrc
 );
 HRESULT StringCchCopyNW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc,
-	size_t cchSrc
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc,
+    size_t cchSrc
 );
 
 #ifdef UNICODE
-	#define StringCchCopyNEx StringCchCopyNExW
+    #define StringCchCopyNEx StringCchCopyNExW
 #else
-	#define StringCchCopyNEx StringCchCopyNExA
+    #define StringCchCopyNEx StringCchCopyNExA
 #endif
 HRESULT StringCchCopyNExA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszSrc,
-	size_t cchSrc,
-	LPSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszSrc,
+    size_t cchSrc,
+    LPSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCchCopyNExW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszSrc,
-	size_t cchSrc,
-	LPWSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszSrc,
+    size_t cchSrc,
+    LPWSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCchGets StringCchGetsW
+    #define StringCchGets StringCchGetsW
 #else
-	#define StringCchGets StringCchGetsA
+    #define StringCchGets StringCchGetsA
 #endif
 HRESULT StringCchGetsA(
-	LPSTR pszDest,
-	size_t cchDest
+    LPSTR pszDest,
+    size_t cchDest
 );
 HRESULT StringCchGetsW(
-	LPWSTR pszDest,
-	size_t cchDest
+    LPWSTR pszDest,
+    size_t cchDest
 );
 
 #ifdef UNICODE
-	#define StringCchGetsEx StringCchGetsExW
+    #define StringCchGetsEx StringCchGetsExW
 #else
-	#define StringCchGetsEx StringCchGetsExA
+    #define StringCchGetsEx StringCchGetsExA
 #endif
 HRESULT StringCchGetsExA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cchDest,
+    LPSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCchGetsExW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPWSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPWSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCchPrintf StringCchPrintfW
+    #define StringCchPrintf StringCchPrintfW
 #else
-	#define StringCchPrintf StringCchPrintfA
+    #define StringCchPrintf StringCchPrintfA
 #endif
 HRESULT StringCchPrintfA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszFormat,
-	...
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszFormat,
+    ...
 );
 HRESULT StringCchPrintfW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszFormat,
-	...
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszFormat,
+    ...
 );
 
 #ifdef UNICODE
-	#define StringCchPrintfEx StringCchPrintfExW
+    #define StringCchPrintfEx StringCchPrintfExW
 #else
-	#define StringCchPrintfEx StringCchPrintfExA
+    #define StringCchPrintfEx StringCchPrintfExA
 #endif
 HRESULT StringCchPrintfExA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags,
-	LPCSTR pszFormat,
-	...
+    LPSTR pszDest,
+    size_t cchDest,
+    LPSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags,
+    LPCSTR pszFormat,
+    ...
 );
 HRESULT StringCchPrintfExW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPWSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags,
-	LPCWSTR pszFormat,
-	...
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPWSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags,
+    LPCWSTR pszFormat,
+    ...
 );
 
 #ifdef UNICODE
-	#define StringCchVPrintf StringCchVPrintfW
+    #define StringCchVPrintf StringCchVPrintfW
 #else
-	#define StringCchVPrintf StringCchVPrintfA
+    #define StringCchVPrintf StringCchVPrintfA
 #endif
 HRESULT StringCchVPrintfA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPCSTR pszFormat,
-	va_list argList
+    LPSTR pszDest,
+    size_t cchDest,
+    LPCSTR pszFormat,
+    va_list argList
 );
 HRESULT StringCchVPrintfW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPCWSTR pszFormat,
-	va_list argList
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPCWSTR pszFormat,
+    va_list argList
 );
 
 #ifdef UNICODE
-	#define StringCchPrintExf StringCchVPrintfExW
+    #define StringCchPrintExf StringCchVPrintfExW
 #else
-	#define StringCchPrintExf StringCchVPrintfExA
+    #define StringCchPrintExf StringCchVPrintfExA
 #endif
 HRESULT StringCchVPrintfExA(
-	LPSTR pszDest,
-	size_t cchDest,
-	LPSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags,
-	LPCSTR pszFormat,
-	va_list argList
+    LPSTR pszDest,
+    size_t cchDest,
+    LPSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags,
+    LPCSTR pszFormat,
+    va_list argList
 );
 HRESULT StringCchVPrintfExW(
-	LPWSTR pszDest,
-	size_t cchDest,
-	LPWSTR * ppszDestEnd,
-	size_t * pcchRemaining,
-	DWORD dwFlags,
-	LPCWSTR pszFormat,
-	va_list argList
+    LPWSTR pszDest,
+    size_t cchDest,
+    LPWSTR * ppszDestEnd,
+    size_t * pcchRemaining,
+    DWORD dwFlags,
+    LPCWSTR pszFormat,
+    va_list argList
 );
 
 #ifdef UNICODE
-	#define StringCchLength StringCchLengthW
+    #define StringCchLength StringCchLengthW
 #else
-	#define StringCchLength StringCchLengthA
+    #define StringCchLength StringCchLengthA
 #endif
 HRESULT StringCchLengthA(
-	LPCSTR psz,
-	size_t cchMax,
-	size_t * pcch
+    LPCSTR psz,
+    size_t cchMax,
+    size_t * pcch
 );
 HRESULT StringCchLengthW(
-	LPCWSTR psz,
-	size_t cchMax,
-	size_t * pcch
+    LPCWSTR psz,
+    size_t cchMax,
+    size_t * pcch
 );
 
 #ifdef UNICODE
-	#define StringCbCat StringCbCatW
+    #define StringCbCat StringCbCatW
 #else
-	#define StringCbCat StringCbCatA
+    #define StringCbCat StringCbCatA
 #endif
 HRESULT StringCbCatA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc
 );
 HRESULT StringCbCatW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc
 );
 
 #ifdef UNICODE
-	#define StringCbCatEx StringCbCatExW
+    #define StringCbCatEx StringCbCatExW
 #else
-	#define StringCbCatEx StringCbCatExA
+    #define StringCbCatEx StringCbCatExA
 #endif
 HRESULT StringCbCatExA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc,
-	LPSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc,
+    LPSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCbCatExW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc,
-	LPWSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc,
+    LPWSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCbCatN StringCbCatNW
+    #define StringCbCatN StringCbCatNW
 #else
-	#define StringCbCatN StringCbCatNA
+    #define StringCbCatN StringCbCatNA
 #endif
 HRESULT StringCbCatNA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc,
-	size_t cbMaxAppend
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc,
+    size_t cbMaxAppend
 );
 HRESULT StringCbCatNW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc,
-	size_t cbMaxAppend
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc,
+    size_t cbMaxAppend
 );
 
 #ifdef UNICODE
-	#define StringCbCatNEx StringCbCatNExW
+    #define StringCbCatNEx StringCbCatNExW
 #else
-	#define StringCbCatNEx StringCbCatNExA
+    #define StringCbCatNEx StringCbCatNExA
 #endif
 HRESULT StringCbCatNExA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc,
-	size_t cbMaxAppend,
-	LPSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc,
+    size_t cbMaxAppend,
+    LPSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCbCatNExW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc,
-	size_t cbMaxAppend,
-	LPWSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc,
+    size_t cbMaxAppend,
+    LPWSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCbCopy StringCbCopyW
+    #define StringCbCopy StringCbCopyW
 #else
-	#define StringCbCopy StringCbCopyA
+    #define StringCbCopy StringCbCopyA
 #endif
 HRESULT StringCbCopyA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc
 );
 HRESULT StringCbCopyW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc
 );
 
 #ifdef UNICODE
-	#define StringCbCopyEx StringCbCopyExW
+    #define StringCbCopyEx StringCbCopyExW
 #else
-	#define StringCbCopyEx StringCbCopyExA
+    #define StringCbCopyEx StringCbCopyExA
 #endif
 HRESULT StringCbCopyExA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc,
-	LPSTR *ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc,
+    LPSTR *ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCbCopyExW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc,
-	LPWSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc,
+    LPWSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCbCopyN StringCbCopyNW
+    #define StringCbCopyN StringCbCopyNW
 #else
-	#define StringCbCopyN StringCbCopyNA
+    #define StringCbCopyN StringCbCopyNA
 #endif
 HRESULT StringCbCopyNA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc,
-	size_t cbSrc
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc,
+    size_t cbSrc
 );
 HRESULT StringCbCopyNW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc,
-	size_t cbSrc
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc,
+    size_t cbSrc
 );
 
 #ifdef UNICODE
-	#define StringCbCopyNEx StringCbCopyNExW
+    #define StringCbCopyNEx StringCbCopyNExW
 #else
-	#define StringCbCopyNEx StringCbCopyNExA
+    #define StringCbCopyNEx StringCbCopyNExA
 #endif
 HRESULT StringCbCopyNExA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszSrc,
-	size_t cbSrc,
-	LPSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszSrc,
+    size_t cbSrc,
+    LPSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCbCopyNExW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszSrc,
-	size_t cbSrc,
-	LPWSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszSrc,
+    size_t cbSrc,
+    LPWSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCbGets StringCbGetsW
+    #define StringCbGets StringCbGetsW
 #else
-	#define StringCbGets StringCbGetsA
+    #define StringCbGets StringCbGetsA
 #endif
 HRESULT StringCbGetsA(
-	LPSTR pszDest,
-	size_t cbDest
+    LPSTR pszDest,
+    size_t cbDest
 );
 HRESULT StringCbGetsW(
-	LPWSTR pszDest,
-	size_t cbDest
+    LPWSTR pszDest,
+    size_t cbDest
 );
 
 #ifdef UNICODE
-	#define StringCbGetsEx StringCbGetsExW
+    #define StringCbGetsEx StringCbGetsExW
 #else
-	#define StringCbGetsEx StringCbGetsExA
+    #define StringCbGetsEx StringCbGetsExA
 #endif
 HRESULT StringCbGetsExA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPSTR pszDest,
+    size_t cbDest,
+    LPSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 HRESULT StringCbGetsExW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPWSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPWSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags
 );
 
 #ifdef UNICODE
-	#define StringCbPrintf StringCbPrintfW
+    #define StringCbPrintf StringCbPrintfW
 #else
-	#define StringCbPrintf StringCbPrintfA
+    #define StringCbPrintf StringCbPrintfA
 #endif
 HRESULT StringCbPrintfA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszFormat,
-	...
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszFormat,
+    ...
 );
 HRESULT StringCbPrintfW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszFormat,
-	...
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszFormat,
+    ...
 );
 
 #ifdef UNICODE
-	#define StringCbPrintfEx StringCbPrintfExW
+    #define StringCbPrintfEx StringCbPrintfExW
 #else
-	#define StringCbPrintfEx StringCbPrintfExA
+    #define StringCbPrintfEx StringCbPrintfExA
 #endif
 HRESULT StringCbPrintfExA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags,
-	LPCSTR pszFormat,
-	...
+    LPSTR pszDest,
+    size_t cbDest,
+    LPSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags,
+    LPCSTR pszFormat,
+    ...
 );
 HRESULT StringCbPrintfExW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPWSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags,
-	LPCWSTR pszFormat,
-	...
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPWSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags,
+    LPCWSTR pszFormat,
+    ...
 );
 
 #ifdef UNICODE
-	#define StringCbVPrintf StringCbVPrintfW
+    #define StringCbVPrintf StringCbVPrintfW
 #else
-	#define StringCbVPrintf StringCbVPrintfA
+    #define StringCbVPrintf StringCbVPrintfA
 #endif
 HRESULT StringCbVPrintfA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPCSTR pszFormat,
-	va_list argList
+    LPSTR pszDest,
+    size_t cbDest,
+    LPCSTR pszFormat,
+    va_list argList
 );
 HRESULT StringCbVPrintfW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPCWSTR pszFormat,
-	va_list argList
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPCWSTR pszFormat,
+    va_list argList
 );
 
 #ifdef UNICODE
-	#define StringCbPrintExf StringCbVPrintfExW
+    #define StringCbPrintExf StringCbVPrintfExW
 #else
-	#define StringCbPrintExf StringCbVPrintfExA
+    #define StringCbPrintExf StringCbVPrintfExA
 #endif
 HRESULT StringCbVPrintfExA(
-	LPSTR pszDest,
-	size_t cbDest,
-	LPSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags,
-	LPCSTR pszFormat,
-	va_list argList
+    LPSTR pszDest,
+    size_t cbDest,
+    LPSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags,
+    LPCSTR pszFormat,
+    va_list argList
 );
 HRESULT StringCbVPrintfExW(
-	LPWSTR pszDest,
-	size_t cbDest,
-	LPWSTR * ppszDestEnd,
-	size_t * pcbRemaining,
-	DWORD dwFlags,
-	LPCWSTR pszFormat,
-	va_list argList
+    LPWSTR pszDest,
+    size_t cbDest,
+    LPWSTR * ppszDestEnd,
+    size_t * pcbRemaining,
+    DWORD dwFlags,
+    LPCWSTR pszFormat,
+    va_list argList
 );
 
 #ifdef UNICODE
-	#define StringCbLength StringCbLengthW
+    #define StringCbLength StringCbLengthW
 #else
-	#define StringCbLength StringCbLengthA
+    #define StringCbLength StringCbLengthA
 #endif
 HRESULT StringCbLengthA(
-	LPCSTR psz,
-	size_t cbMax,
-	size_t *pcb
+    LPCSTR psz,
+    size_t cbMax,
+    size_t *pcb
 );
 HRESULT StringCbLengthW(
-	LPCWSTR psz,
-	size_t cbMax,
-	size_t *pcb
+    LPCWSTR psz,
+    size_t cbMax,
+    size_t *pcb
 );
 
 #endif /* STRSAFE_H */

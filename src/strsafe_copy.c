@@ -8,83 +8,83 @@
 #include "strsafe.h"
 #include "../config.h"
 #ifdef HAVE_STDIO_H
-	#include <stdio.h>
+    #include <stdio.h>
 #endif
 #ifdef HAVE_STRING_H
-	#include <string.h>
+    #include <string.h>
 #endif
 #ifdef HAVE_WCHAR_H
-	#include <wchar.h>
+    #include <wchar.h>
 #endif
 
 HRESULT StringCchCopyA(
-		LPSTR pszDest,
-		size_t cchDest,
-		LPCSTR pszSrc){
-	return StringCchCopyNA(pszDest, cchDest, pszSrc, cchDest);
+        LPSTR pszDest,
+        size_t cchDest,
+        LPCSTR pszSrc){
+    return StringCchCopyNA(pszDest, cchDest, pszSrc, cchDest);
 }
 
 HRESULT StringCchCopyW(
-		LPWSTR pszDest,
-		size_t cchDest,
-		LPCWSTR pszSrc){
-	return StringCchCopyNW(pszDest, cchDest, pszSrc, cchDest);
+        LPWSTR pszDest,
+        size_t cchDest,
+        LPCWSTR pszSrc){
+    return StringCchCopyNW(pszDest, cchDest, pszSrc, cchDest);
 }
 
 HRESULT StringCchCopyExA(
-		LPSTR pszDest,
-		size_t cchDest,
-		LPCSTR pszSrc,
-		LPSTR *ppszDestEnd,
-		size_t * pcchRemaining,
-		DWORD dwFlags){
-	return StringCchCopyNExA(pszDest, cchDest, pszSrc, cchDest,
-			ppszDestEnd, pcchRemaining, dwFlags);
+        LPSTR pszDest,
+        size_t cchDest,
+        LPCSTR pszSrc,
+        LPSTR *ppszDestEnd,
+        size_t * pcchRemaining,
+        DWORD dwFlags){
+    return StringCchCopyNExA(pszDest, cchDest, pszSrc, cchDest,
+            ppszDestEnd, pcchRemaining, dwFlags);
 }
 
 HRESULT StringCchCopyExW(
-		LPWSTR pszDest,
-		size_t cchDest,
-		LPCWSTR pszSrc,
-		LPWSTR *ppszDestEnd,
-		size_t * pcchRemaining,
-		DWORD dwFlags){
-	return StringCchCopyNExW(pszDest, cchDest, pszSrc, cchDest,
-			ppszDestEnd, pcchRemaining, dwFlags);
+        LPWSTR pszDest,
+        size_t cchDest,
+        LPCWSTR pszSrc,
+        LPWSTR *ppszDestEnd,
+        size_t * pcchRemaining,
+        DWORD dwFlags){
+    return StringCchCopyNExW(pszDest, cchDest, pszSrc, cchDest,
+            ppszDestEnd, pcchRemaining, dwFlags);
 }
 
 HRESULT StringCbCopyA(
-		LPSTR pszDest,
-		size_t cbDest,
-		LPCSTR pszSrc){
-	return StringCbCopyNA(pszDest, cbDest, pszSrc, cbDest);
+        LPSTR pszDest,
+        size_t cbDest,
+        LPCSTR pszSrc){
+    return StringCbCopyNA(pszDest, cbDest, pszSrc, cbDest);
 }
 
 HRESULT StringCbCopyW(
-		LPWSTR pszDest,
-		size_t cbDest,
-		LPCWSTR pszSrc){
-	return StringCbCopyNW(pszDest, cbDest, pszSrc, cbDest);
+        LPWSTR pszDest,
+        size_t cbDest,
+        LPCWSTR pszSrc){
+    return StringCbCopyNW(pszDest, cbDest, pszSrc, cbDest);
 }
 
 HRESULT StringCbCopyExA(
-		LPSTR pszDest,
-		size_t cbDest,
-		LPCSTR pszSrc,
-		LPSTR *ppszDestEnd,
-		size_t * pcbRemaining,
-		DWORD dwFlags){
-	return StringCbCopyNExA(pszDest, cbDest, pszSrc, cbDest,
-			ppszDestEnd, pcbRemaining, dwFlags);
+        LPSTR pszDest,
+        size_t cbDest,
+        LPCSTR pszSrc,
+        LPSTR *ppszDestEnd,
+        size_t * pcbRemaining,
+        DWORD dwFlags){
+    return StringCbCopyNExA(pszDest, cbDest, pszSrc, cbDest,
+            ppszDestEnd, pcbRemaining, dwFlags);
 }
 
 HRESULT StringCbCopyExW(
-		LPWSTR pszDest,
-		size_t cbDest,
-		LPCWSTR pszSrc,
-		LPWSTR * ppszDestEnd,
-		size_t * pcbRemaining,
-		DWORD dwFlags){
-	return StringCbCopyNExW(pszDest, cbDest, pszSrc, cbDest,
-			ppszDestEnd, pcbRemaining, dwFlags);
+        LPWSTR pszDest,
+        size_t cbDest,
+        LPCWSTR pszSrc,
+        LPWSTR * ppszDestEnd,
+        size_t * pcbRemaining,
+        DWORD dwFlags){
+    return StringCbCopyNExW(pszDest, cbDest, pszSrc, cbDest,
+            ppszDestEnd, pcbRemaining, dwFlags);
 }

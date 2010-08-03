@@ -28,69 +28,69 @@ size_t length;
 HRESULT result = S_OK;
 
 if(cchDest == 0 || cchDest > STRSAFE_MAX_CCH){
-	/* Invalid value for cchDest. */
-	return STRSAFE_E_INVALID_PARAMETER;
+    /* Invalid value for cchDest. */
+    return STRSAFE_E_INVALID_PARAMETER;
 }
 
 if(pszDest == NULL && (dwFlags & STRSAFE_IGNORE_NULLS)){
-	destLength = 0;
+    destLength = 0;
 } else {
-	if(FAILED(STRSAFE_LENGTH(pszDest, cchDest, &destLength))){
-		/* pszDest not null terminated. */
-		return STRSAFE_E_INVALID_PARAMETER;
-	}
+    if(FAILED(STRSAFE_LENGTH(pszDest, cchDest, &destLength))){
+        /* pszDest not null terminated. */
+        return STRSAFE_E_INVALID_PARAMETER;
+    }
 }
 
 if(pszSrc == NULL && (dwFlags & STRSAFE_IGNORE_NULLS)){
-	srcLength = 0;
+    srcLength = 0;
 } else {
-	if(FAILED(STRSAFE_LENGTH(pszSrc, cchSrc, &srcLength))){
-		/* pszSrc longer than length required. */
-		srcLength = cchSrc;
-	}
+    if(FAILED(STRSAFE_LENGTH(pszSrc, cchSrc, &srcLength))){
+        /* pszSrc longer than length required. */
+        srcLength = cchSrc;
+    }
 }
 
 destCapacity = cchDest - destLength;
 
 if(srcLength >= destCapacity){
-	/* pszSrc too long, copy first destCapacity - 1 characters. */
-	srcLength = destCapacity - 1;
-	result = STRSAFE_E_INSUFFICIENT_BUFFER;
+    /* pszSrc too long, copy first destCapacity - 1 characters. */
+    srcLength = destCapacity - 1;
+    result = STRSAFE_E_INSUFFICIENT_BUFFER;
 }
 
 length = destLength + srcLength;
 
 if(FAILED(result)){
-	if(dwFlags & STRSAFE_NO_TRUNCATION){
-		/* pszDest should be left untouched. */
-		return result;
-	}
-	if(dwFlags & STRSAFE_NULL_ON_FAILURE){
-		/* pszDest should be set to the empty string. */
-		*pszDest = STRSAFE_TEXT('\0');
-		return result;
-	}
-	if(dwFlags & STRSAFE_FILL_ON_FAILURE){
-		/* pszDest should be filled with the lower byte of dwFlags
-		 * and null terminated. */
-		memset(pszDest, dwFlags & 0xff,
-				(cchDest - 1) * sizeof(STRSAFE_CHAR));
-		pszDest[cchDest - 1] = STRSAFE_TEXT('\0');
-		return result;
-	}
+    if(dwFlags & STRSAFE_NO_TRUNCATION){
+        /* pszDest should be left untouched. */
+        return result;
+    }
+    if(dwFlags & STRSAFE_NULL_ON_FAILURE){
+        /* pszDest should be set to the empty string. */
+        *pszDest = STRSAFE_TEXT('\0');
+        return result;
+    }
+    if(dwFlags & STRSAFE_FILL_ON_FAILURE){
+        /* pszDest should be filled with the lower byte of dwFlags
+         * and null terminated. */
+        memset(pszDest, dwFlags & 0xff,
+                (cchDest - 1) * sizeof(STRSAFE_CHAR));
+        pszDest[cchDest - 1] = STRSAFE_TEXT('\0');
+        return result;
+    }
 }
 
 memcpy(pszDest + destLength, pszSrc, srcLength * sizeof(STRSAFE_CHAR));
 pszDest[length] = STRSAFE_TEXT('\0');
 if(ppszDestEnd != NULL){
-	*ppszDestEnd = pszDest + length;
+    *ppszDestEnd = pszDest + length;
 }
 if(pcchRemaining != NULL){
-	*pcchRemaining = cchDest - length;
+    *pcchRemaining = cchDest - length;
 }
 if((dwFlags & STRSAFE_FILL_BEHIND_NULL) && length + 1 < cchDest){
-	memset(pszDest + length + 1, dwFlags & 0xff,
-			(cchDest - length - 1) * sizeof(STRSAFE_CHAR));
+    memset(pszDest + length + 1, dwFlags & 0xff,
+            (cchDest - length - 1) * sizeof(STRSAFE_CHAR));
 }
 
 return result;

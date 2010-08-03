@@ -4,159 +4,159 @@
 #include "tap/wide.h"
 
 void testDestEnd(){
-	wchar_t dest[11];
-	wchar_t * destEnd;
+    wchar_t dest[11];
+    wchar_t * destEnd;
 
-	diag("Test calculation of destEnd.");
+    diag("Test calculation of destEnd.");
 
-	ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"Data", &destEnd, NULL, 0)),
-			"Test calculation of destEnd "
-			"while copying short string.");
-	is_wstring(L"Data", dest,
-			"Result of copying short string.");
-	ok(destEnd == &dest[4],
-			"Value of destEnd after copying short string.");
+    ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"Data", &destEnd, NULL, 0)),
+            "Test calculation of destEnd "
+            "while copying short string.");
+    is_wstring(L"Data", dest,
+            "Result of copying short string.");
+    ok(destEnd == &dest[4],
+            "Value of destEnd after copying short string.");
 
-	ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"", &destEnd, NULL, 0)),
-			"Test calculation of destEnd "
-			"while copying empty string.");
-	is_wstring(L"", dest,
-			"Result of copying empty string.");
-	ok(destEnd == &dest[0],
-			"Value of destEnd after copying empty string.");
+    ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"", &destEnd, NULL, 0)),
+            "Test calculation of destEnd "
+            "while copying empty string.");
+    is_wstring(L"", dest,
+            "Result of copying empty string.");
+    ok(destEnd == &dest[0],
+            "Value of destEnd after copying empty string.");
 
-	ok(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-				L"longer string", &destEnd, NULL, 0) ==
-			STRSAFE_E_INSUFFICIENT_BUFFER,
-			"Test calculation of destEnd "
-			"while copying a too long string.");
-	is_wstring(L"longer str", dest,
-			"Result of copying a too long string.");
-	ok(destEnd == &dest[10],
-			"Value of destEnd after copying a too long string.");
+    ok(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                L"longer string", &destEnd, NULL, 0) ==
+            STRSAFE_E_INSUFFICIENT_BUFFER,
+            "Test calculation of destEnd "
+            "while copying a too long string.");
+    is_wstring(L"longer str", dest,
+            "Result of copying a too long string.");
+    ok(destEnd == &dest[10],
+            "Value of destEnd after copying a too long string.");
 }
 
 void testRemaining(){
-	wchar_t dest[11];
-	size_t remaining;
+    wchar_t dest[11];
+    size_t remaining;
 
-	diag("Test calculation of remaining space.");
+    diag("Test calculation of remaining space.");
 
-	ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"STR", NULL, &remaining, 0)),
-			"Test calculation of remaining space "
-			"while copying short string.");
-	is_wstring(L"STR", dest,
-			"Result of copying short string.");
-	is_int(8 * sizeof(wchar_t), remaining,
-			"Number of remaining characters after copying short string.");
+    ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"STR", NULL, &remaining, 0)),
+            "Test calculation of remaining space "
+            "while copying short string.");
+    is_wstring(L"STR", dest,
+            "Result of copying short string.");
+    is_int(8 * sizeof(wchar_t), remaining,
+            "Number of remaining characters after copying short string.");
 
-	ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"", NULL, &remaining, 0)),
-			"Test calculation of remaining space "
-			"while copying empty string.");
-	is_wstring(L"", dest,
-			"Result of copying empty string.");
-	is_int(11 * sizeof(wchar_t), remaining,
-			"Number of remaining characters after copying empty string.");
+    ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"", NULL, &remaining, 0)),
+            "Test calculation of remaining space "
+            "while copying empty string.");
+    is_wstring(L"", dest,
+            "Result of copying empty string.");
+    is_int(11 * sizeof(wchar_t), remaining,
+            "Number of remaining characters after copying empty string.");
 
-	ok(StringCbCopyExW(dest, 11 * sizeof(wchar_t), 
-				L"too long string", NULL, &remaining, 0) ==
-			STRSAFE_E_INSUFFICIENT_BUFFER,
-			"Test calculation of remaining space "
-			"while copying a too long string.");
-	is_wstring(L"too long s", dest,
-			"Result of copying a too long string.");
-	is_int(1 * sizeof(wchar_t), remaining,
-			"Number of remaining characters after copying "
-			"a too long string.");
+    ok(StringCbCopyExW(dest, 11 * sizeof(wchar_t), 
+                L"too long string", NULL, &remaining, 0) ==
+            STRSAFE_E_INSUFFICIENT_BUFFER,
+            "Test calculation of remaining space "
+            "while copying a too long string.");
+    is_wstring(L"too long s", dest,
+            "Result of copying a too long string.");
+    is_int(1 * sizeof(wchar_t), remaining,
+            "Number of remaining characters after copying "
+            "a too long string.");
 }
 
 void testFlags(){
-	wchar_t dest[11];
-	wchar_t * wanted;
+    wchar_t dest[11];
+    wchar_t * wanted;
 
-	diag("Test the STRSAFE_IGNORE_NULLS flag.");
+    diag("Test the STRSAFE_IGNORE_NULLS flag.");
 
-	ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					NULL, NULL, NULL,
-					STRSAFE_IGNORE_NULLS)),
-			"Test copying a NULL string.");
-	is_wstring(L"", dest,
-			"Result of copying a NULL string.");
+    ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    NULL, NULL, NULL,
+                    STRSAFE_IGNORE_NULLS)),
+            "Test copying a NULL string.");
+    is_wstring(L"", dest,
+            "Result of copying a NULL string.");
 
-	diag("Test the STRSAFE_FILL_BEHIND_NULL flag.");
+    diag("Test the STRSAFE_FILL_BEHIND_NULL flag.");
 
-	ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"testing", NULL, NULL,
-					STRSAFE_FILL_BEHIND_NULL | '@')),
-			"Test filling with '@' behind null termination.");
-	is_wstring(L"testing", dest,
-			"Result of copying and filling behind null termination.");
+    ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"testing", NULL, NULL,
+                    STRSAFE_FILL_BEHIND_NULL | '@')),
+            "Test filling with '@' behind null termination.");
+    is_wstring(L"testing", dest,
+            "Result of copying and filling behind null termination.");
 
-	wanted = malloc(3 * sizeof(wchar_t));
-	if(wanted == NULL){
-		bail("Memory allocation failed.");
-	}
-	memset(wanted, '@', 3 * sizeof(wchar_t));
+    wanted = malloc(3 * sizeof(wchar_t));
+    if(wanted == NULL){
+        bail("Memory allocation failed.");
+    }
+    memset(wanted, '@', 3 * sizeof(wchar_t));
 
-	ok(memcmp(&dest[8], wanted, 3 * sizeof(wchar_t)) == 0,
-			"Correct data filled after null termination.");
+    ok(memcmp(&dest[8], wanted, 3 * sizeof(wchar_t)) == 0,
+            "Correct data filled after null termination.");
 
-	diag("Test the STRSAFE_FILL_ON_FAILURE flag.");
+    diag("Test the STRSAFE_FILL_ON_FAILURE flag.");
 
-	ok(FAILED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"too much data", NULL, NULL,
-					STRSAFE_FILL_ON_FAILURE | '@')),
-			"Test filling with '@' on failure.");
-	
-	wanted = malloc(10 * sizeof(wchar_t));
-	if(wanted == NULL){
-		bail("Memory allocation failed.");
-	}
-	memset(wanted, '@', 10 * sizeof(wchar_t));
+    ok(FAILED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"too much data", NULL, NULL,
+                    STRSAFE_FILL_ON_FAILURE | '@')),
+            "Test filling with '@' on failure.");
+    
+    wanted = malloc(10 * sizeof(wchar_t));
+    if(wanted == NULL){
+        bail("Memory allocation failed.");
+    }
+    memset(wanted, '@', 10 * sizeof(wchar_t));
 
-	ok(memcmp(dest, wanted, 10 * sizeof(wchar_t)) == 0,
-			"Result of filling with '@' on failure.");
-	ok(dest[10] == L'\0',
-			"Check null termination at end of filled buffer.");
-	free(wanted);
+    ok(memcmp(dest, wanted, 10 * sizeof(wchar_t)) == 0,
+            "Result of filling with '@' on failure.");
+    ok(dest[10] == L'\0',
+            "Check null termination at end of filled buffer.");
+    free(wanted);
 
-	diag("Test the STRSAFE_NULL_ON_FAILURE flag.");
+    diag("Test the STRSAFE_NULL_ON_FAILURE flag.");
 
-	ok(FAILED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"Also too much", NULL, NULL,
-					STRSAFE_NULL_ON_FAILURE)),
-			"Test nulling string on failure.");
-	is_wstring(L"", dest,
-			"Result when nulling string on failure.");
+    ok(FAILED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"Also too much", NULL, NULL,
+                    STRSAFE_NULL_ON_FAILURE)),
+            "Test nulling string on failure.");
+    is_wstring(L"", dest,
+            "Result when nulling string on failure.");
 
-	diag("Test the STRSAFE_NO_TRUNCATION flag.");
+    diag("Test the STRSAFE_NO_TRUNCATION flag.");
 
-	ok(FAILED(StringCbCopyExW(dest, 11 * sizeof(wchar_t), 
-					L"Won't fit in dest", NULL, NULL,
-					STRSAFE_NO_TRUNCATION)),
-			"Test copying with truncating disabled.");
-	is_wstring(L"", dest,
-			"Result after copying with truncating disabled.");
+    ok(FAILED(StringCbCopyExW(dest, 11 * sizeof(wchar_t), 
+                    L"Won't fit in dest", NULL, NULL,
+                    STRSAFE_NO_TRUNCATION)),
+            "Test copying with truncating disabled.");
+    is_wstring(L"", dest,
+            "Result after copying with truncating disabled.");
 }
 
 int main(void){
-	wchar_t dest[11];
-	
-	plan(32);
+    wchar_t dest[11];
+    
+    plan(32);
 
-	ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
-					L"test", NULL, NULL, 0)),
-			"Copy short string without any extended functionality.");
-	is_wstring(L"test", dest,
-			"Result of copying short string.");
+    ok(SUCCEEDED(StringCbCopyExW(dest, 11 * sizeof(wchar_t),
+                    L"test", NULL, NULL, 0)),
+            "Copy short string without any extended functionality.");
+    is_wstring(L"test", dest,
+            "Result of copying short string.");
 
-	testDestEnd();
-	testRemaining();
-	testFlags();
+    testDestEnd();
+    testRemaining();
+    testFlags();
 
-	return 0;
+    return 0;
 }

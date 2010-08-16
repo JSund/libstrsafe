@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.65])
-AC_INIT([libstrsafe], [0.1.2], [libstrsafe@jsund.com])
+AC_INIT([libstrsafe], [0.2.0], [libstrsafe@jsund.com])
 AC_CONFIG_SRCDIR([src/strsafe.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])

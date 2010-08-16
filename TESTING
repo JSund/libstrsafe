@@ -1,0 +1,23 @@
+The functionality of libstrsafe is tested with unit tests. The tests are
+located in the tests/ subdirectory and are using the C TAP Harness by Russ
+Allbery [0]. It is a harness for the Test Anything Protocol that provides
+unit testing in C and shell scripts.
+
+For almost all functions, a test is provided to check that it functions
+properly. These are primarily written in C, but the tests for the Gets
+functions are written in a shell script instead since the Gets functions
+reads inuput from stdin.
+
+For tests to be run in the test harness, the executable files have to end in
+"-t". For C files that means that source code for the tests are available at
+tests/<function name>-t.c while the shell script tests are available at
+tests/<function name>-t.
+
+The tests are run by running "make check" from the project root directory.
+To get additional information from a single test, run
+"tests/runtests -o <test name>" from the 
+
+The tests that are to be run are listed in the tests/TESTS file and also
+have to be listed in the check_PROGRAMS target in tests/Makefile.am.
+
+[0] http://www.eyrie.org/~eagle/software/c-tap-harness/

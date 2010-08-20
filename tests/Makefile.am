@@ -27,9 +27,10 @@ check_LIBRARIES = tap/libtap.a
 AM_CPPFLAGS = -I../src
 tap_libtap_a_SOURCES = tap/basic.c tap/basic.h tap/wide.c tap/wide.h
 AM_LDFLAGS = ../src/libstrsafe.la tap/libtap.a
-EXTRA_DIST = tap/libtap.sh \
+EXTRA_DIST = tap/libtap.sh TESTS \
 			 StringCchGetsA-t StringCchGetsW-t \
-			 StringCbGetsA-t StringCbGetsW-t
+			 StringCbGetsA-t StringCbGetsW-t \
+			 data/*.in data/*.ans
 
 check-local: $(check_PROGRAMS)
 	./runtests TESTS

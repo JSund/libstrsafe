@@ -1,1 +1,22 @@
-\section{An introduction to buffer overflows}
+\section{An introduction to buffer overflow attacks}
+\subsection{What is a buffer overflow?}
+Strings in programs are usually stored in a buffer as a series of characters,
+ending with a \emph{null} character to signify the end of the string.
+In low level systems such as when programming in C,
+there is usually no separate information on the length of the string.
+
+When a string is copied into another string buffer,
+the characters are simply copied until the null character is located.
+If this string won't fit in the memory area allocated at the destination,
+the adjacent memory area might be overwritten.
+This is known as a buffer overflow.
+
+\subsection{How are buffer overflow attacks used?}
+Buffer overflows are among the most usual sources of
+security related bugs in software and
+there are many well known examples of this.
+As an example, most recent jailbreaks,
+including ones used
+for the Apple iPhone\footnote{\url{http://support.apple.com/kb/HT4291}}
+and Nintendo Wii,\footnote{\url{http://en.wikipedia.org/wiki/Twilight_hack}}
+used buffer overflow attacks.

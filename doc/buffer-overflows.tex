@@ -9,14 +9,16 @@ When a string is copied into another string buffer,
 the characters are simply copied until the null character is located.
 If this string won't fit in the memory area allocated at the destination,
 the adjacent memory area might be overwritten.
-This is known as a buffer overflow.
+This is known as a buffer overflow or buffer overrun.
 
 \subsection{How are buffer overflow attacks used?}
 Buffer overflows are among the most usual sources of
 security related bugs in software and
 there are many well known examples of this.
-As an example, most recent jailbreaks,
-including ones used
+
+Some examples of the use of buffer overflows include the
+SQL Slammer\footnote{\url{http://www.cert.org/advisories/CA-2003-04.html}}
+and Blaster\footnote{\url{http://www.cert.org/advisories/CA-2003-20.html}}
+worms as well as jailbreaks
 for the Apple iPhone\footnote{\url{http://support.apple.com/kb/HT4291}}
-and Nintendo Wii,\footnote{\url{http://en.wikipedia.org/wiki/Twilight_hack}}
-used buffer overflow attacks.
+and Nintendo Wii.\footnote{\url{http://wiibrew.org/wiki/Twilight_Hack}}

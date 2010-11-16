@@ -11,6 +11,19 @@ If this string won't fit in the memory area allocated at the destination,
 the adjacent memory area might be overwritten.
 This is known as a buffer overflow or buffer overrun.
 
+A buffer overflow can be used to overwrite data used in the program,
+but it can also be used to overwrite control data in the stack or heap
+that stores the buffer.
+This can enable the attacker to run arbritrary code on the system.
+
+For example, by overwriting the return address of the current stack frame,
+the overflow can enable the attacker to use any available data as code.
+If the attacker fills a buffer with carefully chosen machine code,
+known as shellcode,
+and modifies the return address of the current stack frame
+to jump to the buffer,
+the chosen machine code will be run by the program.
+
 \subsection{How are buffer overflow attacks used?}
 Buffer overflows are among the most usual sources of
 security related bugs in software and

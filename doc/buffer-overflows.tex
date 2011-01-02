@@ -24,6 +24,13 @@ and modifies the return address of the current stack frame
 to jump to the buffer,
 the chosen machine code will be run by the program.
 
+By instead exploiting a buffer overflow on the heap,
+the control structures for dynamic memory allocation are often overwritten.
+By modifying the linked list used to keep track of
+the dynamically allocated memory in many \emph{malloc} implementations,
+function pointers can later be overwritten to enable
+execution of arbritrary code.
+
 \subsection{How are buffer overflow attacks used?}
 Buffer overflows are among the most usual sources of
 security related bugs in software and
@@ -35,3 +42,16 @@ and Blaster\footnote{\url{http://www.cert.org/advisories/CA-2003-20.html}}
 worms as well as jailbreaks
 for the Apple iPhone\footnote{\url{http://support.apple.com/kb/HT4291}}
 and Nintendo Wii.\footnote{\url{http://wiibrew.org/wiki/Twilight_Hack}}
+
+\subsection{Protecting against buffer overflow attacks}
+There are several ways to protect software against buffer overflow attacks,
+by modifying either the source code or
+the execution environment that the software runs in.
+
+By using safe coding practices, many buffer overflow bugs can be avoided.
+If all buffer capacities and data lengths are checked,
+the risk for a buffer overflow is greatly reduced.
+However, programmers still make mistakes,
+so additional precautions are often required.
+
+By checking the capacites of all involved buffers,

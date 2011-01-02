@@ -48,10 +48,26 @@ There are several ways to protect software against buffer overflow attacks,
 by modifying either the source code or
 the execution environment that the software runs in.
 
-By using safe coding practices, many buffer overflow bugs can be avoided.
-If all buffer capacities and data lengths are checked,
-the risk for a buffer overflow is greatly reduced.
-However, programmers still make mistakes,
+\subsubsection{Protection in source code}
+By checking the capacites of all involved buffers,
+the risk for buffer overflows can be partially mitigated.
+This does not eliminate the risk entirely though,
+since some bugs may occur due to corner cases
+such as integer calculation overflows when calculating capacities.
+
+Safe coding practices can be used to check all capacities manually.
+However, this can be a tedious workload and
+programmers make mistakes,
 so additional precautions are often required.
 
-By checking the capacites of all involved buffers,
+One way of reducing the workload is by using
+safer string and buffer handling libraries.
+Several such libraries are available for both C and C++. 
+
+Checking of buffer capacities is automatically enforced
+by some programming environments.
+Many languages that compile into bytecode such as Java,
+and interpreted languages like Python or Ruby
+check the capacities of buffers before reading or writing data.
+This should be safe as long as no buffer overflow related bugs exist
+in the runtime of the chosen language.

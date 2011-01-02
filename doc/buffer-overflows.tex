@@ -71,3 +71,33 @@ and interpreted languages like Python or Ruby
 check the capacities of buffers before reading or writing data.
 This should be safe as long as no buffer overflow related bugs exist
 in the runtime of the chosen language.
+
+\subsubsection{Protection in the execution environment}
+Another form of protection against buffer overflows can be achieved
+by changing the execution environment used to run the software.
+
+By using stack smashing protection, certain values known as
+\emph{canary values} are inserted between data fields and
+control structures of the stack.
+When returning from a function call,
+the canary value is examined for alteration.
+
+The strategy of stack smashing protection only helps against
+buffer overflows on the stack.
+To protect data in the heap as well,
+memory pages used for data in the stack and heap can be marked to
+disallow execution of code on the page.
+Execute space protection protects against user-supplied code
+being run on the system,
+but it will not protect against code that returns function calls to
+the standard C libraries instead of the user's own shellcode.
+
+Yet another strategy that can be employed in the execution environment
+is address space layout randomization.
+By randomizing the locations of the various memory areas used by software,
+the difficulty in finding a suitable location to point to with function
+pointers is increased.
+To allow ordinary execution of software,
+a translation step is added between the software and the operating system,
+making the process transparent for software running from
+position-independent executables.

@@ -1,1 +1,15 @@
-\section{Using libstrsafe}
+\section{Using \emph{libstrsafe}}
+The functions in \emph{libstrsafe} are meant as replacement for
+the string copying functions available in the standard C libraries.
+In contrast to the standard functions,
+the functions always require the maximum capacity of any buffer
+that the funciton will write data into
+and will guarantee both
+that the string will be null terminated before the end of the buffer
+and that no data will be written outside of the buffer.
+
+To simplify use of the library,
+all functions share a common system of return codes.
+All functions return a status code signifying the result of the call.
+These status codes can be used to check whether the call was successful
+or check the specific error condition if it was not.

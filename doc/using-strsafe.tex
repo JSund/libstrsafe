@@ -1,5 +1,5 @@
-\section{Using \emph{libstrsafe}}
-The functions in \emph{libstrsafe} are meant as replacement for
+\section{Using the \strsafe{} functions}
+The functions in \strsafe{} are meant as replacement for
 the string copying functions available in the standard C libraries.
 In contrast to the standard functions,
 the functions always require the maximum capacity of any buffer
@@ -11,5 +11,19 @@ and that no data will be written outside of the buffer.
 To simplify use of the library,
 all functions share a common system of return codes.
 All functions return a status code signifying the result of the call.
-These status codes can be used to check whether the call was successful
+These status codes can be used to check if the call was successful
 or check the specific error condition if it was not.
+
+\subsection{Choice of functions}
+There are several choices of functions
+that perform similar operations in \strsafe{}.
+The distinctions are in the character representation used
+and whether to measure the sizes of buffers
+in number of characters or bytes.
+
+\strsafe{} provides functions that work with standard \texttt{char} strings.
+It also provides the same functionality for \texttt{wchar\_t} strings,
+often used with \emph{Unicode} encodings.
+Finally, \strsafe{} also provides a \texttt{TCHAR} type that can be either a
+\texttt{wchar\_t} or a \texttt{char} depending on
+whether the macro \texttt{UNICODE} is set or not.

@@ -1,12 +1,13 @@
 \section{An introduction to buffer overflow attacks}
 \subsection{What is a buffer overflow?}
 Strings in programs are usually stored in a buffer as a series of characters,
-ending with a \emph{null} character to signify the end of the string.
+ending with a \texttt{null} character to signify the end of the string.
 In low level systems such as when programming in C,
 there is usually no separate information on the length of the string.
 
 When a string is copied into another string buffer,
-the characters are simply copied until the null character is located.
+the characters are simply copied until
+the \texttt{null} character is located.
 If this string won't fit in the memory area allocated at the destination,
 the adjacent memory area might be overwritten.
 This is known as a buffer overflow or buffer overrun.
@@ -27,7 +28,7 @@ the chosen machine code will be run by the program.
 By instead exploiting a buffer overflow on the heap,
 the control structures for dynamic memory allocation are often overwritten.
 By modifying the linked list used to keep track of
-the dynamically allocated memory in many \emph{malloc} implementations,
+the dynamically allocated memory in many \texttt{malloc} implementations,
 function pointers can later be overwritten to enable
 execution of arbritrary code.
 
@@ -41,7 +42,7 @@ SQL Slammer\footnote{\url{http://www.cert.org/advisories/CA-2003-04.html}}
 and Blaster\footnote{\url{http://www.cert.org/advisories/CA-2003-20.html}}
 worms as well as jailbreaks
 for the Apple iPhone\footnote{\url{http://support.apple.com/kb/HT4291}}
-and Nintendo Wii.\footnote{\url{http://wiibrew.org/wiki/Twilight_Hack}}
+and Nintendo Wii.\footnote{\url{http://wiibrew.org/wiki/Twilight\_Hack}}
 
 \subsection{Protecting against buffer overflow attacks}
 There are several ways to protect software against buffer overflow attacks,
@@ -63,6 +64,7 @@ so additional precautions are often required.
 One way of reducing the workload is by using
 safer string and buffer handling libraries.
 Several such libraries are available for both C and C++. 
+\strsafe is one of them.
 
 Checking of buffer capacities is automatically enforced
 by some programming environments.

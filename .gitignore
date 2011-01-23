@@ -12,21 +12,22 @@
 *.la
 *.lo
 
-Makefile
-config.h
-config.log
-config.status
-libtool
-stamp-h1
+/Makefile
+/src/Makefile
+/config.h
+/config.log
+/config.status
+/libtool
+/stamp-h1
 .dirstamp
 
 autom4te.cache/
 .deps/
 .libs/
 
-tests/*
-!tests/*.in
-!tests/tap
-!tests/data
-!tests/*.[ch]
-!tests/*.sh
+/tests/*
+!/tests/*.in
+!/tests/tap
+!/tests/data
+!/tests/*.[ch]
+!/tests/*.sh

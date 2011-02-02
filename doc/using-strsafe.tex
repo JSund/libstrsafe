@@ -50,5 +50,37 @@ By definition, a \type{char} has size one.
 This means that there is no difference between the two types of functions
 when using \type{char} strings.
 
+\clearpage
 \subsection{Return codes}
 All functions return a \define{HRESULT} value.
+The possible return values are:
+
+\begin{table}[htb]
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+Return value & Description \\
+\midrule
+\define{S\_OK} &
+Function ran successfully.
+No error occured during the function execution. \\
+\define{STRSAFE\_E\_END\_OF\_FILE} &
+The end of an input file or stream was reached during execution. \\
+\define{STRSAFE\_E\_INVALID\_PARAMETER} &
+One or more of the input parameters was invalid. \\
+\define{STRSAFE\_E\_INSUFFICIENT\_BUFFER} &
+An output buffer used by the function was too small
+to contain the data that was supposed to be written
+into it during the function call.
+The data in the output buffer has been truncated and null terminated. \\
+\bottomrule
+\end{tabularx}
+\caption{\strsafe{} function return values.}
+\end{table}
+
+The only return value to indicate success is \define{S\_OK}.
+To check the return value the macros
+\define{SUCCEEDED} and \define{FAILED} are provided.
+Depending on the specific use case,
+a result of \define{STRSAFE\_E\_INSUFFICIENT\_BUFFER}
+might not be regarded as a failure by the user.
+If that is the case, it is up to the user to check the returned value.

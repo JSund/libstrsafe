@@ -21,9 +21,34 @@ The distinctions are in the character representation used
 and whether to measure the sizes of buffers
 in number of characters or bytes.
 
+\subsubsection{String representation}
 \strsafe{} provides functions that work with standard \type{char} strings.
 It also provides the same functionality for \type{wchar\_t} strings,
 often used with \emph{Unicode} encodings.
 Finally, \strsafe{} also provides a \type{TCHAR} type that can be either a
 \type{wchar\_t} or a \type{char} depending on
 whether the macro \define{UNICODE} is set or not.
+
+To use \strsafe{} with \type{char} strings,
+use the functions ending with \fn{A}.
+To use \strsafe{} with \type{wchar\_t} strings,
+use the functions ending with \fn{W}.
+To use \strsafe{} with \type{TCHAR} strings,
+use the functions that have neither \fn{A} nor \fn{W} at the end.
+
+\subsubsection{Specifying buffer capacities}
+The capacity of a string buffer can be specified either in the number of
+characters or bytes that the buffer can hold.
+By using the functions beginning with \fn{StringCch},
+all buffer sizes will be interpreted as a number of characters.
+By using the functions beginning with \fn{StringCb},
+all buffer sizes will instead be interpreted as a number of bytes.
+If this size is not divisible by the size of a single character,
+the size will be rounded down to the nearest multiple of the character size.
+
+By definition, a \type{char} has size one.
+This means that there is no difference between the two types of functions
+when using \type{char} strings.
+
+\subsection{Return codes}
+All functions return a \define{HRESULT} value.

@@ -9,7 +9,7 @@ that the string will be null terminated before the end of the buffer
 and that no data will be written outside of the buffer.
 
 To simplify use of the library,
-all functions share a common system of return codes.
+all functions share a common system of return values.
 All functions return a status code signifying the result of the call.
 These status codes can be used to check if the call was successful
 or check the specific error condition if it was not.
@@ -18,8 +18,8 @@ or check the specific error condition if it was not.
 There are several choices of functions
 that perform similar operations in \strsafe{}.
 The distinctions are in the character representation used
-and whether to measure the sizes of buffers
-in number of characters or bytes.
+and whether to measure the capacities of buffers
+in character or byte count.
 
 \subsubsection{String representation}
 \strsafe{} provides functions that work with standard \type{char} strings.
@@ -51,7 +51,7 @@ This means that there is no difference between the two types of functions
 when using \type{char} strings.
 
 \clearpage
-\subsection{Return codes}
+\subsection{Return values}
 All functions return a \define{HRESULT} value.
 The possible return values are:
 
@@ -63,10 +63,13 @@ Return value & Description \\
 \define{S\_OK} &
 Function ran successfully.
 No error occured during the function execution. \\
+\midrule
 \define{STRSAFE\_E\_END\_OF\_FILE} &
 The end of an input file or stream was reached during execution. \\
+\midrule
 \define{STRSAFE\_E\_INVALID\_PARAMETER} &
 One or more of the input parameters was invalid. \\
+\midrule
 \define{STRSAFE\_E\_INSUFFICIENT\_BUFFER} &
 An output buffer used by the function was too small
 to contain the data that was supposed to be written
@@ -82,5 +85,47 @@ To check the return value the macros
 \define{SUCCEEDED} and \define{FAILED} are provided.
 Depending on the specific use case,
 a result of \define{STRSAFE\_E\_INSUFFICIENT\_BUFFER}
-might not be regarded as a failure by the user.
-If that is the case, the provided macros can not be used.
+might not be regarded as a failure.
+If it should not be regarded as a failure,
+manual testing of the return value is required.
+
+\subsection{Available functions}
+The following functions are available in \strsafe{}:
+\begin{table}[htb]
+\begin{tabularx}{\textwidth}{p{3.7cm}X}
+\toprule
+Function name & Description \\
+\midrule
+\fn{StringCchCat} \fn{StringCbCat} & \\
+\midrule
+\fn{StringCchCatEx} \fn{StringCbCatEx} & \\
+\midrule
+\fn{StringCchCatN} \fn{StringCbCatN} & \\
+\midrule
+\fn{StringCchCatNEx} \fn{StringCbCatNEx} & \\
+\midrule
+\fn{StringCchCopy} \fn{StringCbCopy} & \\
+\midrule
+\fn{StringCchCopyEx} \fn{StringCbCopyEx} & \\
+\midrule
+\fn{StringCchCopyN} \fn{StringCbCopyN} & \\
+\midrule
+\fn{StringCchCopyNEx} \fn{StringCbCopyNEx} & \\
+\midrule
+\fn{StringCchGets} \fn{StringCbGets} & \\
+\midrule
+\fn{StringCchGetsEx} \fn{StringCbGetsEx} & \\
+\midrule
+\fn{StringCchPrintf} \fn{StringCbPrintf} & \\
+\midrule
+\fn{StringCchPrintfEx} \fn{StringCbPrintfEx} & \\
+\midrule
+\fn{StringCchVPrintf} \fn{StringCbVPrintf} & \\
+\midrule
+\fn{StringCchVPrintfEx} \fn{StringCbVPrintfEx} & \\
+\midrule
+\fn{StringCchLengthEx} \fn{StringCbLengthEx} & \\
+\bottomrule
+\end{tabularx}
+\caption{Available functions in \strsafe{}}
+\end{table}
